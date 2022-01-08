@@ -15,8 +15,8 @@ public class Mainscreen implements ActionListener{
 	private static JLabel username; 
 	GridBagConstraints gbc = new GridBagConstraints();
 	GridBagConstraints gbc_ = new GridBagConstraints(); // made a seperate constraint to 
-													    // set borders between calendar buttons
-														// and the username display
+							    // set borders between calendar buttons
+							    // and the username display
 	
 	// declaring minor decorative details 
 	static Color yellow1 = new Color(243, 215, 3); // tackle logo bg yellow color 
@@ -34,9 +34,9 @@ public class Mainscreen implements ActionListener{
 		// setup the GridBagLayout
 		panel.setLayout(new GridBagLayout());
 		Insets insets = new Insets(5, 5, 250, 250); // border/spacing for the components; will apply to 
-													// all components using the constraint of gbc. 
-													// parameters order:
-											        // (top, bottom, left, right) || might come in handy? 
+							    // all components using the constraint of gbc. 
+							    // parameters order:
+							    // (top, bottom, left, right) || might come in handy? 
 		
 		// add the components 
 		calendars = new JLabel("CALENDARS");
@@ -70,8 +70,8 @@ public class Mainscreen implements ActionListener{
 		frame.add(yearly);
 		
 		username = new JLabel("<display username here>"); // get a different public variable to store user input
-		username.setFont(font2);
-		gbc.gridx = 1; 									  // for usertxt and display it here? 
+		username.setFont(font2);			  // for usertxt and display it here?
+		gbc.gridx = 1; 									   
 		gbc.gridy = 3; 
 		frame.add(username);	
 	}
@@ -87,8 +87,8 @@ public class Mainscreen implements ActionListener{
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
 		frame.add(ms); // why qwq
-					   // try remove the frame from the frame.add(component) in Mainscreen constructor
-					   // and adding a method to make the addition work? 
+			       // try remove the frame from the frame.add(component) in Mainscreen constructor
+			       // and adding a method to make the addition work? 
 	}
 	
 	@Override
