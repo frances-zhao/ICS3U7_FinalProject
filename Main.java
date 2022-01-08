@@ -78,7 +78,7 @@ public class Main implements ActionListener{
 		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel.setBounds(1063, 756, 331, 16);
 		frame.add(lblNewLabel);
-
+		frame.setResizable(false);
 		frame.setVisible(true);
 	}
 
