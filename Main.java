@@ -117,9 +117,13 @@ public class Main extends JFrame implements ActionListener{
 		frame.add(createAccount);
 		frame.add(credentials);
 		frame.add(lblNewLabel);
+<<<<<<< HEAD
 		frame.add(success);
 
 		frame.setVisible(true); // making JFrame visible
+=======
+		frame.setVisible(true);
+>>>>>>> efaace600f8249771c666def07ecc2716ce84533
 	}
 
 	// adding a new user
@@ -212,7 +216,11 @@ public class Main extends JFrame implements ActionListener{
 		}
 
 	}
+<<<<<<< HEAD
 
 
 
 }
+=======
+}
+>>>>>>> efaace600f8249771c666def07ecc2716ce84533

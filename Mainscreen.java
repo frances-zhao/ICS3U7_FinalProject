@@ -86,6 +86,7 @@ public class Mainscreen implements ActionListener{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
 		frame.add(ms); // why qwq
 			       // try remove the frame from the frame.add(component) in Mainscreen constructor
 			       // and adding a method to make the addition work? 
