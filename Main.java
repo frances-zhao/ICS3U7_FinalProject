@@ -1,35 +1,67 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+import java.util.*;
 
-public class Main implements ActionListener{
-	private static JPasswordField passwordtxt;
-	private static JTextField usertxt;
-	private static JLabel userLabel;
-	private static JLabel pwLabel;
-	private static JButton loginButton;
-	private static JLabel success;
-	private static JLabel lblNewLabel;
+public class Main extends JFrame implements ActionListener{
 
-	public static void main(String[] args) {
-		LoginPage();
+	// variable declaration
 
-	}
+	// GUI variables
+	private static final long serialVersionUID = 1L;
+	private JFrame frame;
+	private JPasswordField passwordtxt;
+	private JTextField usertxt;
+	private JLabel userLabel;
+	private JLabel pwLabel;
+	private JButton loginButton;
+	private JLabel success;
+	private JLabel lblNewLabel;
+	private JButton createAccount;
+	private JLabel credentials;
+	Font btnfont = new Font("Tahoma", Font.PLAIN, 13);
+	// file IO variables
+	private String fileName = "userInfo.txt";
+	private BufferedWriter output;
+	private BufferedReader input;
+	// login variables
+	private String[][] accounts = new String[2][1000]; // maximum number of accounts creation: 1000
+	String [] usernames, passwords;
+	int usernum;
+	public static String currentUser;
+	public static String currentPW;
 
-	static void LoginPage(){
 
+	// Main Login Page Class
+	Main() throws IOException{
+
+		// reading in all usernames and passwords
+		input = new BufferedReader(new FileReader(fileName));
+
+		usernames = input.readLine().split(", ");
+		passwords = input.readLine().split(", ");
+		usernum = usernames.length;
+		for(int i = 0; i < usernum; i++) {
+			accounts[0][i] = usernames[i];
+			accounts[1][i] = passwords[i];
+		}
+		input.close(); //closing input
+
+		// initializing screen size
 		final int HEIGHT = 800;
 		final int WIDTH = 1400;
-		JFrame frame = new JFrame("Tackle - Lucia Kim, Frances Zhao");
+		frame = new JFrame("Tackle - Lucia Kim, Frances Zhao"); // title of application
 		frame.setSize(WIDTH,HEIGHT);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBackground(new Color(243, 215, 3));
 		frame.getContentPane().setBackground(new Color(243, 215, 3));
 		frame.setLayout(null);
+		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 
+		// initializing JLABEL for logo image
 		JLabel image = new JLabel("Tackle Logo Image");
-		image.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		image.setFont(btnfont);
 		image.setBounds(457, 107, 466, 160);
 		frame.add(image);
 		image.setIcon(new ImageIcon("images/logo.png"));
@@ -37,67 +69,150 @@ public class Main implements ActionListener{
 		usertxt = new JTextField();
 		usertxt.setColumns(10);
 		usertxt.setBounds(639, 279, 175, 26);
-		frame.add(usertxt);
 
 		passwordtxt = new JPasswordField();
 		passwordtxt.setColumns(10);
 		passwordtxt.setBounds(639, 317, 175, 26);
-		frame.add(passwordtxt);
 
 		userLabel = new JLabel("user: ");
-		userLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		userLabel.setFont(btnfont);
 		userLabel.setBounds(592, 284, 35, 16);
-		frame.add(userLabel);
 
 		pwLabel = new JLabel("password: ");
-		pwLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		pwLabel.setFont(btnfont);
 		pwLabel.setBounds(559, 322, 68, 16);
-		frame.add(pwLabel);
 
 		loginButton = new JButton("Login");
-		loginButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		loginButton.setBounds(642, 359, 117, 29);
-		loginButton.addActionListener(new Main());
-		frame.add(loginButton);
+		loginButton.setFont(btnfont);
+		loginButton.setBounds(639, 343, 117, 29);
+		loginButton.addActionListener(this);
+
+		createAccount = new JButton("Create Account");
+		createAccount.setFont(btnfont);
+		createAccount.setBounds(639, 370, 117, 29);
+		createAccount.addActionListener(this); 
 
 		success = new JLabel("");
-		success.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		success.setFont(btnfont);
 		success.setHorizontalAlignment(SwingConstants.CENTER);
+		success.setBounds(609, 399, 240, 16);
 
-		success.setBounds(584, 400, 240, 16);
-		frame.add(success);
-
-		JLabel credentials = new JLabel("<html>Creators: Frances Zhao, Lucia Kim <br>Course: ICS3U7-01<br>Teacher: Ms. Xie</html>");
-		credentials.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		// credentials for application
+		credentials = new JLabel("<html>Creators: Frances Zhao, Lucia Kim <br>Course: ICS3U7-01<br>Teacher: Ms. Xie</html>");
+		credentials.setFont(btnfont);
 		credentials.setBounds(6, 716, 202, 56);
-		frame.add(credentials);
 
-		lblNewLabel = new JLabel("Main.java version 1.1 12/29/2021");
+		lblNewLabel = new JLabel("Main.java version 1.2 01/08/2021");
 		lblNewLabel.setForeground(Color.LIGHT_GRAY);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblNewLabel.setFont(btnfont);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel.setBounds(1063, 756, 331, 16);
-		frame.add(lblNewLabel);
 
-		frame.setVisible(true);
+		// actual GUI
+		frame.add(usertxt);
+		frame.add(passwordtxt);
+		frame.add(userLabel);
+		frame.add(pwLabel);
+		frame.add(loginButton);
+		frame.add(createAccount);
+		frame.add(credentials);
+		frame.add(lblNewLabel);
+		frame.add(success);
+
+		frame.setVisible(true); // making JFrame visible
 	}
 
-	/*
-	 * currently, without the create account method, the login doesn't fully work yet
-	 * once Create Account class created, the if statement will be changed to match the new account
-	 * 
-	 */
+	// adding a new user
+	public void addNewUser() throws IOException {
+		accounts[0][usernum] = currentUser;
+		accounts[1][usernum] = currentPW;
+		usernum++; // increasing the length of the 2D array to allow for bug-proof adding of account info
+		savedUsers();
+	}
+
+	// class for savedUsers, writes out all account information – username and password, into fileName (userinfo.txt)
+	public void savedUsers() throws IOException {
+		output = new BufferedWriter(new FileWriter(fileName));
+
+		for(int i = 0; i < usernum; i++) {
+			output.write(accounts[0][i] + ", "); // separating each username with ", "
+		}
+		output.newLine();
+
+		for(int i = 0; i < usernum; i++) {
+			output.write(accounts[1][i] + ", "); // separating each password with ", "
+		}
+		output.newLine();
+		output.close(); // closing Bufferedwriter
+	}
+
+	//checking if username and password match up
+	private boolean loginResult() {
+		for(int i = 0; i < usernum; i++) {
+			if(currentUser.equals(accounts[0][i]) && currentPW.equals(accounts[1][i])) {
+				return true;
+			}
+		}
+		return false;
+	}
+/*
+ * implementing ActionListener, based on the event of user (which button clicked), different methods performed 
+ */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String user = usertxt.getText();
-		String password = passwordtxt.getText();
-		System.out.println(user + ", " + password);
+		if(e.getSource() ==loginButton) { // if login button clicked
+			currentUser = usertxt.getText(); // input of user in JTextField becomes current user
+			currentPW = passwordtxt.getText(); // input of password in JPasswordField becomes current password
+			if(loginResult()) { // testing if username and password match
+				JOptionPane.showMessageDialog(this, "Login Successful!"); // pop up panel
+				Mainscreen main = new Mainscreen(); // link to new JFrame
+				main.setVisible(true);
+				frame.dispose(); // dispose of current frame
 
-		if (user.equals(usertxt.getText()) && password.equals(passwordtxt.getText())) {
-			success.setText("login successful!");
+			} else {
+				JOptionPane.showMessageDialog(this, "Wrong username or password!"); // if they do not match up, let user know
+			}
+
 		}
-		else {
-			success.setText("username or password invalid");
+		if (e.getSource() == createAccount) { // if create account button clicked
+			currentUser = usertxt.getText(); // input of user in JTextField becomes current user
+			currentPW = passwordtxt.getText(); // input of password in JPasswordField becomes current password
+			try {
+				if(currentUser.equals("") || currentPW.equals("")) { // ensuring that new account created has both a username and password
+					JOptionPane.showMessageDialog(this, "Cannot have no user or no password!");
+				}
+
+				else if(Arrays.asList(accounts[0]).contains(currentUser)){ // if the first row of strings (usernames), contains the currentUser
+					JOptionPane.showMessageDialog(this, "An account with this user already exists!"); // let user know
+
+				} else { // if username and password are filled, with no duplicate username
+					addNewUser();
+					JOptionPane.showMessageDialog(this, "Account Created!");
+					Mainscreen main = new Mainscreen(); // link to new JFrame
+					main.setVisible(true);
+					frame.dispose(); // dispose of current frame
+
+				} 
+
+			} catch (IOException event) {
+				event.printStackTrace();
+			}
+
+
 		}
+
 	}
+
+	// testing the main program
+	public static void main(String[] args) {
+		try {
+			new test();
+		} catch (IOException e) {
+			System.out.println("can't run");
+		}
+
+	}
+
+
+
 }
