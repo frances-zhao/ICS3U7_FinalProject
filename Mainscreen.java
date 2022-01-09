@@ -7,6 +7,7 @@ import java.awt.Color;
 
 public class Mainscreen extends JFrame implements ActionListener{
 
+	private static final long serialVersionUID = 1L;
 	static // declaring all components to be used for the main screen 
 	JFrame frame = new JFrame("Tackle");
 	static JPanel panel; 
@@ -25,16 +26,20 @@ public class Mainscreen extends JFrame implements ActionListener{
 	static Font font1 = new Font("Tahoma", Font.BOLD, 20);
 	static Font font2 = new Font("Tahoma", Font.BOLD, 15);
 
-	public static void main(String[] args) {
-		Screen();
-		new Mainscreen();
-	}
+	
 	// declaring minor decorative details 
-
 
 
 	Mainscreen(){
 		
+		final int HEIGHT = 800;
+		final int WIDTH = 1400;
+		frame = new JFrame("Tackle"); // title of application
+		frame.setSize(WIDTH,HEIGHT);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setBackground(yellow1);
+		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
 
 		// setup the GridBagLayout
 		frame.setLayout(new GridBagLayout());
@@ -86,12 +91,9 @@ public class Mainscreen extends JFrame implements ActionListener{
 
 	static void Screen() {	
 		// set basic format of the screen 
-
-		frame.setSize(1400, 800);
-		frame.setBackground(yellow3);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null);
-		frame.setResizable(false);
+		
+		new Mainscreen();
+		
 		
 		// why qwq
 		// try remove the frame from the frame.add(component) in Mainscreen constructor
@@ -103,7 +105,13 @@ public class Mainscreen extends JFrame implements ActionListener{
 		// TODO Auto-generated method stub
 
 	}
-
-
+	public static void main(String[] args) {
+		try {
+			new Mainscreen();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }
