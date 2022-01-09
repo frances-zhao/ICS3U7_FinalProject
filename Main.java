@@ -191,16 +191,13 @@ public class Main extends JFrame implements ActionListener{
 					Mainscreen main = new Mainscreen(); // link to new JFrame
 					main.setVisible(true);
 					frame.dispose(); // dispose of current frame
-
 				} 
 
 			} catch (IOException event) {
 				event.printStackTrace();
 			}
 
-
 		}
-
 	}
 
 	// testing the main program
@@ -210,9 +207,6 @@ public class Main extends JFrame implements ActionListener{
 		} catch (IOException e) {
 			System.out.println("can't run");
 		}
-
 	}
-
-
 
 }
