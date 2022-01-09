@@ -186,8 +186,7 @@ public class Main extends JFrame implements ActionListener{
 			currentPW = passwordtxt.getText(); // input of password in JPasswordField becomes current password
 			if(loginResult()) { // testing if username and password match
 				JOptionPane.showMessageDialog(this, "Login Successful!"); // pop up panel
-				Mainscreen main = new Mainscreen(); // link to new JFrame
-				main.setVisible(true);
+				new Mainscreen(); // link to new JFrame
 				frame.dispose(); // dispose of current frame
 
 			} else {
@@ -212,8 +211,7 @@ public class Main extends JFrame implements ActionListener{
 					if (currentPW.equals(PWconfirm)) {
 						addNewUser();
 						JOptionPane.showMessageDialog(this, "Account Created!");
-						Mainscreen main = new Mainscreen(); // link to new JFrame
-						main.setVisible(true);
+						new Mainscreen(); // link to new JFrame
 						frame.dispose(); // dispose of current frame
 					}
 					else {
@@ -232,7 +230,7 @@ public class Main extends JFrame implements ActionListener{
 	// testing the main program
 	public static void main(String[] args) {
 		try {
-			new test();
+			new Main();
 		} catch (IOException e) {
 			System.out.println("can't run");
 		}
