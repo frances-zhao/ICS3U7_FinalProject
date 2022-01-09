@@ -17,9 +17,13 @@ public class Main extends JFrame implements ActionListener{
 	private JLabel pwLabel;
 	private JButton loginButton;
 	private JLabel success;
-	private JLabel lblNewLabel;
+	private JLabel projectVer;
 	private JButton createAccount;
 	private JLabel credentials;
+	private JLabel confirmPW;
+	private JPasswordField confirmPWTEXT;
+	private JLabel confirmnote;
+	
 	Font btnfont = new Font("Tahoma", Font.PLAIN, 13);
 	// file IO variables
 	private String fileName = "userInfo.txt";
@@ -31,6 +35,8 @@ public class Main extends JFrame implements ActionListener{
 	int usernum;
 	public static String currentUser;
 	public static String currentPW;
+	public static String PWconfirm;
+	
 
 
 	// Main Login Page Class
@@ -84,12 +90,12 @@ public class Main extends JFrame implements ActionListener{
 
 		loginButton = new JButton("Login");
 		loginButton.setFont(btnfont);
-		loginButton.setBounds(639, 343, 117, 29);
+		loginButton.setBounds(639, 386, 117, 29);
 		loginButton.addActionListener(this);
 
 		createAccount = new JButton("Create Account");
 		createAccount.setFont(btnfont);
-		createAccount.setBounds(639, 370, 117, 29);
+		createAccount.setBounds(639, 417, 117, 29);
 		createAccount.addActionListener(this); 
 
 		success = new JLabel("");
@@ -97,16 +103,28 @@ public class Main extends JFrame implements ActionListener{
 		success.setHorizontalAlignment(SwingConstants.CENTER);
 		success.setBounds(609, 399, 240, 16);
 
+		confirmPWTEXT = new JPasswordField();
+		confirmPWTEXT.setColumns(10);
+		confirmPWTEXT.setBounds(639, 355, 175, 26);
+		
+		confirmPW = new JLabel("confirm password:* ");
+		confirmPW.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		confirmPW.setBounds(503, 360, 127, 16);
+		
 		// credentials for application
 		credentials = new JLabel("<html>Creators: Frances Zhao, Lucia Kim <br>Course: ICS3U7-01<br>Teacher: Ms. Xie</html>");
 		credentials.setFont(btnfont);
 		credentials.setBounds(6, 716, 202, 56);
 
-		lblNewLabel = new JLabel("Main.java version 1.2 01/08/2021");
-		lblNewLabel.setForeground(Color.LIGHT_GRAY);
-		lblNewLabel.setFont(btnfont);
-		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel.setBounds(1063, 756, 331, 16);
+		projectVer = new JLabel("Main.java version 1.2 01/09/2021");
+		projectVer.setForeground(Color.LIGHT_GRAY);
+		projectVer.setFont(btnfont);
+		projectVer.setHorizontalAlignment(SwingConstants.RIGHT);
+		projectVer.setBounds(1063, 756, 331, 16);
+		
+		confirmnote = new JLabel("<html>*confirm password only if creating new account</html>");
+		confirmnote.setFont(btnfont);
+		confirmnote.setBounds(673, 441, 164, 40);
 
 		// actual GUI
 		frame.add(usertxt);
@@ -116,8 +134,11 @@ public class Main extends JFrame implements ActionListener{
 		frame.add(loginButton);
 		frame.add(createAccount);
 		frame.add(credentials);
-		frame.add(lblNewLabel);
+		frame.add(projectVer);
 		frame.add(success);
+		frame.add(confirmPW);
+		frame.add(confirmPWTEXT);
+		frame.add(confirmnote);		
 
 		frame.setVisible(true); // making JFrame visible
 	}
@@ -175,22 +196,29 @@ public class Main extends JFrame implements ActionListener{
 
 		}
 		if (e.getSource() == createAccount) { // if create account button clicked
+			
 			currentUser = usertxt.getText(); // input of user in JTextField becomes current user
 			currentPW = passwordtxt.getText(); // input of password in JPasswordField becomes current password
 			try {
 				if(currentUser.equals("") || currentPW.equals("")) { // ensuring that new account created has both a username and password
-					JOptionPane.showMessageDialog(this, "Cannot have no user or no password!");
+					JOptionPane.showMessageDialog(this, "You must enter both a user and password to create an account.");
 				}
 
 				else if(Arrays.asList(accounts[0]).contains(currentUser)){ // if the first row of strings (usernames), contains the currentUser
 					JOptionPane.showMessageDialog(this, "An account with this user already exists!"); // let user know
 
 				} else { // if username and password are filled, with no duplicate username
-					addNewUser();
-					JOptionPane.showMessageDialog(this, "Account Created!");
-					Mainscreen main = new Mainscreen(); // link to new JFrame
-					main.setVisible(true);
-					frame.dispose(); // dispose of current frame
+					PWconfirm = confirmPWTEXT.getText();
+					if (currentPW.equals(PWconfirm)) {
+						addNewUser();
+						JOptionPane.showMessageDialog(this, "Account Created!");
+						Mainscreen main = new Mainscreen(); // link to new JFrame
+						main.setVisible(true);
+						frame.dispose(); // dispose of current frame
+					}
+					else {
+						JOptionPane.showMessageDialog(this, "Wrong password confirmation!");
+					}
 				} 
 
 			} catch (IOException event) {
@@ -198,6 +226,7 @@ public class Main extends JFrame implements ActionListener{
 			}
 
 		}
+
 	}
 
 	// testing the main program
@@ -207,6 +236,6 @@ public class Main extends JFrame implements ActionListener{
 		} catch (IOException e) {
 			System.out.println("can't run");
 		}
-	}
 
+	}
 }
