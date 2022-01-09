@@ -21,14 +21,14 @@ public class Mainscreen extends JFrame implements ActionListener{
 	static Color yellow3 = new Color(255, 229, 96); // lighter yellow 
 	static Icon icon = new ImageIcon("images/logo.png");
 	static Font font1 = new Font("Tahoma", Font.BOLD, 20);
-	static Font font2 = new Font("Tahoma", Font.BOLD, 15);
+	static Font font2 = new Font("Tahoma", Font.PLAIN, 15);
 
-	
+
 	// declaring minor decorative details 
 
 
 	Mainscreen(){
-		
+
 		final int HEIGHT = 800;
 		final int WIDTH = 1400;
 		frame = new JFrame("Tackle"); // title of application
@@ -50,48 +50,55 @@ public class Mainscreen extends JFrame implements ActionListener{
 		calendars.setFont(font1);
 		gbc.gridx = 0; 
 		gbc.gridy = 0; 
-		frame.add(calendars);
 
 		settings = new JButton(icon);
 		settings.setFont(font2);
 		gbc.gridx = 0;
 		gbc.gridy = 1; 
-		frame.add(settings); 
 
 		weekly = new JButton("Weekly");
 		weekly.setFont(font2);
 		gbc.gridx = 1;
 		gbc.gridy = 1;
-		frame.add(weekly);
 
 		monthly = new JButton("Monthly");
 		monthly.setFont(font2);
 		gbc.gridx = 2; 
 		gbc.gridy = 1;
-		frame.add(monthly);
 
 		yearly = new JButton("Yearly");
 		yearly.setFont(font2);
 		gbc.gridx = 3; 
 		gbc.gridy = 1;
-		frame.add(yearly);
 
 		username = new JLabel("<display username here>"); // get a different public variable to store user input
 		username.setFont(font2);			  // for usertxt and display it here?
 		gbc.gridx = 1; 									   
 		gbc.gridy = 3; 
-		frame.add(username);
 		
+		
+		settings.addActionListener(this);
+		weekly.addActionListener(this);
+		monthly.addActionListener(this);
+		yearly.addActionListener(this);
+
+		frame.add(calendars);
+		frame.add(settings); 
+		frame.add(weekly);
+		frame.add(monthly);
+		frame.add(yearly);
+		frame.add(username);
+
 		frame.setVisible(true);
 
 	}
 
 	static void Screen() {	
 		// set basic format of the screen 
-		
+
 		new Mainscreen();
-		
-		
+
+
 		// why qwq
 		// try remove the frame from the frame.add(component) in Mainscreen constructor
 		// and adding a method to make the addition work? 
@@ -99,13 +106,32 @@ public class Mainscreen extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getSource() == settings) {
+			
+		}
+		
+		if (e.getSource() == weekly) {
+			new Weekly();
+			frame.dispose(); // dispose of current frame
 
+		}
+		if (e.getSource() == monthly) {
+			new Monthly();
+			frame.dispose(); // dispose of current frame
+
+		}
+		if (e.getSource() == yearly) {
+			new Yearly();
+			frame.dispose(); // dispose of current frame
+
+		}
+		
+		
 	}
 	public static void main(String[] args) {
 		try {
 			new Mainscreen();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
