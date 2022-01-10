@@ -23,20 +23,20 @@ public class Main extends JFrame implements ActionListener{
 	private JLabel confirmPW;
 	private JPasswordField confirmPWTEXT;
 	private JLabel confirmnote;
-	
+
 	Font btnfont = new Font("Tahoma", Font.PLAIN, 13);
 	// file IO variables
 	private String fileName = "userInfo.txt";
 	private BufferedWriter output;
 	private BufferedReader input;
 	// login variables
-	private String[][] accounts = new String[2][1000]; // maximum number of accounts creation: 1000
+	private String[][] totalAcc = new String[2][1000]; // maximum number of totalAcc creation: 1000
 	String [] usernames, passwords;
 	int usernum;
 	public static String currentUser;
-	public static String currentPW;
-	public static String PWconfirm;
-	
+	private static String currentPW;
+	private static String PWconfirm;
+
 
 
 	// Main Login Page Class
@@ -49,8 +49,8 @@ public class Main extends JFrame implements ActionListener{
 		passwords = input.readLine().split(", ");
 		usernum = usernames.length;
 		for(int i = 0; i < usernum; i++) {
-			accounts[0][i] = usernames[i];
-			accounts[1][i] = passwords[i];
+			totalAcc[0][i] = usernames[i];
+			totalAcc[1][i] = passwords[i];
 		}
 		input.close(); //closing input
 
@@ -106,11 +106,11 @@ public class Main extends JFrame implements ActionListener{
 		confirmPWTEXT = new JPasswordField();
 		confirmPWTEXT.setColumns(10);
 		confirmPWTEXT.setBounds(639, 355, 175, 26);
-		
+
 		confirmPW = new JLabel("confirm password:* ");
 		confirmPW.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		confirmPW.setBounds(503, 360, 127, 16);
-		
+
 		// credentials for application
 		credentials = new JLabel("<html>Creators: Frances Zhao, Lucia Kim <br>Course: ICS3U7-01<br>Teacher: Ms. Xie</html>");
 		credentials.setFont(btnfont);
@@ -121,7 +121,7 @@ public class Main extends JFrame implements ActionListener{
 		projectVer.setFont(btnfont);
 		projectVer.setHorizontalAlignment(SwingConstants.RIGHT);
 		projectVer.setBounds(1063, 756, 331, 16);
-		
+
 		confirmnote = new JLabel("<html>*confirm password only if creating new account</html>");
 		confirmnote.setFont(btnfont);
 		confirmnote.setBounds(673, 441, 164, 40);
@@ -143,10 +143,11 @@ public class Main extends JFrame implements ActionListener{
 		frame.setVisible(true); // making JFrame visible
 	}
 
+
 	// adding a new user
 	public void addNewUser() throws IOException {
-		accounts[0][usernum] = currentUser;
-		accounts[1][usernum] = currentPW;
+		totalAcc[1][usernum] = currentPW;
+		totalAcc[0][usernum] = currentUser;
 		usernum++; // increasing the length of the 2D array to allow for bug-proof adding of account info
 		savedUsers();
 	}
@@ -154,14 +155,13 @@ public class Main extends JFrame implements ActionListener{
 	// class for savedUsers, writes out all account information – username and password, into fileName (userinfo.txt)
 	public void savedUsers() throws IOException {
 		output = new BufferedWriter(new FileWriter(fileName));
-
 		for(int i = 0; i < usernum; i++) {
-			output.write(accounts[0][i] + ", "); // separating each username with ", "
+			output.write(totalAcc[0][i] + ", "); // separating each username with ", "
 		}
 		output.newLine();
 
 		for(int i = 0; i < usernum; i++) {
-			output.write(accounts[1][i] + ", "); // separating each password with ", "
+			output.write(totalAcc[1][i] + ", "); // separating each password with ", "
 		}
 		output.newLine();
 		output.close(); // closing Bufferedwriter
@@ -170,15 +170,16 @@ public class Main extends JFrame implements ActionListener{
 	//checking if username and password match up
 	private boolean loginResult() {
 		for(int i = 0; i < usernum; i++) {
-			if(currentUser.equals(accounts[0][i]) && currentPW.equals(accounts[1][i])) {
+			if(currentUser.equals(totalAcc[0][i]) && currentPW.equals(totalAcc[1][i])) {
 				return true;
 			}
+
 		}
 		return false;
 	}
-/*
- * implementing ActionListener, based on the event of user (which button clicked), different methods performed 
- */
+	/*
+	 * implementing ActionListener, based on the event of user (which button clicked), different methods performed 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() ==loginButton) { // if login button clicked
@@ -195,7 +196,7 @@ public class Main extends JFrame implements ActionListener{
 
 		}
 		if (e.getSource() == createAccount) { // if create account button clicked
-			
+
 			currentUser = usertxt.getText(); // input of user in JTextField becomes current user
 			currentPW = passwordtxt.getText(); // input of password in JPasswordField becomes current password
 			try {
@@ -203,7 +204,7 @@ public class Main extends JFrame implements ActionListener{
 					JOptionPane.showMessageDialog(this, "You must enter both a user and password to create an account.");
 				}
 
-				else if(Arrays.asList(accounts[0]).contains(currentUser)){ // if the first row of strings (usernames), contains the currentUser
+				else if(Arrays.asList(totalAcc[0]).contains(currentUser)){ // if the first row of strings (usernames), contains the currentUser
 					JOptionPane.showMessageDialog(this, "An account with this user already exists!"); // let user know
 
 				} else { // if username and password are filled, with no duplicate username
@@ -222,7 +223,6 @@ public class Main extends JFrame implements ActionListener{
 			} catch (IOException event) {
 				event.printStackTrace();
 			}
-
 		}
 
 	}
@@ -232,7 +232,7 @@ public class Main extends JFrame implements ActionListener{
 		try {
 			new Main();
 		} catch (IOException e) {
-			System.out.println("can't run");
+			System.out.println("Cannott run");
 		}
 
 	}
