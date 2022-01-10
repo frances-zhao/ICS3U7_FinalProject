@@ -232,7 +232,7 @@ public class Main extends JFrame implements ActionListener{
 		try {
 			new Main();
 		} catch (IOException e) {
-			System.out.println("Cannott run");
+			System.out.println("Cannot run");
 		}
 
 	}
