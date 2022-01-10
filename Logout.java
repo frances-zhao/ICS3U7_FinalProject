@@ -72,6 +72,7 @@ public class Logout extends JFrame implements ActionListener{
 
 		if (e.getSource() == confirmbtn) { // if confirm button clicked
 			try {
+				JOptionPane.showMessageDialog(this, "Logging out...");
 				new Main(); // redirect to main class
 				frame.dispose();
 			} catch (IOException e1) {
