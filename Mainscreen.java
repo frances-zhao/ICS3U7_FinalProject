@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 public class Mainscreen extends JFrame implements ActionListener{
 
@@ -27,7 +28,14 @@ public class Mainscreen extends JFrame implements ActionListener{
 	// declaring minor decorative details 
 
 
-	Mainscreen(){
+	public void doSmth() throws IOException {
+	      
+
+	   }
+	Mainscreen() throws IOException{
+		
+		Main loginpage = new Main();
+	    String userDisplay = loginpage.getUser();
 
 		final int HEIGHT = 800;
 		final int WIDTH = 1400;
@@ -39,7 +47,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 		frame.setResizable(false);
 
 		// setup the GridBagLayout
-		frame.setLayout(new GridBagLayout());
+		frame.getContentPane().setLayout(new GridBagLayout());
 		Insets insets = new Insets(5, 5, 250, 250); // border/spacing for the components; will apply to 
 		// all components using the constraint of gbc. 
 		// parameters order:
@@ -71,7 +79,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 		gbc.gridx = 3; 
 		gbc.gridy = 1;
 
-		username = new JLabel("<display username here>"); // get a different public variable to store user input
+		username = new JLabel(userDisplay); // get a different public variable to store user input
 		username.setFont(font2);			  // for usertxt and display it here?
 		gbc.gridx = 1; 									   
 		gbc.gridy = 3; 
@@ -82,18 +90,20 @@ public class Mainscreen extends JFrame implements ActionListener{
 		monthly.addActionListener(this);
 		yearly.addActionListener(this);
 
-		frame.add(calendars);
-		frame.add(settings); 
-		frame.add(weekly);
-		frame.add(monthly);
-		frame.add(yearly);
-		frame.add(username);
+		frame.getContentPane().add(calendars);
+		frame.getContentPane().add(settings); 
+		frame.getContentPane().add(weekly);
+		frame.getContentPane().add(monthly);
+		frame.getContentPane().add(yearly);
+		GridBagConstraints gbc_username = new GridBagConstraints();
+		gbc_username.gridx = 5;
+		frame.getContentPane().add(username, gbc_username);
 
 		frame.setVisible(true);
 
 	}
 
-	static void Screen() {	
+	static void Screen() throws IOException {	
 		// set basic format of the screen 
 
 		new Mainscreen();
