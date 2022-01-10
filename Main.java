@@ -142,7 +142,12 @@ public class Main extends JFrame implements ActionListener{
 
 		frame.setVisible(true); // making JFrame visible
 	}
-
+	
+	// getting current User String
+	public String getUser() {
+		return Main.currentUser;
+	}
+	
 
 	// adding a new user
 	public void addNewUser() throws IOException {
@@ -187,7 +192,12 @@ public class Main extends JFrame implements ActionListener{
 			currentPW = passwordtxt.getText(); // input of password in JPasswordField becomes current password
 			if(loginResult()) { // testing if username and password match
 				JOptionPane.showMessageDialog(this, "Login Successful!"); // pop up panel
-				new Mainscreen(); // link to new JFrame
+				try {
+					new Mainscreen();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} // link to new JFrame
 				frame.dispose(); // dispose of current frame
 
 			} else {
@@ -225,7 +235,7 @@ public class Main extends JFrame implements ActionListener{
 			}
 		}
 
-	}
+	} // end actionPerformed
 
 	// testing the main program
 	public static void main(String[] args) {
