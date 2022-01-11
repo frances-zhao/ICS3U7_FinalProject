@@ -53,11 +53,12 @@ public class Weekly extends JFrame implements ActionListener{
 		if (e.getSource() == backbtn) {
 			try {
 				new Mainscreen();
+				frame.dispose();
+
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			frame.dispose();
 		}
 	}
 }
