@@ -13,17 +13,13 @@ public class Main extends JFrame implements ActionListener{
 	private JFrame frame;
 	private JPasswordField passwordtxt;
 	private JTextField usertxt;
-	private JLabel userLabel;
-	private JLabel pwLabel;
+	private JLabel userLabel, pwLabel, success, projectVer, credentials, credentials_1, credentials_2, confirmPW, confirmnote, confirmnote_1;
 	private JButton loginButton;
-	private JLabel success;
-	private JLabel projectVer;
 	private JButton createAccount;
-	private JLabel credentials;
-	private JLabel confirmPW;
 	private JPasswordField confirmPWTEXT;
-	private JLabel confirmnote;
+	
 
+	Font newfont;
 	Font btnfont = new Font("Tahoma", Font.PLAIN, 13);
 	// file IO variables
 	private String fileName = "userInfo.txt";
@@ -37,11 +33,17 @@ public class Main extends JFrame implements ActionListener{
 	private static String currentPW;
 	private static String PWconfirm;
 
+	
 
 
 	// Main Login Page Class
 	Main() throws IOException{
 
+		try {
+			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(13f);
+		} catch (IOException | FontFormatException e){
+			
+		}
 		// reading in all usernames and passwords
 		input = new BufferedReader(new FileReader(fileName));
 
@@ -61,18 +63,19 @@ public class Main extends JFrame implements ActionListener{
 		frame.setSize(WIDTH,HEIGHT);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setBackground(new Color(243, 215, 3));
-		frame.setLayout(null);
+		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 
 		// initializing JLABEL for logo image
 		JLabel image = new JLabel("Tackle Logo Image");
-		image.setFont(btnfont);
+		image.setFont(newfont);
 		image.setBounds(457, 107, 466, 160);
-		frame.add(image);
+		frame.getContentPane().add(image);
 		image.setIcon(new ImageIcon("images/logo.png"));
 
 		usertxt = new JTextField();
+		usertxt.setFont(newfont);
 		usertxt.setColumns(10);
 		usertxt.setBounds(639, 279, 175, 26);
 
@@ -81,25 +84,27 @@ public class Main extends JFrame implements ActionListener{
 		passwordtxt.setBounds(639, 317, 175, 26);
 
 		userLabel = new JLabel("user: ");
-		userLabel.setFont(btnfont);
-		userLabel.setBounds(592, 284, 35, 16);
+		userLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		userLabel.setFont(newfont);
+		userLabel.setBounds(560, 284, 67, 16);
 
 		pwLabel = new JLabel("password: ");
-		pwLabel.setFont(btnfont);
-		pwLabel.setBounds(559, 322, 68, 16);
+		pwLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		pwLabel.setFont(newfont);
+		pwLabel.setBounds(527, 322, 100, 16);
 
 		loginButton = new JButton("Login");
-		loginButton.setFont(btnfont);
-		loginButton.setBounds(639, 386, 117, 29);
+		loginButton.setFont(newfont);
+		loginButton.setBounds(639, 386, 175, 29);
 		loginButton.addActionListener(this);
 
 		createAccount = new JButton("Create Account");
-		createAccount.setFont(btnfont);
-		createAccount.setBounds(639, 417, 117, 29);
+		createAccount.setFont(newfont);
+		createAccount.setBounds(639, 417, 175, 29);
 		createAccount.addActionListener(this); 
 
 		success = new JLabel("");
-		success.setFont(btnfont);
+		success.setFont(newfont);
 		success.setHorizontalAlignment(SwingConstants.CENTER);
 		success.setBounds(609, 399, 240, 16);
 
@@ -108,41 +113,58 @@ public class Main extends JFrame implements ActionListener{
 		confirmPWTEXT.setBounds(639, 355, 175, 26);
 
 		confirmPW = new JLabel("confirm password:* ");
-		confirmPW.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		confirmPW.setBounds(503, 360, 127, 16);
+		confirmPW.setHorizontalAlignment(SwingConstants.RIGHT);
+		confirmPW.setFont(newfont);
+		confirmPW.setBounds(481, 360, 149, 16);
 
 		// credentials for application
-		credentials = new JLabel("<html>Creators: Frances Zhao, Lucia Kim <br>Course: ICS3U7-01<br>Teacher: Ms. Xie</html>");
-		credentials.setFont(btnfont);
-		credentials.setBounds(6, 716, 202, 56);
+		credentials = new JLabel("Creators: Frances Zhao, Lucia Kim");
+		credentials.setFont(newfont);
+		credentials.setBounds(6, 719, 272, 26);
+		
+		credentials_1 = new JLabel("Course: ICS3U7-01");
+		credentials_1.setFont(newfont);
+		credentials_1.setBounds(6, 733, 272, 26);
+		
+		credentials_2 = new JLabel("Teacher: Ms. Xie");
+		credentials_2.setFont(newfont);
+		credentials_2.setBounds(6, 746, 272, 26);
 
 		projectVer = new JLabel("Main.java version 1.2 01/09/2021");
 		projectVer.setForeground(Color.LIGHT_GRAY);
-		projectVer.setFont(btnfont);
+		projectVer.setFont(newfont);
 		projectVer.setHorizontalAlignment(SwingConstants.RIGHT);
-		projectVer.setBounds(1063, 756, 331, 16);
+		projectVer.setBounds(1063, 746, 331, 26);
 
-		confirmnote = new JLabel("<html>*confirm password only if creating new account</html>");
-		confirmnote.setFont(btnfont);
-		confirmnote.setBounds(673, 441, 164, 40);
+		confirmnote = new JLabel("*confirm password only ");
+		confirmnote.setFont(newfont);
+		confirmnote.setBounds(673, 441, 176, 40);
+		
+		confirmnote_1 = new JLabel("if creating new account");
+		confirmnote_1.setFont(newfont);
+		confirmnote_1.setBounds(673, 455, 176, 40);
 
 		// actual GUI
-		frame.add(usertxt);
-		frame.add(passwordtxt);
-		frame.add(userLabel);
-		frame.add(pwLabel);
-		frame.add(loginButton);
-		frame.add(createAccount);
-		frame.add(credentials);
-		frame.add(projectVer);
-		frame.add(success);
-		frame.add(confirmPW);
-		frame.add(confirmPWTEXT);
-		frame.add(confirmnote);		
+		frame.getContentPane().add(usertxt);
+		frame.getContentPane().add(passwordtxt);
+		frame.getContentPane().add(userLabel);
+		frame.getContentPane().add(pwLabel);
+		frame.getContentPane().add(loginButton);
+		frame.getContentPane().add(createAccount);
+		frame.getContentPane().add(credentials);
+		frame.getContentPane().add(credentials_1);
+		frame.getContentPane().add(credentials_2);
+		frame.getContentPane().add(projectVer);
+		frame.getContentPane().add(success);
+		frame.getContentPane().add(confirmPW);
+		frame.getContentPane().add(confirmPWTEXT);
+		frame.getContentPane().add(confirmnote);
+		frame.getContentPane().add(confirmnote_1);		
+
 
 		frame.setVisible(true); // making JFrame visible
 	}
-	
+
 	// getting current User String
 	public String getUser() {
 		return Main.currentUser;
@@ -173,7 +195,7 @@ public class Main extends JFrame implements ActionListener{
 	}
 
 	//checking if username and password match up
-	private boolean loginResult() {
+	public boolean loginResult() {
 		for(int i = 0; i < usernum; i++) {
 			if(currentUser.equals(totalAcc[0][i]) && currentPW.equals(totalAcc[1][i])) {
 				return true;

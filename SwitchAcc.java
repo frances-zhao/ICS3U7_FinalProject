@@ -10,16 +10,23 @@ public class SwitchAcc extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	private JLabel switchtitle = new JLabel("Switch Account?");
-	private JLabel switchlabel;
+	private JLabel switchlabel, switchlabel1;
 	private JButton confirmbtn;
 	private JButton cancelbtn;
 	
 	// font declarations
-	static Font font1 = new Font("Tahoma", Font.PLAIN, 15);
-	static Font font2 = new Font("Tahoma", Font.PLAIN, 18);
+	Font newfont;
+	Font newnewfont;
 
 
 	public SwitchAcc() {
+		
+		try {
+			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(13f);
+			newnewfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
+		} catch (IOException | FontFormatException e){
+			
+		}
 
 		// initializing frame
 		final int HEIGHT = 250;
@@ -32,28 +39,35 @@ public class SwitchAcc extends JFrame implements ActionListener{
 		frame.setResizable(false);
 		frame.setLayout(null);
 
-		switchtitle.setFont(font2);
+		switchtitle.setFont(newnewfont);
 		switchtitle.setHorizontalAlignment(SwingConstants.CENTER);
-		switchtitle.setBounds(121, 6, 148, 46);
+		switchtitle.setBounds(94, 6, 205, 46);
 
-		switchlabel = new JLabel("<html>Are you sure you want <br>to switch accounts?</html>");
+		switchlabel = new JLabel("Are you sure you want ");
 		switchlabel.setHorizontalAlignment(SwingConstants.CENTER);
-		switchlabel.setFont(font1);
+		switchlabel.setFont(newfont);
 		switchlabel.setBounds(42, 43, 321, 46);
+		
+		switchlabel1 = new JLabel("to switch accounts?");
+		switchlabel1.setHorizontalAlignment(SwingConstants.CENTER);
+		switchlabel1.setFont(newfont);
+		switchlabel1.setBounds(42, 55, 321, 46);
 
+		
 		confirmbtn = new JButton("Confirm");
-		confirmbtn.setFont(font1);
+		confirmbtn.setFont(newfont);
 		confirmbtn.setBounds(226, 120, 117, 56);
 		confirmbtn.addActionListener(this);
 
 		cancelbtn = new JButton("Cancel");
-		cancelbtn.setFont(font1);
+		cancelbtn.setFont(newfont);
 		cancelbtn.setBounds(42, 120, 117, 56);
 		cancelbtn.addActionListener(this);
 		
 		// actual GUI
 		frame.add(switchtitle);
 		frame.add(switchlabel);
+		frame.add(switchlabel1);
 		frame.add(confirmbtn);
 		frame.add(cancelbtn);
 

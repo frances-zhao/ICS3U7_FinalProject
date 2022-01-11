@@ -15,11 +15,12 @@ public class accountCfm extends JFrame implements ActionListener{
 	private JButton confirmbtn;
 	private JButton cancelbtn;
 	private JLabel userlabel;
+	private JTextField username;
+
 
 	// font declaration
-	static Font font1 = new Font("Tahoma", Font.PLAIN, 15);
-	static Font font2 = new Font("Tahoma", Font.PLAIN, 18);
-	private JTextField username;
+	Font newfont;
+	Font newnewfont;
 
 	// file IO variables
 	private BufferedReader input;
@@ -37,6 +38,13 @@ public class accountCfm extends JFrame implements ActionListener{
 	 * @throws IOException 
 	 */
 	public accountCfm() throws IOException {
+		
+		try {
+			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(13f);
+			newnewfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
+		} catch (IOException | FontFormatException e){
+			
+		}
 
 		// initializing frame
 		final int HEIGHT = 250;
@@ -50,31 +58,37 @@ public class accountCfm extends JFrame implements ActionListener{
 		frame.setResizable(false);
 		frame.setLayout(null);
 
-		acctitle.setFont(font2);
+		acctitle.setFont(newnewfont);
 		acctitle.setHorizontalAlignment(SwingConstants.CENTER);
 		acctitle.setBounds(109, 6, 171, 46);
 
-		acclabel = new JLabel("<html>Please input the username <br>you'd like to switch to: </html>");
+		acclabel = new JLabel("Please input the username");
 		acclabel.setHorizontalAlignment(SwingConstants.CENTER);
-		acclabel.setFont(font1);
+		acclabel.setFont(newfont);
 		acclabel.setBounds(42, 43, 321, 46);
+		
+		acclabel = new JLabel("you'd like to switch to:");
+		acclabel.setHorizontalAlignment(SwingConstants.CENTER);
+		acclabel.setFont(newfont);
+		acclabel.setBounds(42, 55, 321, 46);
 
 		confirmbtn = new JButton("Confirm");
-		confirmbtn.setFont(font1);
+		confirmbtn.setFont(newfont);
 		confirmbtn.setBounds(226, 128, 117, 56);
 		confirmbtn.addActionListener(this);
 
 		cancelbtn = new JButton("Cancel");
-		cancelbtn.setFont(font1);
+		cancelbtn.setFont(newfont);
 		cancelbtn.setBounds(42, 128, 117, 56);
 		cancelbtn.addActionListener(this);
 
 		username = new JTextField();
-		username.setToolTipText("");
+		username.setFont(newfont);
 		username.setBounds(109, 90, 171, 26);
 		username.setColumns(10);
 
 		userlabel = new JLabel("USER: ");
+		userlabel.setFont(newfont);
 		userlabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		userlabel.setBounds(42, 95, 61, 16);
 		

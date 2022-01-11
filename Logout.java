@@ -11,16 +11,23 @@ public class Logout extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	private JLabel logouttitle = new JLabel("Logout?");
-	private JLabel logoutlabel;
+	private JLabel logoutlabel, logoutlabel1;
 	private JButton confirmbtn;
 	private JButton cancelbtn;
 
 	// font declarations
-	static Font font1 = new Font("Tahoma", Font.PLAIN, 15);
-	static Font font2 = new Font("Tahoma", Font.PLAIN, 18);
+	Font newfont;
+	Font newfont1;
 
 	
 	public Logout() {
+		
+		try {
+			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(13f);
+			newfont1 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
+		} catch (IOException | FontFormatException e){
+			
+		}
 		
 		// initializing frame
 		final int HEIGHT = 250;
@@ -34,22 +41,27 @@ public class Logout extends JFrame implements ActionListener{
 		frame.setLayout(null);
 
 		
-		logouttitle.setFont(font2);
+		logouttitle.setFont(newfont1);
 		logouttitle.setHorizontalAlignment(SwingConstants.CENTER);
 		logouttitle.setBounds(155, 6, 90, 46);
 
-		logoutlabel = new JLabel("<html>Are you sure you want to <br>log out of your account?</html>");
+		logoutlabel = new JLabel("Are you sure you want ");
 		logoutlabel.setHorizontalAlignment(SwingConstants.CENTER);
-		logoutlabel.setFont(font1);
+		logoutlabel.setFont(newfont);
 		logoutlabel.setBounds(42, 43, 321, 46);
+		
+		logoutlabel1 = new JLabel("to log out of your account?");
+		logoutlabel1.setHorizontalAlignment(SwingConstants.CENTER);
+		logoutlabel1.setFont(newfont);
+		logoutlabel1.setBounds(42, 55, 321, 46);
 
 		confirmbtn = new JButton("Confirm");
-		confirmbtn.setFont(font1);
+		confirmbtn.setFont(newfont);
 		confirmbtn.setBounds(226, 120, 117, 56);
 		confirmbtn.addActionListener(this);
 
 		cancelbtn = new JButton("Cancel");
-		cancelbtn.setFont(font1);
+		cancelbtn.setFont(newfont);
 		cancelbtn.setBounds(42, 120, 117, 56);
 		cancelbtn.addActionListener(this);
 
@@ -57,6 +69,7 @@ public class Logout extends JFrame implements ActionListener{
 		// actual GUI
 		frame.add(logouttitle);
 		frame.add(logoutlabel);
+		frame.add(logoutlabel1);
 		frame.add(confirmbtn);
 		frame.add(cancelbtn);
 
