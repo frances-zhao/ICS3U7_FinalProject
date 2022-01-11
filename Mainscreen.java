@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
+import java.io.*;
 
 public class Mainscreen extends JFrame implements ActionListener{
 
@@ -9,33 +9,43 @@ public class Mainscreen extends JFrame implements ActionListener{
 	static // declaring all components to be used for the main screen 
 	JFrame frame = new JFrame("Tackle");
 	static JPanel panel; 
-	private static JButton settings, weekly, monthly, yearly; //buttons for week, month, year 
-	private static JLabel calendars; 
+	private static JButton weekly, monthly, yearly; //buttons for week, month, year 
 	private static JLabel username; 
-	GridBagConstraints gbc = new GridBagConstraints();
-	GridBagConstraints gbc_ = new GridBagConstraints(); // made a seperate constraint to 
-	// set borders between calendar buttons
-	// and the username display
+	private static JLabel scheduleLabel;
 
+	Font newfont;
+
+	
 	static Color yellow1 = new Color(243, 215, 3); // tackle logo bg yellow color 
 	static Color yellow2 = new Color(130, 113, 53); // buttons color (dark)
 	static Color yellow3 = new Color(255, 229, 96); // lighter yellow 
 	static Icon icon = new ImageIcon("images/logo.png");
 	static Font font1 = new Font("Tahoma", Font.BOLD, 20);
 	static Font font2 = new Font("Tahoma", Font.PLAIN, 15);
+	static Font font3 = new Font(".AppleSystemUIFont", Font.PLAIN, 19);
+	private static JMenuBar menuBar;
+	private static JMenu settings;
+	private static JMenuItem colourCSTM;
+	private static JMenuItem switchAcc;
+	private static JMenuItem logout;
 
 
 	// declaring minor decorative details 
 
 
-	public void doSmth() throws IOException {
-	      
-
-	   }
 	Mainscreen() throws IOException{
+		
+		try {
+			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(13f);
+		} catch (IOException | FontFormatException e){
+			
+		}
 		
 		Main loginpage = new Main();
 	    String userDisplay = loginpage.getUser();
+		
+		//Main loginpage = new Main();
+		//String userDisplay = loginpage.getUser();
 
 		final int HEIGHT = 800;
 		final int WIDTH = 1400;
@@ -45,60 +55,63 @@ public class Mainscreen extends JFrame implements ActionListener{
 		frame.getContentPane().setBackground(yellow1);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
-
-		// setup the GridBagLayout
-		frame.getContentPane().setLayout(new GridBagLayout());
-		Insets insets = new Insets(5, 5, 250, 250); // border/spacing for the components; will apply to 
-		// all components using the constraint of gbc. 
-		// parameters order:
-		// (top, bottom, left, right) || might come in handy? 
-
-		// add the components 
-		calendars = new JLabel("CALENDARS");
-		calendars.setFont(font1);
-		gbc.gridx = 0; 
-		gbc.gridy = 0; 
-
-		settings = new JButton(icon);
-		settings.setFont(font2);
-		gbc.gridx = 0;
-		gbc.gridy = 1; 
-
+		
 		weekly = new JButton("Weekly");
-		weekly.setFont(font2);
-		gbc.gridx = 1;
-		gbc.gridy = 1;
+		weekly.setBounds(919, 117, 135, 77);
+		weekly.setFont(newfont);
 
 		monthly = new JButton("Monthly");
-		monthly.setFont(font2);
-		gbc.gridx = 2; 
-		gbc.gridy = 1;
+		monthly.setBounds(1066, 117, 135, 77);
+		monthly.setFont(newfont);
 
 		yearly = new JButton("Yearly");
-		yearly.setFont(font2);
-		gbc.gridx = 3; 
-		gbc.gridy = 1;
+		yearly.setBounds(1213, 117, 135, 77);
+		yearly.setFont(newfont);
 
 		username = new JLabel(userDisplay); // get a different public variable to store user input
-		username.setFont(font2);			  // for usertxt and display it here?
-		gbc.gridx = 1; 									   
-		gbc.gridy = 3; 
+		username.setBounds(50, 105, 429, 59);
+		username.setFont(new Font(".AppleSystemUIFont", Font.PLAIN, 33));
 		
-		
-		settings.addActionListener(this);
+		menuBar = new JMenuBar();
+		menuBar.setBounds(12, 20, 73, 22);
+		menuBar.setFont(newfont);
+		frame.add(menuBar);
+
+		settings = new JMenu("Settings");
+		settings.setFont(newfont);
+		menuBar.add(settings);
+
+		colourCSTM = new JMenuItem("Colour Customization");
+		colourCSTM.setFont(newfont);
+		settings.add(colourCSTM);
+
+		switchAcc = new JMenuItem("Switch Accounts");
+		switchAcc.setFont(newfont);
+		settings.add(switchAcc);
+
+		logout = new JMenuItem("Logout");
+		logout.setFont(newfont);
+		settings.add(logout);
+
+		scheduleLabel = new JLabel("SCHEDULER");
+		scheduleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		scheduleLabel.setBounds(919, 54, 429, 51);
+		scheduleLabel.setFont(newfont);
+
+		colourCSTM.addActionListener(this);
+		switchAcc.addActionListener(this);
+		logout.addActionListener(this);
 		weekly.addActionListener(this);
 		monthly.addActionListener(this);
 		yearly.addActionListener(this);
+		frame.setLayout(null);
+		frame.add(weekly);
+		frame.add(monthly);
+		frame.add(yearly);
+		frame.add(username);
+		frame.add(scheduleLabel);
 
-		frame.getContentPane().add(calendars);
-		frame.getContentPane().add(settings); 
-		frame.getContentPane().add(weekly);
-		frame.getContentPane().add(monthly);
-		frame.getContentPane().add(yearly);
-		GridBagConstraints gbc_username = new GridBagConstraints();
-		gbc_username.gridx = 5;
-		frame.getContentPane().add(username, gbc_username);
-
+	
 		frame.setVisible(true);
 
 	}
@@ -116,10 +129,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == settings) {
-			
-		}
-		
+
 		if (e.getSource() == weekly) {
 			new Weekly();
 			frame.dispose(); // dispose of current frame
@@ -135,8 +145,19 @@ public class Mainscreen extends JFrame implements ActionListener{
 			frame.dispose(); // dispose of current frame
 
 		}
+		if (e.getSource()== logout) {
+			new Logout();
+		}
+		if (e.getSource()== switchAcc) {
+			new SwitchAcc();
+		}
 		
+		if (e.getSource()== colourCSTM) {
+			new ColourCSTM();
+		}
 		
+
+
 	}
 	public static void main(String[] args) {
 		try {
@@ -146,5 +167,4 @@ public class Mainscreen extends JFrame implements ActionListener{
 			e.printStackTrace();
 		}
 	}
-
 }
