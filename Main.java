@@ -18,7 +18,7 @@ public class Main extends JFrame implements ActionListener{
 	private JButton createAccount;
 	private JPasswordField confirmPWTEXT;
 	
-
+	
 	Font newfont;
 	Font btnfont = new Font("Tahoma", Font.PLAIN, 13);
 	// file IO variables
@@ -63,7 +63,7 @@ public class Main extends JFrame implements ActionListener{
 		frame.setSize(WIDTH,HEIGHT);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setBackground(new Color(243, 215, 3));
-		frame.getContentPane().setLayout(null);
+		frame.setLayout(null);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 
@@ -71,7 +71,7 @@ public class Main extends JFrame implements ActionListener{
 		JLabel image = new JLabel("Tackle Logo Image");
 		image.setFont(newfont);
 		image.setBounds(457, 107, 466, 160);
-		frame.getContentPane().add(image);
+		frame.add(image);
 		image.setIcon(new ImageIcon("images/logo.png"));
 
 		usertxt = new JTextField();
@@ -145,21 +145,21 @@ public class Main extends JFrame implements ActionListener{
 		confirmnote_1.setBounds(673, 455, 176, 40);
 
 		// actual GUI
-		frame.getContentPane().add(usertxt);
-		frame.getContentPane().add(passwordtxt);
-		frame.getContentPane().add(userLabel);
-		frame.getContentPane().add(pwLabel);
-		frame.getContentPane().add(loginButton);
-		frame.getContentPane().add(createAccount);
-		frame.getContentPane().add(credentials);
-		frame.getContentPane().add(credentials_1);
-		frame.getContentPane().add(credentials_2);
-		frame.getContentPane().add(projectVer);
-		frame.getContentPane().add(success);
-		frame.getContentPane().add(confirmPW);
-		frame.getContentPane().add(confirmPWTEXT);
-		frame.getContentPane().add(confirmnote);
-		frame.getContentPane().add(confirmnote_1);		
+		frame.add(usertxt);
+		frame.add(passwordtxt);
+		frame.add(userLabel);
+		frame.add(pwLabel);
+		frame.add(loginButton);
+		frame.add(createAccount);
+		frame.add(credentials);
+		frame.add(credentials_1);
+		frame.add(credentials_2);
+		frame.add(projectVer);
+		frame.add(success);
+		frame.add(confirmPW);
+		frame.add(confirmPWTEXT);
+		frame.add(confirmnote);
+		frame.add(confirmnote_1);		
 
 
 		frame.setVisible(true); // making JFrame visible
