@@ -43,9 +43,11 @@ public class Mainscreen extends JFrame implements ActionListener{
 	Mainscreen() throws IOException{
 
 		try {
-			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(13f);
-			newfont1 =  Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(40f);
-			madefont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/wake.otf")).deriveFont(40f);
+			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f); // font for buttons text
+			newfont1 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(30f); // font for schedule label 
+			newfont2 =  Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(40f); // font spare
+			newfont3 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(60f); // font for time display 
+			madefont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/wake.otf")).deriveFont(15f); // font for settings 
 
 		} catch (IOException | FontFormatException e){
 
@@ -58,8 +60,8 @@ public class Mainscreen extends JFrame implements ActionListener{
 
 		timeLabel = new JLabel();
 		timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		timeLabel.setFont(newfont1);
-		timeLabel.setBounds(448, 117, 516, 102);
+		timeLabel.setFont(newfont3);
+		timeLabel.setBounds(95, 95, 516, 102);
 
 
 
@@ -91,28 +93,28 @@ public class Mainscreen extends JFrame implements ActionListener{
 
 		menuBar = new JMenuBar();
 		menuBar.setBounds(6, 6, 69, 22);
-		menuBar.setFont(newfont);
+		menuBar.setFont(madefont);
 		frame.add(menuBar);
 
 		settings = new JMenu("Settings");
 		menuBar.add(settings);
-		settings.setFont(newfont);
+		settings.setFont(madefont);
 
 
 		help = new JMenuItem("Help");
-		help.setFont(newfont);
+		help.setFont(madefont);
 		settings.add(help);
 
 		colourCSTM = new JMenuItem("Colour Customization");
-		colourCSTM.setFont(newfont);
+		colourCSTM.setFont(madefont);
 		settings.add(colourCSTM);
 
 		switchAcc = new JMenuItem("Switch Accounts");
-		switchAcc.setFont(newfont);
+		switchAcc.setFont(madefont);
 		settings.add(switchAcc);
 
 		logout = new JMenuItem("Logout");
-		logout.setFont(newfont);
+		logout.setFont(madefont);
 		settings.add(logout);
 
 		help.addActionListener(this);
@@ -122,8 +124,8 @@ public class Mainscreen extends JFrame implements ActionListener{
 
 		scheduleLabel = new JLabel("SCHEDULER");
 		scheduleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		scheduleLabel.setBounds(965, 6, 429, 51);
-		scheduleLabel.setFont(newfont);
+		scheduleLabel.setBounds(920, 60, 429, 51);
+		scheduleLabel.setFont(newfont1);
 		weekly.addActionListener(this);
 		monthly.addActionListener(this);
 		yearly.addActionListener(this);
