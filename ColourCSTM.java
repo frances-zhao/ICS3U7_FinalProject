@@ -12,23 +12,21 @@ public class ColourCSTM extends JFrame implements ActionListener{
 	private JFrame frame;
 	private JLabel colourtitle = new JLabel("Colour Customization?");
 	private JLabel colourlabel, colourlabel1;
-	private JButton confirmbtn;
-	private JButton cancelbtn;
+	private JButton pinkbtn, yellowbtn, bluebtn;
 
 	// font declarations
-	Font newfont;
-	Font newfont1;
+	Font newfont, smallestfont, newfont1;	
 
-	
 	public ColourCSTM() {
-		
+
 		try {
+			smallestfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(10f);
 			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(13f);
 			newfont1 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
 		} catch (IOException | FontFormatException e){
-			
+
 		}
-		
+
 		// initializing frame
 		final int HEIGHT = 250;
 		final int WIDTH = 400;
@@ -40,7 +38,7 @@ public class ColourCSTM extends JFrame implements ActionListener{
 		frame.setResizable(false);
 		frame.setLayout(null);
 
-		
+
 		colourtitle.setFont(newfont1);
 		colourtitle.setHorizontalAlignment(SwingConstants.CENTER);
 		colourtitle.setBounds(59, 6, 278, 46);
@@ -49,48 +47,52 @@ public class ColourCSTM extends JFrame implements ActionListener{
 		colourlabel.setHorizontalAlignment(SwingConstants.CENTER);
 		colourlabel.setFont(newfont);
 		colourlabel.setBounds(42, 43, 321, 46);
-		
+
 		colourlabel1 = new JLabel("you like to switch to?");
 		colourlabel1.setHorizontalAlignment(SwingConstants.CENTER);
 		colourlabel1.setFont(newfont);
 		colourlabel1.setBounds(42, 55, 321, 46);
 
-		confirmbtn = new JButton("Confirm");
-		confirmbtn.setFont(newfont);
-		confirmbtn.setBounds(226, 120, 117, 56);
-		confirmbtn.addActionListener(this);
+		bluebtn = new JButton("Ocean");
+		bluebtn.setBackground(new Color(164, 210, 237));
+		bluebtn.setBounds(31, 100, 89, 23);
+		bluebtn.setFont(newfont);
 
-		cancelbtn = new JButton("Cancel");
-		cancelbtn.setFont(newfont);
-		cancelbtn.setBounds(42, 120, 117, 56);
-		cancelbtn.addActionListener(this);
+		yellowbtn = new JButton("Bumble");
+		yellowbtn.setBackground(new Color(255, 208, 37));
+		yellowbtn.setBounds(149, 100, 89, 23);
+		yellowbtn.setFont(newfont);
 
+		pinkbtn = new JButton("Blossom");
+		pinkbtn.setBackground(new Color(240, 156, 166));
+		pinkbtn.setBounds(262, 100, 89, 23);
+		pinkbtn.setFont(newfont);
 
 		// actual GUI
 		frame.add(colourtitle);
 		frame.add(colourlabel);
 		frame.add(colourlabel1);
-		frame.add(confirmbtn);
-		frame.add(cancelbtn);
+		frame.add(pinkbtn);
+		frame.add(yellowbtn);
+		frame.add(bluebtn);
 
+
+		bluebtn.addActionListener(this);
+		yellowbtn.addActionListener(this);
+		pinkbtn.addActionListener(this);
 		frame.setVisible(true);
 	}
 
 	/*
 	 * implementing ActionListener, based on the event of user (which button clicked), different methods performed 
 	 */
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		if (e.getSource() == confirmbtn) { // if confirm button clicked
-			JOptionPane.showMessageDialog(this, "Changing colour theme...");
-			frame.dispose();
-
-		}
-
-		if (e.getSource() == cancelbtn) { // if cancel button clicked
-			frame.dispose(); // dispose of current frame
+		if(e.getSource() == pinkbtn){
+			
+		
 		}
 	}
 
