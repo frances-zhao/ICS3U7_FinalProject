@@ -9,20 +9,22 @@ import java.util.Calendar;
 public class Mainscreen extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
-	static // declaring all components to be used for the main screen 
-	JFrame frame = new JFrame("Tackle");
+	
+	// declare all components to be used for the main screen 
+	static JFrame frame = new JFrame("Tackle");
 	static JPanel panel; 
 	private static JButton weekly, monthly, yearly; //buttons for week, month, year 
 	private static JLabel username; 
 	private static JLabel scheduleLabel;
 
-	Font newfont;
-	Font newfont1;
-	Font madefont;
-
-	static Color yellow1 = new Color(243, 215, 3); // tackle logo bg yellow color 
-	static Color yellow2 = new Color(130, 113, 53); // buttons color (dark)
-	static Color yellow3 = new Color(255, 229, 96); // lighter yellow 
+	static Color yellow1 = new Color(255, 208, 37); // tackle logo bg yellow color 
+	static Color yellow2 = new Color(232, 180, 2); // buttons color (dark)
+	static Color yellow3 = new Color(255, 255, 255); // white
+	static Font newfont;
+	static Font newfont1;
+	static Font newfont2;
+	static Font newfont3;
+	static Font madefont;
 	static Icon icon = new ImageIcon("images/logo.png");
 	private static JMenuBar menuBar;
 	private static JMenu settings;
@@ -43,11 +45,12 @@ public class Mainscreen extends JFrame implements ActionListener{
 	Mainscreen() throws IOException{
 
 		try {
-			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f); // font for buttons text
-			newfont1 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(30f); // font for schedule label 
-			newfont2 =  Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(40f); // font spare
-			newfont3 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(60f); // font for time display 
-			madefont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/wake.otf")).deriveFont(15f); // font for settings 
+			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
+			newfont1 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(30f);
+			newfont2 =  Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(40f);
+			newfont3 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(60f);
+			madefont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/wake.otf")).deriveFont(15f);
+
 
 		} catch (IOException | FontFormatException e){
 
@@ -75,16 +78,27 @@ public class Mainscreen extends JFrame implements ActionListener{
 		frame.setResizable(false);
 
 		weekly = new JButton("Weekly");
-		weekly.setBounds(965, 46, 135, 77);
+		weekly.setBounds(919, 117, 135, 77);
+		weekly.setBackground(yellow2);
 		weekly.setFont(newfont);
-
+		weekly.setForeground(yellow3);
+		weekly.setBorder(BorderFactory.createLineBorder(yellow2));
+		
 		monthly = new JButton("Monthly");
-		monthly.setBounds(1112, 46, 135, 77);
+		monthly.setBounds(1066, 117, 135, 77);
+		monthly.setBackground(yellow2);
 		monthly.setFont(newfont);
-
+		monthly.setForeground(yellow3);
+		monthly.setBorder(BorderFactory.createLineBorder(yellow2));
+		
 		yearly = new JButton("Yearly");
-		yearly.setBounds(1259, 46, 135, 77);
+		yearly.setBounds(1213, 117, 135, 77);
+		yearly.setBackground(yellow2);
 		yearly.setFont(newfont);
+		yearly.setForeground(yellow3);
+		yearly.setBorder(BorderFactory.createLineBorder(yellow2));
+
+
 
 		username = new JLabel(userDisplay); // get a different public variable to store user input
 		username.setHorizontalAlignment(SwingConstants.CENTER);
