@@ -1,27 +1,30 @@
+// import packages
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.io.*;
+import java.util.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
 class CalendarView extends JPanel {
 
+	// variable declaration
 	private static final long serialVersionUID = 1L;
-	public Calendar calendar;
+	public Calendar calendar; // importing a calendar
+
 	private int thisYear;
 	private int thisMonth;
 	private int daysinMonth;
 	private int startofDay;
-	String monthstring;
+	private String monthstring;
 	private int lastMonth;
 	private JLabel monthLabel;
-	
+
+	// temporary: colours
 	static Color yellow1 = new Color(255, 208, 37); // tackle logo bg yellow color 
 	static Color yellow2 = new Color(232, 180, 2); // buttons color (dark)
 	static Color yellow3 = new Color(255, 255, 255); // white
 
+	// days of the week labels
 	private JLabel sun;
 	private JLabel mon;
 	private JLabel tue;
@@ -30,40 +33,46 @@ class CalendarView extends JPanel {
 	private JLabel fri;
 	private JLabel sat;
 
-	static Font newfont, newfontsmall, newfont1,newfont2, madefont, newfont3 ;
+	// font declaration
+	static Font newfont;
 
 	public CalendarView(Calendar calendar) {
-		
+
+		// try/catch the font
 		try {
-			newfontsmall = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(10f);
 			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
-			newfont1 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(30f);
-			newfont2 =  Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(40f);
-			newfont3 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(60f);
-			madefont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/wake.otf")).deriveFont(20f);
 
 		} catch (IOException | FontFormatException e){
 
 		}
+
+		// current calendar is the calendar
 		this.calendar = calendar;
 
+		// setting layout as border
 		setLayout(new BorderLayout());
 
-		thisYear = calendar.get(Calendar.YEAR);
-		thisMonth = calendar.get(Calendar.MONTH);
-		daysinMonth = getMaximum(thisMonth);
-		monthstring = monthname(thisMonth);
-		startofDay = calendar.get(Calendar.DAY_OF_WEEK);
-		lastMonth = getPreviousMonth(thisMonth);
+		// using calendar function, get the specific needs
+		thisMonth = calendar.get(Calendar.MONTH); // get the month
+		thisYear = calendar.get(Calendar.YEAR); // get the year
+		daysinMonth = getMax(thisMonth); // get the max days in the month
+		monthstring = monthname(thisMonth); // get the string ver of the current month
+		startofDay = calendar.get(Calendar.DAY_OF_WEEK); // get the start of the day of the week
+		lastMonth = getPreviousMonth(thisMonth); // get the previous month
 
+		// using the string of the current month and the current year to create a label
 		monthLabel = new JLabel(monthstring +" "+ thisYear);
 		monthLabel.setHorizontalAlignment(JLabel.CENTER);
 		monthLabel.setFont(newfont);
 
+		// creating a JPanel for the actual calendar
 		JPanel panel = new JPanel(new GridLayout(0, 7, 0, 0));
 		Border border = new LineBorder(Color.black, 1);
+
+		// creating a JPanel for the month name
 		JPanel top = new JPanel();
 
+		// creating names for variables
 		sun = new JLabel("Sunday");
 		mon = new JLabel("Monday");
 		tue = new JLabel("Tuesday");
@@ -72,6 +81,7 @@ class CalendarView extends JPanel {
 		fri = new JLabel("Friday");
 		sat = new JLabel("Saturday");
 
+		// set variables as center for horizontal alignment
 		sun.setHorizontalAlignment(JLabel.CENTER);
 		mon.setHorizontalAlignment(JLabel.CENTER);
 		tue.setHorizontalAlignment(JLabel.CENTER);
@@ -80,6 +90,7 @@ class CalendarView extends JPanel {
 		fri.setHorizontalAlignment(JLabel.CENTER);
 		sat.setHorizontalAlignment(JLabel.CENTER);
 
+		// add the labels into the border
 		mon.setBorder(border);
 		sun.setBorder(border);
 		tue.setBorder(border);
@@ -88,6 +99,7 @@ class CalendarView extends JPanel {
 		fri.setBorder(border);
 		sat.setBorder(border);
 
+		// set font for the labels
 		sun.setFont(newfont);
 		mon.setFont(newfont);
 		tue.setFont(newfont);
@@ -95,10 +107,12 @@ class CalendarView extends JPanel {
 		thu.setFont(newfont);
 		fri.setFont(newfont);
 		sat.setFont(newfont);
-		
-		top.add(monthLabel, BorderLayout.NORTH);
-		top.setBackground(yellow1);
 
+		// add the month label to top JPanel
+		top.add(monthLabel, BorderLayout.NORTH);
+		top.setBackground(yellow1); // TEMPORARY COLOUR
+
+		// add the labels to the JPanel for the calendar
 		panel.add(sun);
 		panel.add(mon);
 		panel.add(tue);
@@ -107,53 +121,56 @@ class CalendarView extends JPanel {
 		panel.add(fri);
 		panel.add(sat);
 
-		int i;
+		// variable declarations continued. 
+		int i; // declared out of loops because it is used in more than one loop
+		int daysinLastMonth = getMax(lastMonth); // the amount of days in the previous month
+		int previousdays = daysinLastMonth - startofDay + 2; // determining how many days needed to be lightened
 
-		int daysinLastMonth = getMaximum(lastMonth);
-		int previousdays = daysinLastMonth - startofDay + 2;
 
-		
-		
-		for (i = 1; i < startofDay; i++) {
+		for (i = 1; i < startofDay; i++) { // adding a JLabel for all days that are in the previous month (grey numbers before the current month)
 			JLabel date = new JLabel(" " + previousdays);
-			date.setBorder(border);
-			date.setHorizontalAlignment(JLabel.LEFT);
-			date.setForeground(Color.LIGHT_GRAY);
-			date.setFont(newfont);
-			panel.add(date);
-			previousdays++;
+			date.setBorder(border); // adding the labels in the border layout
+			date.setHorizontalAlignment(JLabel.LEFT); // setting the numbers onto the left side of the box
+			date.setForeground(Color.LIGHT_GRAY); // setting the colour of the numbers as light gray
+			date.setFont(newfont); // setting font of labels
+			panel.add(date); // adding the date to the panel
+			previousdays++; // adding one to the previousdays so the next number printed is not the same
 		}
 
-		for (int j = 1 ; j <= daysinMonth; j++, i++) {
+		for (int j = 1 ; j <= daysinMonth; j++, i++) { // adding a JLabel for each day in the month 
+			JLabel date = new JLabel(" " + j); 
+			date.setBorder(border); // adding label in border layout
+			date.setHorizontalAlignment(JLabel.LEFT); // setting numbers onto left side of the box
+			date.setFont(newfont); // setting the font of the numbers
+			panel.add(date); // adding the date to the panel
+		}
+
+		
+		for (int j = 1 ; i <= 42; j++, i++) { // adding a JLabel for all days that are in the next month (grey numbers after the current month)
 			JLabel date = new JLabel(" " + j);
-			date.setBorder(border);
-			date.setHorizontalAlignment(JLabel.LEFT);
-			date.setFont(newfont);
-			panel.add(date);
+			date.setBorder(border); // adding label in border layout
+			date.setHorizontalAlignment(JLabel.LEFT); // setting numbers onto left side of the box
+			date.setForeground(Color.LIGHT_GRAY); // setting colour of the numbers
+			date.setFont(newfont); // setting font of the numbers
+			panel.add(date); // adding date to the panel
 		}
 
-		for (int j = 1 ; i <= 42; j++, i++) {
-			JLabel date = new JLabel(" " + j);
-			date.setBorder(border);
-			date.setHorizontalAlignment(JLabel.LEFT);
-			date.setForeground(Color.LIGHT_GRAY);
-			date.setFont(newfont);
-			panel.add(date);
-		}
-
-		add(top, BorderLayout.NORTH);
+		// adding the top and panel JPanels to the BorderLayout
+		add(top, BorderLayout.NORTH); 
 		add(panel, BorderLayout.CENTER);
 
 	}
 
+	// getting the previous month
 	private int getPreviousMonth(int month) {
-		if (month == 0) {
+		if (month == 0) { // if the month is december, return january
 			return 11;
 		}
 
-		return month - 1;
+		return month - 1; // return the month before the current month
 	}
 
+	// method to convert the month (as int) into its String version
 	private String monthname(int thisMonth) {
 		String name = "";
 		switch(thisMonth) {
@@ -194,10 +211,11 @@ class CalendarView extends JPanel {
 			name = "December";
 			break;
 		}
-		return name;
+		return name; // returning the name of month
 	}
 
-	private int getMaximum(int month) {
+	// method to get the maximum number of days in the month
+	private int getMax(int month) {
 		int max = 0;
 		switch (month) {
 		case 0, 2, 4, 6, 7, 9, 11: 
@@ -213,14 +231,17 @@ class CalendarView extends JPanel {
 			max = 30;
 		break;
 		}
-		return max;
+		
+		return max; // returning the max days
 	}
 
+	// checking if the current year is a leap year or not
 	private boolean isLeap() {
 		return (thisYear % 4 == 0 && thisYear % 100 != 0) || 
 				thisYear % 400 == 0;
 	}
 
+	// getting the last month 
 	public CalendarView lastMonth() {
 		return new CalendarView(new GregorianCalendar(
 				thisYear, 
@@ -228,6 +249,7 @@ class CalendarView extends JPanel {
 				1));
 	}
 
+	// getting the next month
 	public CalendarView nextMonth() {
 		return new CalendarView(new GregorianCalendar(
 				thisYear, 

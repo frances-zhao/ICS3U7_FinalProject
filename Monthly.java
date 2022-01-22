@@ -1,25 +1,26 @@
+// import packages
 import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
-
+import java.io.*;
 import javax.swing.*;
 import java.awt.*;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.*;
 
 
 public class Monthly extends JFrame implements ActionListener {
 
-	static JFrame frame = new JFrame("Monthly Calendar");
+	// variable declarations 
 	private static final long serialVersionUID = 1L;
+	static JFrame frame = new JFrame("Monthly Calendar");
+	
+	// declaring calendars
 	Calendar calendar1 = new GregorianCalendar();
-	Calendar calendar2 = new GregorianCalendar(calendar1.get(Calendar.YEAR), calendar1.get(Calendar.MONTH), 1);
+	Calendar calendar2 = new GregorianCalendar(calendar1.get(Calendar.YEAR), calendar1.get(Calendar.MONTH), 1); // used as temp
 
-	CalendarView currentcalendar = new CalendarView(calendar2);
-	private JButton last = new JButton("<<");
-	private JButton next = new JButton(">>");
+	CalendarView currentcalendar = new CalendarView(calendar2); // calendar on screen
+	private JButton last = new JButton("<<"); // move to previous month button
+	private JButton next = new JButton(">>"); // move to next month button
 
-	static Font newfont, newfontsmall, newfont1,newfont2, madefont, newfont3 ;
+	static Font newfont; // declaring font
 	private JButton home;
 
 	static Color yellow1 = new Color(255, 208, 37); // tackle logo bg yellow color 
@@ -28,21 +29,19 @@ public class Monthly extends JFrame implements ActionListener {
 
 	Monthly() {
 
+		// try/catch importing the font
 		try {
-			newfontsmall = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(10f);
 			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
-			newfont1 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(30f);
-			newfont2 =  Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(40f);
-			newfont3 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(60f);
-			madefont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/wake.otf")).deriveFont(20f);
-
+			
 		} catch (IOException | FontFormatException e){
 
 		}
 
+		// importing mini logo as icon
 		Icon icon = new ImageIcon("images/image.png");
 		home = new JButton(icon);
 		
+		// screen declarations
 		final int HEIGHT = 800;
 		final int WIDTH = 1400;
 		frame.setSize(WIDTH,HEIGHT);
@@ -51,58 +50,66 @@ public class Monthly extends JFrame implements ActionListener {
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 
+		// declaring a new panel
+		JPanel panel = new JPanel();
+
+		// setting font for buttons
 		last.setFont(newfont);
 		home.setFont(newfont);
 		next.setFont(newfont);
-		JPanel panel = new JPanel();
-
+		
+		// setting panel colour and adding buttons
 		panel.setBackground(yellow1);
 		panel.add(last);
 		panel.add(home);
 		panel.add(next);
 
+		// adding the calendar to the JFrame
 		frame.add(currentcalendar, BorderLayout.CENTER);
 		frame.add(panel, BorderLayout.NORTH);
 		
-		frame.setVisible(true);
-
+		// adding action listener to the buttons
 		home.addActionListener(this);
 		next.addActionListener(this);	
 		last.addActionListener(this);
+		
+		frame.setVisible(true); // set frame visible
+
 	}
 
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		if (e.getSource()== next) {
-			frame.remove(currentcalendar);
-			currentcalendar = currentcalendar.nextMonth();
-			frame.getContentPane().add(currentcalendar, BorderLayout.CENTER);
+		if (e.getSource()== next) { // if next month button clicked
+			frame.remove(currentcalendar); // remove the current calendar shown
+			currentcalendar = currentcalendar.nextMonth(); // make the new current calendar the next month
+			frame.getContentPane().add(currentcalendar, BorderLayout.CENTER); // add the calendar to the current frame
 			frame.repaint();
-			frame.revalidate();
+			frame.revalidate(); // revalidate the frame
 		}
 
-		if (e.getSource() == last) {
-			frame.remove(currentcalendar);
-			currentcalendar = currentcalendar.lastMonth();
-			frame.getContentPane().add(currentcalendar);
+		if (e.getSource() == last) {  // if last month button clicked
+			frame.remove(currentcalendar); // remove the current calendar shown
+			currentcalendar = currentcalendar.lastMonth(); // make the new current calendar the last month
+			frame.getContentPane().add(currentcalendar); // add the calendar to the current frame
 			frame.repaint();
-			frame.revalidate();
+			frame.revalidate(); // revalidate the frame
 
 		}
 		
-		if (e.getSource() == home) {
+		if (e.getSource() == home) { // if the home button is clicked
 			try {
-				new Mainscreen();
+				new Mainscreen(); // go back to the main screen
 				frame.dispose();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			
 		}
 	}
-
+	
+	// for trial and error only: main program
 	public static void main(String[] args) {
 		try {
 			new Monthly();
