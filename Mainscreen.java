@@ -165,7 +165,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 		frame.setVisible(true);
 		
 		
-		setTime(); //does not work with main program
+		//setTime(); //does not work with main program
 
 	}
 
