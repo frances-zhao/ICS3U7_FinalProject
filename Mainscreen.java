@@ -15,7 +15,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 	static JPanel panel; 
 	private static JButton weekly, monthly, yearly; //buttons for week, month, year 
 	private static JLabel username; 
-	private static JLabel scheduleLabel;
+	private static JLabel scheduleLabel, todoLabel;
 
 	static Color yellow1 = new Color(255, 208, 37); // tackle logo bg yellow color 
 	static Color yellow2 = new Color(232, 180, 2); // buttons color (dark)
@@ -108,7 +108,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 		yearly.setFont(newfont);
 		yearly.setForeground(yellow3);
 		yearly.setBorder(BorderFactory.createLineBorder(yellow2));
-
+		
 
 		username = new JLabel(userDisplay); // get a different public variable to store user input
 		username.setHorizontalAlignment(SwingConstants.CENTER);
@@ -149,6 +149,12 @@ public class Mainscreen extends JFrame implements ActionListener{
 		scheduleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		scheduleLabel.setBounds(920, 60, 429, 51);
 		scheduleLabel.setFont(newfont1);
+		
+		todoLabel = new JLabel ("// TODO");
+		todoLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		todoLabel.setBounds(1030, 240, 200, 41);
+		todoLabel.setFont(newfont1);
+		
 		weekly.addActionListener(this);
 		monthly.addActionListener(this);
 		yearly.addActionListener(this);
@@ -158,6 +164,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 		frame.add(yearly);
 		frame.add(username);
 		frame.add(scheduleLabel);
+		frame.add(todoLabel);
 		frame.add(timeLabel);
 		frame.add(dayLabel);
 		frame.add(dateLabel);
