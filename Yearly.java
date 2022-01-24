@@ -11,15 +11,6 @@ public class Yearly extends JFrame implements ActionListener{
 	Font newnewfont;
 
 
-	public static void main(String[] args) {
-		try {
-			new Yearly();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-
 	public Yearly() {
 		
 		try {

@@ -110,13 +110,6 @@ public class Monthly extends JFrame implements ActionListener {
 	}
 	
 	// for trial and error only: main program
-	public static void main(String[] args) {
-		try {
-			new Monthly();
-
-		} catch(Exception e){
-			e.printStackTrace();
-		}
-	}
+	
 }
 

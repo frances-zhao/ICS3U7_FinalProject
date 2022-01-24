@@ -96,12 +96,4 @@ public class ColourCSTM extends JFrame implements ActionListener{
 		}
 	}
 
-	// testing the main program
-	public static void main(String[] args) {
-		try {
-			new ColourCSTM();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 }

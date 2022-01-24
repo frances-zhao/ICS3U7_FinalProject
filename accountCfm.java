@@ -150,12 +150,4 @@ public class accountCfm extends JFrame implements ActionListener{
 	}
 
 
-	// testing the main program
-	public static void main(String[] args) {
-		try {
-			new accountCfm();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 }

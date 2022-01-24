@@ -96,12 +96,5 @@ public class SwitchAcc extends JFrame implements ActionListener{
 		}
 	}
 
-	// testing the main program
-	public static void main(String[] args) {
-		try {
-			new SwitchAcc();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 }

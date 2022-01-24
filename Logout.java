@@ -101,12 +101,5 @@ public class Logout extends JFrame implements ActionListener{
 		}
 	}
 
-	// testing the main program
-	public static void main(String[] args) {
-		try {
-			new Logout();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 }

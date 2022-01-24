@@ -232,14 +232,5 @@ public class Mainscreen extends JFrame implements ActionListener{
 
 
 		}
-		public static void main(String[] args) {
-			try {
-				frame.dispose();
-				new Mainscreen();
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
+		
 	}
