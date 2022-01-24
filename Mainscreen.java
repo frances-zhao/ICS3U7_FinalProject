@@ -200,7 +200,12 @@ public class Mainscreen extends JFrame implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 
 			if (e.getSource() == weekly) {
-				new Weekly();
+				try {
+					new Weekly();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				frame.dispose(); // dispose of current frame
 			}
 			if (e.getSource() == monthly) {
