@@ -128,14 +128,14 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		next1.setFont(newfont);
 		next1.setForeground(bumble5);
 		next1.setBackground(bumble6);
-		next1.setBorder(BorderFactory.createLineBorder(bumble5));
+		next1.setBorder(BorderFactory.createLineBorder(bumble6));
 		
 		prev1 = new JButton("-");
 		prev1.setBounds(420, 115, 20, 16);
 		prev1.setFont(newfont);
 		prev1.setForeground(bumble5);
 		prev1.setBackground(bumble6);
-		prev1.setBorder(BorderFactory.createLineBorder(bumble5));
+		prev1.setBorder(BorderFactory.createLineBorder(bumble6));
 		
 		h = new JTextField(hour);
 		h.setBounds(440, 100, 60, 32);
