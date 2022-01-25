@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.awt.event.*;
 
 
-public class accountCfm extends JFrame implements ActionListener{
+public class AccountCfm extends JFrame implements ActionListener{
 
 	// variable declaration
 	private static final long serialVersionUID = 1L;
@@ -37,7 +37,7 @@ public class accountCfm extends JFrame implements ActionListener{
 	/**
 	 * @throws IOException 
 	 */
-	public accountCfm() throws IOException {
+	public AccountCfm() throws IOException {
 		
 		try {
 			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(13f);

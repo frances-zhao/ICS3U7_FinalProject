@@ -82,7 +82,7 @@ public class SwitchAcc extends JFrame implements ActionListener{
  
 		if (e.getSource() == confirmbtn) { // if confirm button clicked
 			try {
-				new accountCfm(); // redirect to accountCfm class
+				new AccountCfm(); // redirect to accountCfm class
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
