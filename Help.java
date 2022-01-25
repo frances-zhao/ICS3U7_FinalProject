@@ -34,7 +34,6 @@ public class Help implements ActionListener{
 		final int WIDTH = 800;
 		frame = new JFrame("Help"); // title of application
 		frame.setSize(WIDTH,HEIGHT);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);

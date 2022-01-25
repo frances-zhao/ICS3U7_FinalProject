@@ -28,9 +28,8 @@ public class MonthlyHelp extends JFrame implements ActionListener {
 		// initializing frame
 		final int HEIGHT = 500;
 		final int WIDTH = 800;
-		frame = new JFrame("Help"); // title of application
+		frame = new JFrame("Monthly Help"); // title of application
 		frame.setSize(WIDTH,HEIGHT);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
