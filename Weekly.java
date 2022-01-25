@@ -4,19 +4,26 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.*;
-import java.awt.Graphics;
 
 public class Weekly extends JFrame implements ActionListener{
+	
 	JFrame frame = new JFrame("Weekly Calendar");
-	JPanel panel; 
+	JPanel m_panel = new JPanel(); 
+	JTable weekdays, weekends; 
 	JButton addEvent;
 	JLabel weekly, todo, notes; 
+	ImageIcon add = new ImageIcon("images/add.png");
+		
+	//declaring fonts 
+	static Font newfont, newfont1, newfont2, newfont3, newfont4, newfont5; //declaring all fonts 
 	
+	// declaring the colours 
+	static Color bumble1 = new Color(255, 208, 37);   // button background colour 
+	static Color bumble2 = new Color(245, 208, 76);   // outline 1 (lighter yellow)
+	static Color bumble3 = new Color(252, 248, 219);  // outline 2 (yellowish gray)
+	static Color bumble4 = new Color(202, 194, 150);  // text colour (dark stale brown)
+	static Color bumble5 = new Color(69, 62, 39);     // panel background colour 
 	
-	static Font newfont, newfont1, newfont2, newfont3, newfont4; 
-	static Color yellow1 = new Color(255, 208, 37); // tackle logo bg yellow color 
-	static Color yellow2 = new Color(232, 180, 2); // buttons color (dark)
-	static Color yellow3 = new Color(255, 255, 255); // white
 
 	public static void main(String[] args) {
 		try {
@@ -36,33 +43,49 @@ public class Weekly extends JFrame implements ActionListener{
 			newfont2 =  Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(40f);
 			newfont3 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(60f);
 			newfont4 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(35f);
-
+			newfont5 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(25f);
 		} 
 		
 		catch (IOException | FontFormatException e){
 
 		}
+		
+		// weekdays table constructor
+		// ---------Monday-----------
+		JPanel m_panel = new JPanel(); 
+		m_panel.add(new TablePanel(25, 85, 175, 300));
+		m_panel.setBackground(bumble2);
 
+		// ---------Tuesday-----------
+		JPanel t_panel = new JPanel();
+		t_panel.add(new TablePanel(200, 85, 175, 300));
+		t_panel.setBackground(bumble2);
+		
 		// setting the basic outline of the gui tab 
 		final int HEIGHT = 800;
 		final int WIDTH = 1400;
 		frame.setSize(WIDTH,HEIGHT);
-		frame.getContentPane().setBackground(new Color(243, 215, 3));
+		frame.getContentPane().setBackground(bumble5);
 		frame.setLayout(null);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 		
 		// declaring the characteristics of the components
+		Image image = add.getImage(); // transforming the icon
+		Image image_n = image.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
+		add = new ImageIcon(image_n);
 		
-		addEvent = new JButton("add picture for +event");
-		addEvent.setBounds(90, 90, 200, 18);
-		addEvent.setBackground(yellow3);
+		addEvent = new JButton(add);
+		addEvent.setBounds(30, 65, 25, 25);
+		addEvent.setBackground(bumble3);
 		addEvent.setFont(newfont);
-		addEvent.setForeground(yellow2);
-		addEvent.setBorder(BorderFactory.createLineBorder(yellow2));
+		addEvent.setBorder(BorderFactory.createLineBorder(bumble3));
 		
 		weekly = new JLabel("WEEKLY");
-		weekly.setBounds(8, 14, 240, 36);
+		weekly.setHorizontalAlignment(SwingConstants.CENTER);
+		weekly.setBounds(-40, 15, 240, 36);
+		weekly.setFont(newfont5);		
+		
 		
 		// add the actionlisteners
 		addEvent.addActionListener(this);
@@ -70,35 +93,17 @@ public class Weekly extends JFrame implements ActionListener{
 		// frame location on screen null
 		
 		// add the components
-
 		frame.add(addEvent);
-		
+		frame.add(weekly);
+		frame.add(m_panel);
+		frame.add(t_panel);
+
 		// frame visibility toggle 
 		frame.setVisible(true);
 		
 	}
 
 
-	private void drawScheduler(Graphics g) {
-		Graphics2D chart = (Graphics2D) g;
-		final int WIDTH1 = 875; // when setting the locations for these rectangles make sure their x values are spaced by 4 pixels. 
-		final int WIDTH2 = 350;
-		final int HEIGHT = 300; 
-
-		
-		chart.drawRect(44, 25, WIDTH1, HEIGHT);
-		chart.drawRect(44, 325, WIDTH1, HEIGHT);
-		
-		for (int i = 219; i < 594; i += 175) {
-			chart.drawLine(i, 25, i, 325);
-		}
-		
-		chart.drawLine(219, 325, 219, 725);
-		
-		
-		
-
-	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
@@ -112,5 +117,17 @@ public class Weekly extends JFrame implements ActionListener{
 		
 		}
 		
+		
+	}
+	
+	// method for adding the day sections of the weekly calendar 
+	public class TablePanel extends JPanel{
+		public TablePanel(int cx, int cy, int w, int h) {
+			JPanel monPanel = new JPanel();
+			monPanel.setBounds(cx, cy, w, h);
+			monPanel.setBorder(BorderFactory.createLineBorder(bumble5) );
+		}
+
 	}
 }
+
