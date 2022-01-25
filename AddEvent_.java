@@ -15,14 +15,15 @@ public class AddEvent_ extends JFrame implements ActionListener{
 	
 	JCheckBox importance; 
 	JLabel class_title, importance_, event_name_, event_desc_;
-	JTextField event_name; 
+	JTextField event_name, h, m, colon; 
 	JTextArea event_desc;
-	JButton add_event, discard_event; 
-	
+	JButton add_event, discard_event, prev1, next1;
 	
 	
 	//  -------------- declare the misc. variables --------------------------------
 	Boolean important = false; 
+	int hour = 0; 
+	int minute = 0; 
 	
 	
 	// Action a;
@@ -98,9 +99,7 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		event_desc.setBackground(bumble6);
 		event_desc.setLineWrap(true);
 		event_desc.setBorder(BorderFactory.createLineBorder(bumble3));
-		
-		// TODO: add eventTime; will ask the user for the time the event is over using the class JScrollBar
-		
+				
 		importance = new JCheckBox("important");
 		importance.setBounds(420, 71, 160, 20);
 		importance.setFont(newfont2);
@@ -122,6 +121,42 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		discard_event.setForeground(bumble5);
 		discard_event.setBackground(bumble6);
 		discard_event.setBorder(BorderFactory.createLineBorder(bumble3));
+
+		// making time picker 
+		next1 = new JButton("+");
+		next1.setBounds(420, 100, 20, 16);
+		next1.setFont(newfont);
+		next1.setForeground(bumble5);
+		next1.setBackground(bumble6);
+		next1.setBorder(BorderFactory.createLineBorder(bumble5));
+		
+		prev1 = new JButton("-");
+		prev1.setBounds(420, 115, 20, 16);
+		prev1.setFont(newfont);
+		prev1.setForeground(bumble5);
+		prev1.setBackground(bumble6);
+		prev1.setBorder(BorderFactory.createLineBorder(bumble5));
+		
+		h = new JTextField(hour);
+		h.setBounds(440, 100, 60, 32);
+		h.setFont(newfont2);
+		h.setForeground(bumble5);
+		h.setBackground(bumble6);
+		
+		m = new JTextField(minute);
+		m.setBounds(510, 100, 60, 32);
+		m.setFont(newfont2);
+		m.setForeground(bumble5);
+		m.setBackground(bumble6);
+	
+		colon = new JTextField(":");
+		colon.setBounds(499, 100, 12, 32);
+		colon.setFont(newfont2);
+		colon.setForeground(bumble5);
+		colon.setBackground(bumble6);
+		colon.setHorizontalAlignment(SwingConstants.CENTER);
+		colon.setBorder(BorderFactory.createLineBorder(bumble6));
+		colon.setEditable(false);
 		
 		
 		// getting rid of the sound that jtextarea and field makes when backspace is out of range 
@@ -143,6 +178,11 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		frame.add(importance);
 		frame.add(add_event);
 		frame.add(discard_event);
+		frame.add(next1);
+		frame.add(prev1);
+		frame.add(h);
+		frame.add(m);
+		frame.add(colon);
 		
 		// ------------- frame visibility toggle --------------------------------
 		frame.setVisible(true);
@@ -157,6 +197,12 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		}
 		
 	}
+	
+	public void prev(int min, int n, ActionEvent e) {
+		n = 0; 
+		
+	}
 
 }
+
 
