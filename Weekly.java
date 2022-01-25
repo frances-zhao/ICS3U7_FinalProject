@@ -13,7 +13,7 @@ public class Weekly extends JFrame implements ActionListener{
 	JButton addEvent, return_main;
 	JLabel weekly, todo, notes; 
 	ImageIcon add = new ImageIcon("images/add.png");
-	ImageIcon logo = new ImageIcon("images/logo.png");
+	ImageIcon logo = new ImageIcon("images/image.png");
 	
 		
 	//declaring fonts 
@@ -91,7 +91,8 @@ public class Weekly extends JFrame implements ActionListener{
 				
 		return_main = new JButton(logo);
 		return_main.setBounds(1325, 15, 50, 50);
-		return_main.setBorder(BorderFactory.createLineBorder(bumble5));
+		return_main.setBackground(bumble2);
+		return_main.setBorder(BorderFactory.createLineBorder(bumble3));
 		
 		weekly = new JLabel("WEEKLY");
 		weekly.setHorizontalAlignment(SwingConstants.CENTER);
@@ -153,8 +154,5 @@ public class Weekly extends JFrame implements ActionListener{
 
 	}
 }
-
-
-
 
 
