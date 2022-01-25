@@ -172,28 +172,25 @@ public class Mainscreen extends JFrame implements ActionListener{
 		frame.setVisible(true);
 		
 		
-		setTime(); //does not work with main program
-
+		setTime(); 
 	}
 
 	public void setTime() {
-		while (true) {
-			time = formatTime.format(Calendar.getInstance().getTime());
-			timeLabel.setText(time);
-			
-			day = dayFormat.format(Calendar.getInstance().getTime());
-			dayLabel.setText(day);
-			date = dateFormat.format(Calendar.getInstance().getTime());
-			dateLabel.setText(date);
-			
-			try {
-				Thread.sleep(1000);
-			} catch(InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		
-	}
+
+	    Timer timer = new Timer(1000, e -> {
+	      time = formatTime.format(Calendar.getInstance().getTime());
+	      timeLabel.setText(time);
+
+	      day = dayFormat.format(Calendar.getInstance().getTime());
+	      dayLabel.setText(day);
+	      date = dateFormat.format(Calendar.getInstance().getTime());
+	      dateLabel.setText(date);
+	    });
+
+	    timer.setInitialDelay(0);
+	    timer.start();
+	  }
+	
 	
 
 		@Override
