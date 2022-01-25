@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.text.DefaultEditorKit;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -7,19 +9,22 @@ import java.io.*;
 
 public class AddEvent_ extends JFrame implements ActionListener{
 	
-	// declare the GUI variables 
+	//  -------------- declare the GUI variables --------------------------------
 	JPanel panel;
 	JFrame frame; 
 	
 	JCheckBox importance; 
 	JLabel class_title, importance_, event_name_, event_desc_;
-	JTextField event_name, event_desc; 
+	JTextField event_name; 
+	JTextArea event_desc;
 	JButton add_event, discard_event; 
 	
-	// declaring the fonts 
+	// Action a;
+	
+	//  -------------- declaring the fonts --------------------------------------
 	static Font newfont, newfont1, newfont2, newfont3, newfont4, newfont5, newfont6; 
 	
-	// declaring the colours 
+	// -------------- declaring the colours -------------------------------------
 		static Color bumble1 = new Color(255, 208, 37);   // button background colour 
 		static Color bumble2 = new Color(245, 208, 76);   // panel background colour 
 		static Color bumble3 = new Color(252, 248, 219);  // outline 2 (yellowish gray)
@@ -29,7 +34,7 @@ public class AddEvent_ extends JFrame implements ActionListener{
 	
 	AddEvent_() throws IOException{
 		
-		// adding the attributes of the fonts 
+		//  -------------- adding the attributes of the fonts ------------------- 
 		try {
 			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(15f);
 			newfont1 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
@@ -44,16 +49,16 @@ public class AddEvent_ extends JFrame implements ActionListener{
 
 		}
 		
-		// setting the basic outline of the gui tab 
-		final int HEIGHT = 500; 
-		final int WIDTH = 850; 
+		// -------------- setting the basic outline of the GUI tab --------------
+		final int HEIGHT = 420; 
+		final int WIDTH = 690; 
 		frame = new JFrame("Tackle");
 		frame.setSize(WIDTH, HEIGHT);
 		frame.getContentPane().setBackground(bumble2);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 		
-		// declaring the characteristics of the components
+		// -------------- declaring the characteristics of the components -------
 		class_title = new JLabel("Add Event");
 		class_title.setHorizontalAlignment(SwingConstants.CENTER);
 		class_title.setBounds(28, 20, 160, 30);
@@ -80,31 +85,41 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		event_desc_.setForeground(bumble5);
 		event_desc_.setBorder(BorderFactory.createLineBorder(bumble3));
 		
-		event_desc = new JTextField();
-		event_desc.setBounds(194, 115, 200, 275);
+		event_desc = new JTextArea();
+		event_desc.setBounds(194, 115, 200, 225);
 		event_desc.setFont(newfont);
 		event_desc.setBackground(bumble6);
+		event_desc.setLineWrap(true);
 		event_desc.setBorder(BorderFactory.createLineBorder(bumble3));
 		
+		// TODO: add eventTime; will ask the user for the time the event is over using the class JScrollBar
 		
+		importance = new JCheckBox("important");
+		importance.setBounds(420, 71, 100, 20);
+		importance.setFont(newfont);
+		importance.setForeground(bumble5);
+		importance.setBackground(bumble2);
+	
 		
+		// getting rid of the sound that jtextarea and field makes when backspace is out of range 
+		// a = event_desc.getActionMap().get(DefaultEditorKit.beepAction);
+		// a.setEnabled(false);	
 		
+		// ------------- add the actionlisteners --------------------------------
 		
-		
-		// add the actionlisteners 
-		
-		// frame on screen location null
+		// ------------- frame on screen location null --------------------------
 		frame.setLayout(null);
 		
-		// add the components
+		// ------------- add the components -------------------------------------
 		frame.add(class_title);
 		frame.add(event_name_);
 		frame.add(event_name);
 		frame.add(event_desc_);
 		frame.add(event_desc);
+		frame.add(importance);
 		
 		
-		// frame visibility toggle 
+		// ------------- frame visibility toggle --------------------------------
 		frame.setVisible(true);
 		
 	}
