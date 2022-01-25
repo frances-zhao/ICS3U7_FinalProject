@@ -166,7 +166,7 @@ public class Main extends JFrame implements ActionListener{
 	}
 
 	// getting current User String
-	public String getUser() {
+	public static String getUser() {
 		return Main.currentUser;
 	}
 	

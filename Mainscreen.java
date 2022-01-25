@@ -38,6 +38,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 	SimpleDateFormat formatTime;
 	SimpleDateFormat dayFormat;
 	SimpleDateFormat dateFormat;
+	String userDisplay;
 
 
 
@@ -56,8 +57,14 @@ public class Mainscreen extends JFrame implements ActionListener{
 
 		}
 
-		Main loginpage = new Main();
-		String userDisplay = loginpage.getUser();
+		
+		try {
+			userDisplay = Main.getUser();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 
 		formatTime = new SimpleDateFormat("hh : mm: ss a");
 		timeLabel = new JLabel();
