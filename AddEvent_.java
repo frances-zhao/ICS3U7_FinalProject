@@ -4,6 +4,7 @@ import javax.swing.text.DefaultEditorKit;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.util.Scanner;
 
 
 
@@ -22,8 +23,24 @@ public class AddEvent_ extends JFrame implements ActionListener{
 	
 	//  -------------- declare the misc. variables --------------------------------
 	Boolean important = false; 
-	int hour = 0; 
-	int minute = 0; 
+	Boolean append = false; 
+	public String en_string, ed_string, time_string;
+	String filename1 = "eventName.txt";
+	String filename2 = "eventInfo.txt";
+	Scanner sc = new Scanner(System.in);
+	
+//	String[] hours = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", 
+//			"11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
+//	
+//	String[] minutes = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", 
+//			"11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22",
+//			"23", "24", "25", "26", "27", "28", "28", "29", "30", "31", "32", "33", "34", 
+//			"35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47",
+//			"48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60"};
+	
+	//TODO: buffered readers 
+	BufferedReader event_t = new BufferedReader(new FileReader("eventName.txt")); // +time of event 
+	BufferedReader event_d = new BufferedReader(new FileReader("eventInfo.txt"));
 	
 	
 	// Action a;
@@ -39,6 +56,7 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		static Color bumble5 = new Color(69, 62, 39);     // outline 2 (dark stale brown)
 		static Color bumble6 = new Color(255, 248, 171);  // textfield fill colour 
 	
+		
 	AddEvent_() throws IOException{
 		
 		// -------------- adding the attributes of the fonts --------------------
@@ -124,33 +142,33 @@ public class AddEvent_ extends JFrame implements ActionListener{
 
 		// making time picker 
 		next1 = new JButton("+");
-		next1.setBounds(420, 100, 20, 16);
+		next1.setBounds(420, 115, 20, 16);
 		next1.setFont(newfont);
 		next1.setForeground(bumble5);
 		next1.setBackground(bumble6);
 		next1.setBorder(BorderFactory.createLineBorder(bumble6));
 		
 		prev1 = new JButton("-");
-		prev1.setBounds(420, 115, 20, 16);
+		prev1.setBounds(420, 130, 20, 16);
 		prev1.setFont(newfont);
 		prev1.setForeground(bumble5);
 		prev1.setBackground(bumble6);
 		prev1.setBorder(BorderFactory.createLineBorder(bumble6));
 		
-		h = new JTextField(hour);
-		h.setBounds(440, 100, 60, 32);
+		h = new JTextField("0");
+		h.setBounds(440, 115, 60, 32);
 		h.setFont(newfont2);
 		h.setForeground(bumble5);
 		h.setBackground(bumble6);
 		
-		m = new JTextField(minute);
-		m.setBounds(510, 100, 60, 32);
+		m = new JTextField("0");
+		m.setBounds(510, 115, 60, 32);
 		m.setFont(newfont2);
 		m.setForeground(bumble5);
 		m.setBackground(bumble6);
 	
 		colon = new JTextField(":");
-		colon.setBounds(499, 100, 12, 32);
+		colon.setBounds(499, 115, 12, 32);
 		colon.setFont(newfont2);
 		colon.setForeground(bumble5);
 		colon.setBackground(bumble6);
@@ -191,9 +209,29 @@ public class AddEvent_ extends JFrame implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+	
+
+		// setting the importance of the event as true 
 		if (e.getSource() == importance) {
 			important = true;
+		}
+		
+		// adding the event name into the eventName.txt file if the user confirms
+		if (e.getSource() == add_event) {
+			en_string = event_name.getText();
+			frame.dispose();
+			
+		}
+		
+		if (e.getSource() == discard_event) {
+			try {
+				new Weekly();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			frame.dispose();
+			
 		}
 		
 	}
@@ -204,5 +242,3 @@ public class AddEvent_ extends JFrame implements ActionListener{
 	}
 
 }
-
-
