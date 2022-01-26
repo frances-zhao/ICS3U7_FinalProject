@@ -73,11 +73,6 @@ public class Yearly extends YearlySize implements ActionListener{
 	}
 
 
-	public static void main(String[]args) {
-		new Yearly();
-	}
-
-
 	// if button clicked, using Action Listener continue accordingly
 	@Override
 	public void actionPerformed(ActionEvent e) {
