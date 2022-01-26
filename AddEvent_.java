@@ -25,7 +25,7 @@ public class AddEvent_ extends JFrame implements ActionListener{
 	Boolean important = false; 
 	Boolean append = false; 
 	public String en_string, ed_string, time_string;
-	String filename1 = "eventName.txt";
+	FileWriter filename1 = new FileWriter("eventName.txt");
 	String filename2 = "eventInfo.txt";
 	Scanner sc = new Scanner(System.in);
 	
@@ -39,7 +39,7 @@ public class AddEvent_ extends JFrame implements ActionListener{
 //			"48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60"};
 	
 	//TODO: buffered readers 
-	BufferedReader event_t = new BufferedReader(new FileReader("eventName.txt")); // +time of event 
+	BufferedWriter event_t = new BufferedWriter(new FileWriter("eventName.txt")); // +time of event 
 	BufferedReader event_d = new BufferedReader(new FileReader("eventInfo.txt"));
 	
 	
@@ -219,8 +219,18 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		// adding the event name into the eventName.txt file if the user confirms
 		if (e.getSource() == add_event) {
 			en_string = event_name.getText();
+			BufferedWriter buffer1; 
+			buffer1 = new BufferedWriter(filename1);
+			try {
+				buffer1.write(en_string);
+				buffer1.newLine();
+				buffer1.close();
+
+			} catch (IOException err) {
+				System.out.println("there was an error");
+			}
 			frame.dispose();
-			
+
 		}
 		
 		if (e.getSource() == discard_event) {
