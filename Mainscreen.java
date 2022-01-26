@@ -1,11 +1,3 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
-
 public class Mainscreen extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
@@ -20,7 +12,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 	static Color yellow1 = new Color(255, 208, 37); // tackle logo bg yellow color 
 	static Color yellow2 = new Color(232, 180, 2); // buttons color (dark)
 	static Color yellow3 = new Color(255, 255, 255); // white
-	static Font newfont, newfontsmall, newfont1,newfont2, madefont, newfont3 ;
+	static Font newfont, newfontsmall, newfont1,newfont2, madefont, newfont3, newfont4;
 
 	static Icon icon = new ImageIcon("images/logo.png");
 	private static JMenuBar menuBar;
@@ -38,7 +30,6 @@ public class Mainscreen extends JFrame implements ActionListener{
 	SimpleDateFormat formatTime;
 	SimpleDateFormat dayFormat;
 	SimpleDateFormat dateFormat;
-	String userDisplay;
 
 
 
@@ -51,20 +42,15 @@ public class Mainscreen extends JFrame implements ActionListener{
 			newfont1 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(30f);
 			newfont2 =  Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(40f);
 			newfont3 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(60f);
+			newfont4 = Font.createFont(Font.TRUETYPE_FONT,  new File("fonts/PPObjectSans-Regular.otf")).deriveFont(25f);
 			madefont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/wake.otf")).deriveFont(20f);
 
 		} catch (IOException | FontFormatException e){
 
 		}
 
-		
-		try {
-			userDisplay = Main.getUser();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		Main loginpage = new Main();
+		String userDisplay = loginpage.getUser();
 
 		formatTime = new SimpleDateFormat("hh : mm: ss a");
 		timeLabel = new JLabel();
@@ -120,7 +106,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 		username = new JLabel(userDisplay); // get a different public variable to store user input
 		username.setHorizontalAlignment(SwingConstants.CENTER);
 		username.setBounds(385, 46, 633, 59);
-		username.setFont(madefont);
+		username.setFont(newfont4);
 
 		menuBar = new JMenuBar();
 		menuBar.setBounds(12, 12, 80, 22);
