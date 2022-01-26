@@ -32,7 +32,6 @@ public class ColourCSTM extends JFrame implements ActionListener{
 		final int WIDTH = 400;
 		frame = new JFrame("Logout?"); // title of application
 		frame.setSize(WIDTH,HEIGHT);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
