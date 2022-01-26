@@ -55,14 +55,15 @@ public class Help implements ActionListener{
 
 
 		weeklytut = new JButton("Weekly Help");
-		weeklytut.setBounds(213, 101, 117, 41);
+		weeklytut.setBounds(200, 101, 117, 41);
 		weeklytut.setFont(newfont);
 		weeklytut.addActionListener(this);
 
 		
 		monthlytut = new JButton("Monthly Help");
-		monthlytut.setBounds(342, 101, 117, 41);
+		monthlytut.setBounds(332, 101, 127, 41);
 		monthlytut.setFont(newfont);
+		monthlytut.setHorizontalAlignment(SwingConstants.CENTER);
 		monthlytut.addActionListener(this);
 
 
@@ -75,7 +76,7 @@ public class Help implements ActionListener{
 
 		returnbtn = new JButton("Return Home");
 		returnbtn.setFont(newfont);
-		returnbtn.setBounds(342, 154, 117, 41);
+		returnbtn.setBounds(332, 154, 127, 41);
 		returnbtn.addActionListener(this);
 
 		
