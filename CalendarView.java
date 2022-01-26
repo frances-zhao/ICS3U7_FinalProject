@@ -10,13 +10,12 @@ class CalendarView extends JPanel {
 	// variable declaration
 	private static final long serialVersionUID = 1L;
 	public Calendar calendar; // importing a calendar
-
-	private int thisYear;
-	private int thisMonth;
-	private int daysinMonth;
-	private int startofDay;
-	private String monthstring;
-	private int lastMonth;
+	private int thisYear = 0;
+	private int thisMonth  = 0;
+	private int daysinMonth = 0;
+	private int startofDay = 0;
+	private String monthstring = "";
+	private int lastMonth = 0;
 	private JLabel monthLabel;
 
 	// temporary: colours
@@ -245,8 +244,7 @@ class CalendarView extends JPanel {
 	public CalendarView lastMonth() {
 		return new CalendarView(new GregorianCalendar(
 				thisYear, 
-				thisMonth - 1, 
-				1));
+				thisMonth - 1, 1));
 	}
 
 	// getting the next month
