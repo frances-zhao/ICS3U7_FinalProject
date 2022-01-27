@@ -14,21 +14,26 @@ public class AddEvent_ extends JFrame implements ActionListener{
 	JPanel panel;
 	JFrame frame; 
 	
-	JCheckBox importance; 
-	JLabel class_title, importance_, event_name_, event_desc_;
-	JTextField event_name, h, m, colon; 
+	JCheckBox importance;
+	JLabel class_title, importance_, event_name_, event_desc_, day_;
+	JTextField event_name, h, m, colon, day; 
 	JTextArea event_desc;
 	JButton add_event, discard_event, prev1, next1;
 	
 	
 	//  -------------- declare the misc. variables --------------------------------
 	Boolean important = false; 
-	Boolean append = false; 
-	public String en_string, ed_string, time_string;
-	FileWriter filename1 = new FileWriter("eventName.txt");
+	String filename1 = "eventName.txt";
 	String filename2 = "eventInfo.txt";
-	Scanner sc = new Scanner(System.in);
+	public static BufferedWriter out; 
+	public static String[][] aen = new String[7][50]; // add event name
+	public static String[][] aed = new String[7][50]; // add event desc. 
+	public static int num_event_n, num_event_d; 
+	public static String event_n; 
+	public static String event_d; 
 	
+	public String en_string, ed_string, time_string;
+
 //	String[] hours = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", 
 //			"11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
 //	
@@ -39,8 +44,8 @@ public class AddEvent_ extends JFrame implements ActionListener{
 //			"48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60"};
 	
 	//TODO: buffered readers 
-	BufferedWriter event_t = new BufferedWriter(new FileWriter("eventName.txt")); // +time of event 
-	BufferedReader event_d = new BufferedReader(new FileReader("eventInfo.txt"));
+	BufferedWriter out_t = new BufferedWriter(new FileWriter("eventName.txt")); // title+time of event 
+	BufferedWriter out_d = new BufferedWriter(new FileWriter("eventInfo.txt")); // event description 
 	
 	
 	// Action a;
@@ -75,6 +80,7 @@ public class AddEvent_ extends JFrame implements ActionListener{
 
 		}
 		
+		
 		// -------------- setting the basic outline of the GUI tab --------------
 		final int HEIGHT = 420; 
 		final int WIDTH = 690; 
@@ -91,7 +97,7 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		class_title.setFont(newfont3);
 		class_title.setForeground(bumble5);
 		
-		event_name_ = new JLabel("EVENT NAME ");
+		event_name_ = new JLabel("Event Name");
 		event_name_.setHorizontalAlignment(SwingConstants.CENTER);
 		event_name_.setBounds(35, 65, 160, 30);
 		event_name_.setFont(newfont2);
@@ -119,13 +125,27 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		event_desc.setBorder(BorderFactory.createLineBorder(bumble3));
 				
 		importance = new JCheckBox("important");
-		importance.setBounds(420, 71, 160, 20);
+		importance.setBounds(425, 71, 160, 20);
 		importance.setFont(newfont2);
 		importance.setForeground(bumble5);
 		importance.setBackground(bumble2);
+		
+		day_ = new JLabel("Day of Event");
+		day_.setBounds(425, 160, 150, 30);
+		day_.setForeground(bumble5);
+		day_.setFont(newfont2);
+		day_.setHorizontalAlignment(SwingConstants.CENTER);
+		day_.setBorder(BorderFactory.createLineBorder(bumble3));
+		
+		day = new JTextField(); 
+		day.setBounds(425, 190, 150, 30);
+		day.setFont(newfont1);
+		day.setBackground(bumble6);
+		day.setHorizontalAlignment(SwingConstants.CENTER);
+		day.setBorder(BorderFactory.createLineBorder(bumble3));
 	
 		add_event = new JButton("ADD");
-		add_event.setBounds(425, 210, 150, 40);
+		add_event.setBounds(425, 245, 150, 40);
 		add_event.setHorizontalAlignment(SwingConstants.CENTER);
 		add_event.setFont(newfont3);
 		add_event.setForeground(bumble5);
@@ -133,7 +153,7 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		add_event.setBorder(BorderFactory.createLineBorder(bumble3));
 		
 		discard_event = new JButton("Discard");
-		discard_event.setBounds(425, 270, 150, 40);
+		discard_event.setBounds(425, 300, 150, 40);
 		discard_event.setHorizontalAlignment(SwingConstants.CENTER);
 		discard_event.setFont(newfont3);
 		discard_event.setForeground(bumble5);
@@ -142,33 +162,33 @@ public class AddEvent_ extends JFrame implements ActionListener{
 
 		// making time picker 
 		next1 = new JButton("+");
-		next1.setBounds(420, 115, 20, 16);
+		next1.setBounds(425, 105, 20, 16);
 		next1.setFont(newfont);
 		next1.setForeground(bumble5);
 		next1.setBackground(bumble6);
 		next1.setBorder(BorderFactory.createLineBorder(bumble6));
 		
 		prev1 = new JButton("-");
-		prev1.setBounds(420, 130, 20, 16);
+		prev1.setBounds(425, 120, 20, 16);
 		prev1.setFont(newfont);
 		prev1.setForeground(bumble5);
 		prev1.setBackground(bumble6);
 		prev1.setBorder(BorderFactory.createLineBorder(bumble6));
 		
 		h = new JTextField("0");
-		h.setBounds(440, 115, 60, 32);
+		h.setBounds(445, 105, 60, 32);
 		h.setFont(newfont2);
 		h.setForeground(bumble5);
 		h.setBackground(bumble6);
 		
 		m = new JTextField("0");
-		m.setBounds(510, 115, 60, 32);
+		m.setBounds(515, 105, 60, 32);
 		m.setFont(newfont2);
 		m.setForeground(bumble5);
 		m.setBackground(bumble6);
 	
 		colon = new JTextField(":");
-		colon.setBounds(499, 115, 12, 32);
+		colon.setBounds(504, 105, 12, 32);
 		colon.setFont(newfont2);
 		colon.setForeground(bumble5);
 		colon.setBackground(bumble6);
@@ -183,6 +203,8 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		
 		// ------------- add the actionlisteners --------------------------------
 		importance.addActionListener(this);
+		add_event.addActionListener(this);
+		discard_event.addActionListener(this);
 		
 		// ------------- frame on screen location null --------------------------
 		frame.setLayout(null);
@@ -196,6 +218,8 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		frame.add(importance);
 		frame.add(add_event);
 		frame.add(discard_event);
+		frame.add(day_);
+		frame.add(day);
 		frame.add(next1);
 		frame.add(prev1);
 		frame.add(h);
@@ -207,6 +231,64 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		
 	}
 	
+	public void addEventName() throws IOException{
+		if (day.getText().equalsIgnoreCase("monday")) {
+			addE(0);
+		}
+		
+		else if (day.getText().equalsIgnoreCase("tuesday")) {
+			addE(1);
+		}
+		
+		else if (day.getText().equalsIgnoreCase("wednesday")) {
+			addE(2);
+		}
+		
+		else if (day.getText().equalsIgnoreCase("thursday")) {
+			addE(3);
+		}
+		
+		else if (day.getText().equalsIgnoreCase("friday")) {
+			addE(4);
+		}
+		
+		else if (day.getText().equalsIgnoreCase("saturday")) {
+			addE(5);
+		}
+		
+		else if (day.getText().equalsIgnoreCase("sunday")) {
+			addE(6);
+		}
+		
+		else {
+			new Invalid();
+			frame.dispose();
+		}
+	}
+	
+	public void addE(int n) throws IOException { // n and m represents the row of aen, aed arrays 
+		// out_t, out_d 
+		event_n = event_name.getText();
+		event_d = event_desc.getText();
+		
+		aen[n][num_event_n] = event_n;
+		aed[n][num_event_d] = event_d; 
+		out_t.write(aen[n][num_event_n] + ", ");
+		out_d.write(aed[n][num_event_d] + ", ");
+		
+		out_t.newLine();
+		out_t.close();
+		out_d.newLine();
+		out_d.close();
+		
+		num_event_n++; 
+		num_event_d++;
+	}
+	
+
+	
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 	
@@ -216,38 +298,25 @@ public class AddEvent_ extends JFrame implements ActionListener{
 			important = true;
 		}
 		
-		// adding the event name into the eventName.txt file if the user confirms
-		if (e.getSource() == add_event) {
-			en_string = event_name.getText();
-			BufferedWriter buffer1; 
-			buffer1 = new BufferedWriter(filename1);
-			try {
-				buffer1.write(en_string);
-				buffer1.newLine();
-				buffer1.close();
-
-			} catch (IOException err) {
-				System.out.println("there was an error");
-			}
-			frame.dispose();
-
-		}
-		
 		if (e.getSource() == discard_event) {
-			try {
-				new Weekly();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			
 			frame.dispose();
 			
 		}
 		
-	}
-	
-	public void prev(int min, int n, ActionEvent e) {
-		n = 0; 
+		if (e.getSource() == add_event) {
+		
+			try {
+				addEventName();
+				
+			} 
+			
+			catch (IOException e1) {
+				e1.printStackTrace();
+				
+			} 
+			frame.dispose();
+		}
 		
 	}
 
