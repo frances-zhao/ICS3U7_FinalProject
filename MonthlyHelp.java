@@ -56,7 +56,7 @@ public class MonthlyHelp extends JFrame implements ActionListener {
 
 		returnbtn = new JButton("Return Home");
 		returnbtn.setFont(newfont);
-		returnbtn.setBounds(348, 420, 117, 41);
+		returnbtn.setBounds(326, 419, 170, 41);
 		returnbtn.addActionListener(this);
 
 		Border b = new LineBorder(Color.WHITE, 3);
