@@ -22,12 +22,14 @@ public class Mainscreen extends JFrame implements ActionListener{
 	static Font newfont, newfontsmall, newfont1,newfont2, madefont, newfont3, newfont4;
 
 	static Icon icon = new ImageIcon("images/logo.png");
+	Icon duckicon = new ImageIcon("images/duckwaddle.gif");
 	private static JMenuBar menuBar;
 	private static JMenu settings;
 	private static JMenuItem help;
 	private static JMenuItem colourCSTM;
 	private static JMenuItem switchAcc;
 	private static JMenuItem logout;
+	private static JLabel duckdance;
 	JLabel timeLabel, dayLabel, dateLabel;
 
 	int hour, second, minute;
@@ -155,6 +157,9 @@ public class Mainscreen extends JFrame implements ActionListener{
 		todoLabel.setBounds(1030, 240, 200, 41);
 		todoLabel.setFont(newfont1);
 		
+		duckdance = new JLabel(duckicon);
+		duckdance.setBounds(107, 300, 410, 445);
+		
 		weekly.addActionListener(this);
 		monthly.addActionListener(this);
 		yearly.addActionListener(this);
@@ -168,7 +173,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 		frame.add(timeLabel);
 		frame.add(dayLabel);
 		frame.add(dateLabel);
-		
+		frame.add(duckdance);
 		frame.setVisible(true);
 		
 		
