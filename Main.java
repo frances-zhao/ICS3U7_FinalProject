@@ -130,7 +130,7 @@ public class Main extends JFrame implements ActionListener{
 		credentials_2.setFont(newfont);
 		credentials_2.setBounds(6, 746, 272, 26);
 
-		projectVer = new JLabel("Main.java version 1.2 01/09/2021");
+		projectVer = new JLabel("Main.java version 1.8 01/26/2021");
 		projectVer.setForeground(Color.LIGHT_GRAY);
 		projectVer.setFont(newfont);
 		projectVer.setHorizontalAlignment(SwingConstants.RIGHT);
