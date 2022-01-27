@@ -207,6 +207,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 			}
 			if (e.getSource() == monthly) {
 				new Monthly();
+				frame.dispose();
 			}
 			if (e.getSource() == yearly) {
 				new Yearly();

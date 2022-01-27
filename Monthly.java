@@ -13,8 +13,8 @@ public class Monthly extends JFrame implements ActionListener {
 	static JFrame frame = new JFrame("Monthly Calendar");
 
 	// declaring calendars
-	Calendar calendar1 = new GregorianCalendar();
-	CalendarView currentcalendar = new CalendarView(new GregorianCalendar(calendar1.get(Calendar.YEAR), calendar1.get(Calendar.MONTH), 1)); // calendar on screen
+	static Calendar calendar1 = new GregorianCalendar();
+	static CalendarView currentcalendar = new CalendarView(new GregorianCalendar(calendar1.get(Calendar.YEAR), calendar1.get(Calendar.MONTH), 1)); // calendar on screen
 
 	private JButton last = new JButton("<<"); // move to previous month button
 	private JButton next = new JButton(">>"); // move to next month button
@@ -100,8 +100,14 @@ public class Monthly extends JFrame implements ActionListener {
 		}
 
 		if (e.getSource() == home) { // if the home button is clicked
-			frame.disable();
-			frame.setVisible(false);
+			try {
+				new Mainscreen();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			frame.dispose();
+			
 
 		}
 	}
