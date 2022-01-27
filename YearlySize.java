@@ -10,7 +10,6 @@ public class YearlySize extends JPanel {
 
 	// variable declarations
 	private static final long serialVersionUID = 1L;
-	static int yearint = 122;
 	// using simpledateformat, declare format of year month and date
 	SimpleDateFormat yearformat = new SimpleDateFormat("yyyy");
 	SimpleDateFormat monthformat = new SimpleDateFormat("MMMM");
@@ -20,14 +19,14 @@ public class YearlySize extends JPanel {
 	// declaring a date object
 	Date date = new Date();
 
-	static Color yellow1 = new Color(243, 215, 3); // tackle logo bg yellow color 
-	static Color yellow2 = new Color(232, 180, 2); // buttons color (dark)
-	static Color yellow3 = new Color(255, 255, 255); // white
+	Color colour1 = ColourCSTM.getFirstColour();
+	Color colour2 = ColourCSTM.getSecondColour();
+	Color colour3 = ColourCSTM.getThirdColour();
 
 	public YearlySize() {
 		// setting size and colour background of tiny calendar
 		setPreferredSize(new Dimension(280, 260));
-		setBackground(yellow1);
+		setBackground(colour1);
 
 	}
 

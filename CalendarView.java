@@ -19,9 +19,9 @@ class CalendarView extends JPanel {
 	private JLabel monthLabel;
 
 	// temporary: colours
-	static Color yellow1 = new Color(255, 208, 37); // tackle logo bg yellow color 
-	static Color yellow2 = new Color(232, 180, 2); // buttons color (dark)
-	static Color yellow3 = new Color(255, 255, 255); // white
+	Color colour1 = ColourCSTM.getFirstColour();
+	Color colour2 = ColourCSTM.getSecondColour();
+	Color colour3 = ColourCSTM.getThirdColour();
 
 	// days of the week labels
 	private JLabel sun;
@@ -109,7 +109,7 @@ class CalendarView extends JPanel {
 
 		// add the month label to top JPanel
 		top.add(monthLabel, BorderLayout.NORTH);
-		top.setBackground(yellow1); // TEMPORARY COLOUR
+		top.setBackground(colour1); // TEMPORARY COLOUR
 
 		// add the labels to the JPanel for the calendar
 		panel.add(sun);

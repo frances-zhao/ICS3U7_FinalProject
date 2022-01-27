@@ -22,9 +22,9 @@ public class Monthly extends JFrame implements ActionListener {
 	static Font newfont; // declaring font
 	private JButton home;
 
-	static Color yellow1 = new Color(255, 208, 37); // tackle logo bg yellow color 
-	static Color yellow2 = new Color(232, 180, 2); // buttons color (dark)
-	static Color yellow3 = new Color(255, 255, 255); // white
+	Color colour1 = ColourCSTM.getFirstColour();
+	Color colour2 = ColourCSTM.getSecondColour();
+	Color colour3 = ColourCSTM.getThirdColour();
 
 	Monthly() {
 
@@ -45,7 +45,7 @@ public class Monthly extends JFrame implements ActionListener {
 		final int WIDTH = 1400;
 		frame.setSize(WIDTH,HEIGHT);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setBackground(yellow1);
+		frame.getContentPane().setBackground(colour1);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 		frame.enable();
@@ -59,7 +59,7 @@ public class Monthly extends JFrame implements ActionListener {
 		next.setFont(newfont);
 
 		// setting panel colour and adding buttons
-		panel.setBackground(yellow1);
+		panel.setBackground(colour1);
 		panel.add(last);
 		panel.add(home);
 		panel.add(next);

@@ -5,7 +5,7 @@ import java.io.*;
 import java.awt.event.*;
 
 
-public class Logout extends JFrame implements ActionListener{
+public class Logout extends ColourCSTM implements ActionListener{
 
 	// variable declaration
 	private static final long serialVersionUID = 1L;
@@ -85,6 +85,8 @@ public class Logout extends JFrame implements ActionListener{
 
 		if (e.getSource() == confirmbtn) { // if confirm button clicked
 			try {
+				colourpicker = 4;
+				setColours();
 				JOptionPane.showMessageDialog(this, "Logging out...");
 				new Main(); // redirect to main class
 				frame.dispose();

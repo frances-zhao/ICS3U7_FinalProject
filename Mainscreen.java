@@ -16,7 +16,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 	private static JLabel username; 
 	private static JLabel scheduleLabel, todoLabel;
 
-	
+	Mainscreen page;
 	Color colour1 = ColourCSTM.getFirstColour();
 	Color colour2 = ColourCSTM.getSecondColour();
 	Color colour3 = ColourCSTM.getThirdColour();
@@ -229,6 +229,8 @@ public class Mainscreen extends JFrame implements ActionListener{
 
 		if (e.getSource()== colourCSTM) {
 			new ColourCSTM();
+			frame.dispose();
+			
 		}
 		if (e.getSource()== help) {
 			new Help();

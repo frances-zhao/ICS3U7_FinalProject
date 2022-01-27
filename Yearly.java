@@ -12,6 +12,7 @@ public class Yearly extends YearlySize implements ActionListener{
 
 	// variable declarations
 	private static final long serialVersionUID = 1L;
+	static int yearint = 122;
 	JButton next = new JButton("Next");
 	JButton back = new JButton("Back");
 	JButton home = new JButton("Home");
@@ -21,7 +22,7 @@ public class Yearly extends YearlySize implements ActionListener{
 	public Yearly() {
 
 		// frame settings
-		frame.getContentPane().setBackground(yellow1);
+		frame.getContentPane().setBackground(colour1);
 		frame.setSize(1400, 800);
 		frame.setLayout(new GridLayout(0, 5, 0, 0)); // grid layout = 5 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,7 +43,7 @@ public class Yearly extends YearlySize implements ActionListener{
 		back.setBorderPainted(false);
 
 		// importing icon for home button and settings
-		Icon homeicon = new ImageIcon("images/logo.png");
+		Icon homeicon = new ImageIcon("images/transparent.png");
 		home = new JButton(homeicon);
 		home.setOpaque(false);
 		home.setContentAreaFilled(false);

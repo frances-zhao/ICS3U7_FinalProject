@@ -12,12 +12,12 @@ public class ColourCSTM extends JFrame implements ActionListener{
 	static Color secondcolour;
 	static Color thirdcolour;
 	
-	int i = 0;
+	int colourpicker = 0;
 
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	private JLabel colourtitle = new JLabel("Colour Customization?");
-	private JLabel colourlabel, colourlabel1;
+	private JLabel colourlabel, watergif, beegif, flowergif;
 	private JButton pinkbtn, yellowbtn, bluebtn;
 
 	// font declarations
@@ -27,56 +27,66 @@ public class ColourCSTM extends JFrame implements ActionListener{
 
 		try {
 			smallestfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(10f);
-			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(13f);
-			newfont1 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
+			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
+			newfont1 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(40f);
 		} catch (IOException | FontFormatException e){
 
 		}
 
 		// initializing frame
-		final int HEIGHT = 250;
-		final int WIDTH = 400;
-		frame = new JFrame("Logout?"); // title of application
+		final int HEIGHT = 800;
+		final int WIDTH = 1400;
+		frame = new JFrame("Customize Colour?"); // title of application
 		frame.setSize(WIDTH,HEIGHT);
 		frame.setLayout(null);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
-		frame.setLayout(null);
 
 
 		colourtitle.setFont(newfont1);
 		colourtitle.setHorizontalAlignment(SwingConstants.CENTER);
-		colourtitle.setBounds(59, 6, 278, 46);
+		colourtitle.setBounds(295, 17, 819, 46);
 
-		colourlabel = new JLabel("Which colour would");
+		colourlabel = new JLabel("Which colour theme would you like to switch to?");
 		colourlabel.setHorizontalAlignment(SwingConstants.CENTER);
 		colourlabel.setFont(newfont);
-		colourlabel.setBounds(42, 43, 321, 46);
-
-		colourlabel1 = new JLabel("you like to switch to?");
-		colourlabel1.setHorizontalAlignment(SwingConstants.CENTER);
-		colourlabel1.setFont(newfont);
-		colourlabel1.setBounds(42, 55, 321, 46);
+		colourlabel.setBounds(6, 75, 1388, 46);
 
 		bluebtn = new JButton("Ocean");
 		bluebtn.setBackground(new Color(164, 210, 237));
-		bluebtn.setBounds(31, 100, 89, 23);
+		bluebtn.setBounds(152, 252, 209, 82);
 		bluebtn.setFont(newfont);
 
 		yellowbtn = new JButton("Bumble");
 		yellowbtn.setBackground(new Color(255, 208, 37));
-		yellowbtn.setBounds(149, 100, 89, 23);
+		yellowbtn.setBounds(606, 252, 209, 82);
 		yellowbtn.setFont(newfont);
 
 		pinkbtn = new JButton("Blossom");
 		pinkbtn.setBackground(new Color(240, 156, 166));
-		pinkbtn.setBounds(262, 100, 89, 23);
+		pinkbtn.setBounds(1035, 252, 209, 82);
 		pinkbtn.setFont(newfont);
 
+		Icon watericon = new ImageIcon("images/water.gif");
+		watergif = new JLabel(watericon);
+		watergif.setBounds(123, 346, 287, 263);
+		
+		Icon beeicon = new ImageIcon("images/bee.gif");
+		beegif = new JLabel(beeicon);
+		beegif.setBounds(562, 346, 287, 263);
+		
+		Icon flowericon = new ImageIcon("images/flower.gif");
+		flowergif = new JLabel(flowericon);
+		flowergif.setBounds(991, 346, 321, 263);
+		
+		frame.add(watergif);
+		frame.add(beegif);
+		frame.add(flowergif);
+
+		
 		// actual GUI
 		frame.add(colourtitle);
 		frame.add(colourlabel);
-		frame.add(colourlabel1);
 		frame.add(pinkbtn);
 		frame.add(yellowbtn);
 		frame.add(bluebtn);
@@ -101,7 +111,7 @@ public class ColourCSTM extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 
 		if(e.getSource() == pinkbtn){
-			i = 1;
+			colourpicker = 1;
 			JOptionPane.showMessageDialog(this, "Changing to blossom theme... ");
 			setColours();
 			try {
@@ -114,7 +124,7 @@ public class ColourCSTM extends JFrame implements ActionListener{
 		}
 		
 		if(e.getSource() == bluebtn) {
-			i = 2;
+			colourpicker = 2;
 			JOptionPane.showMessageDialog(this, "Changing to ocean theme... ");
 			setColours();
 			try {
@@ -126,7 +136,7 @@ public class ColourCSTM extends JFrame implements ActionListener{
 			frame.dispose();
 		}
 		if (e.getSource() == yellowbtn) {
-			i = 3;
+			colourpicker = 3;
 			JOptionPane.showMessageDialog(this, "Changing to bumble theme... ");
 			setColours();
 			try {
@@ -140,34 +150,44 @@ public class ColourCSTM extends JFrame implements ActionListener{
 	}
 	
 	public void setColours() {
-		if(i == 1) {
+		if(colourpicker == 1) {
 			firstcolour = new Color(240, 156, 166);
 			secondcolour = new Color(240, 156, 166);
 			thirdcolour = new Color(138, 39, 58);
 
 		}
-		if (i == 2) {
+		if (colourpicker == 2) {
 			firstcolour = new Color(164, 210, 237);
 			secondcolour = new Color(76, 150, 194);
 			thirdcolour = new Color(35, 61, 77);
 		}
 		
-		if(i == 3) {
+		if(colourpicker == 3) {
 			firstcolour = new Color(255, 208, 37);
 			secondcolour = new Color(245, 208, 76);
 			thirdcolour = new Color(69, 62, 39);
 		}
+		if (colourpicker == 4) {
+			firstcolour = null;
+			secondcolour = null;
+			thirdcolour = null;
+		}
+		
 	}
 	
 	public static Color getFirstColour() {
 		return firstcolour;
 	}
-	
 	public static Color getSecondColour() {
 		return secondcolour;
 	}
 	public static Color getThirdColour() {
 		return thirdcolour;
+	}
+	
+	
+	public static void main(String[]args) {
+		new ColourCSTM();
 	}
 	
 }
