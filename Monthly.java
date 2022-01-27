@@ -68,7 +68,7 @@ public class Monthly extends JFrame implements ActionListener {
 		home.addActionListener(this);
 		next.addActionListener(this);	
 		last.addActionListener(this);
-		
+
 		// adding the calendar to the JFrame
 		frame.add(currentcalendar, BorderLayout.CENTER);
 		frame.add(panel, BorderLayout.NORTH);
@@ -107,14 +107,9 @@ public class Monthly extends JFrame implements ActionListener {
 				e1.printStackTrace();
 			}
 			frame.dispose();
-			
+
 
 		}
-	}
-
-	// for trial and error only: main program
-	public static void main(String[]args) {
-		new Monthly();
 	}
 
 }

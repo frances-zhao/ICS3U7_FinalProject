@@ -47,7 +47,7 @@ public class MonthlyHelp extends JFrame implements ActionListener {
 		helplabel1 = new JLabel("click on the arrow buttons to go back and forth per monthly calendar,");
 		helplabel1.setHorizontalAlignment(SwingConstants.CENTER);
 		helplabel1.setFont(newfont);
-		helplabel1.setBounds(28, 58, 738, 46);
+		helplabel1.setBounds(28, 63, 738, 46);
 
 		helplabel2 = new JLabel("click on the logo (checkmark) to return back to the main screen!");
 		helplabel2.setHorizontalAlignment(SwingConstants.CENTER);

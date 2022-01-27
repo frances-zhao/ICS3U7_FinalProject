@@ -42,8 +42,6 @@ public class Mainscreen extends JFrame implements ActionListener{
 	String userDisplay;
 
 
-
-
 	public Mainscreen() throws IOException{
 
 		try {
@@ -60,7 +58,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 		}
 
 		userDisplay = Main.getUser();
-		
+
 		formatTime = new SimpleDateFormat("hh : mm: ss a");
 		timeLabel = new JLabel();
 		timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -80,7 +78,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 		dateLabel.setFont(newfont2);		
 		dateLabel.setBounds(43, 170, 622, 141);
 
-		
+
 		final int HEIGHT = 800;
 		final int WIDTH = 1400;
 		frame = new JFrame("Tackle"); // title of application
@@ -110,7 +108,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 		yearly.setFont(newfont);
 		yearly.setForeground(yellow3);
 		yearly.setBorder(BorderFactory.createLineBorder(yellow2));
-		
+
 
 		username = new JLabel(userDisplay); // get a different public variable to store user input
 		username.setHorizontalAlignment(SwingConstants.CENTER);
@@ -151,15 +149,15 @@ public class Mainscreen extends JFrame implements ActionListener{
 		scheduleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		scheduleLabel.setBounds(920, 60, 429, 51);
 		scheduleLabel.setFont(newfont1);
-		
+
 		todoLabel = new JLabel ("// TODO");
 		todoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		todoLabel.setBounds(1030, 240, 200, 41);
 		todoLabel.setFont(newfont1);
-		
+
 		duckdance = new JLabel(duckicon);
 		duckdance.setBounds(107, 300, 410, 445);
-		
+
 		weekly.addActionListener(this);
 		monthly.addActionListener(this);
 		yearly.addActionListener(this);
@@ -175,67 +173,64 @@ public class Mainscreen extends JFrame implements ActionListener{
 		frame.add(dateLabel);
 		frame.add(duckdance);
 		frame.setVisible(true);
-		
-		
+
+
 		setTime(); 
 	}
 
 	public void setTime() {
 
-	    Timer timer = new Timer(1000, e -> {
-	      time = formatTime.format(Calendar.getInstance().getTime());
-	      timeLabel.setText(time);
+		Timer timer = new Timer(1000, e -> {
+			time = formatTime.format(Calendar.getInstance().getTime());
+			timeLabel.setText(time);
 
-	      day = dayFormat.format(Calendar.getInstance().getTime());
-	      dayLabel.setText(day);
-	      date = dateFormat.format(Calendar.getInstance().getTime());
-	      dateLabel.setText(date);
-	    });
+			day = dayFormat.format(Calendar.getInstance().getTime());
+			dayLabel.setText(day);
+			date = dateFormat.format(Calendar.getInstance().getTime());
+			dateLabel.setText(date);
+		});
 
-	    timer.setInitialDelay(0);
-	    timer.start();
-	  }
-	
-	
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-
-			if (e.getSource() == weekly) {
-				try {
-					new Weekly();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				frame.dispose(); // dispose of current frame
-			}
-			if (e.getSource() == monthly) {
-				new Monthly();
-				frame.dispose();
-			}
-			if (e.getSource() == yearly) {
-				new Yearly();
-				frame.dispose(); // dispose of current frame
-			}
-			if (e.getSource()== logout) {
-				new Logout();
-			}
-			if (e.getSource()== switchAcc) {
-				new SwitchAcc();
-			}
-
-			if (e.getSource()== colourCSTM) {
-				new ColourCSTM();
-			}
-			if (e.getSource()== help) {
-				new Help();
-			}
-
-
-		}
-		
-		public static void main(String[] args) throws IOException {
-			new Mainscreen();
-		}
+		timer.setInitialDelay(0);
+		timer.start();
 	}
+
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		if (e.getSource() == weekly) {
+			try {
+				new Weekly();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			frame.dispose(); // dispose of current frame
+		}
+		if (e.getSource() == monthly) {
+			new Monthly();
+			frame.dispose();
+		}
+		if (e.getSource() == yearly) {
+			new Yearly();
+			frame.dispose(); // dispose of current frame
+		}
+		if (e.getSource()== logout) {
+			new Logout();
+		}
+		if (e.getSource()== switchAcc) {
+			new SwitchAcc();
+		}
+
+		if (e.getSource()== colourCSTM) {
+			new ColourCSTM();
+		}
+		if (e.getSource()== help) {
+			new Help();
+		}
+
+
+	}
+
+}
