@@ -16,6 +16,10 @@ public class Mainscreen extends JFrame implements ActionListener{
 	private static JLabel username; 
 	private static JLabel scheduleLabel, todoLabel;
 
+	
+	Color colour1 = ColourCSTM.getFirstColour();
+	Color colour2 = ColourCSTM.getSecondColour();
+	Color colour3 = ColourCSTM.getThirdColour();
 	static Color yellow1 = new Color(255, 208, 37); // tackle logo bg yellow color 
 	static Color yellow2 = new Color(232, 180, 2); // buttons color (dark)
 	static Color yellow3 = new Color(255, 255, 255); // white
@@ -84,30 +88,30 @@ public class Mainscreen extends JFrame implements ActionListener{
 		frame = new JFrame("Tackle"); // title of application
 		frame.setSize(WIDTH,HEIGHT);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setBackground(yellow1);
+		frame.getContentPane().setBackground(colour1);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 
 		weekly = new JButton("Weekly");
 		weekly.setBounds(919, 117, 135, 77);
-		weekly.setBackground(yellow2);
+		weekly.setBackground(colour2);
 		weekly.setFont(newfont);
-		weekly.setForeground(yellow3);
-		weekly.setBorder(BorderFactory.createLineBorder(yellow2));
+		weekly.setForeground(colour3);
+		weekly.setBorder(BorderFactory.createLineBorder(colour2));
 
 		monthly = new JButton("Monthly");
 		monthly.setBounds(1066, 117, 135, 77);
-		monthly.setBackground(yellow2);
+		monthly.setBackground(colour2);
 		monthly.setFont(newfont);
-		monthly.setForeground(yellow3);
-		monthly.setBorder(BorderFactory.createLineBorder(yellow2));
+		monthly.setForeground(colour3);
+		monthly.setBorder(BorderFactory.createLineBorder(colour2));
 
 		yearly = new JButton("Yearly");
 		yearly.setBounds(1213, 117, 135, 77);
-		yearly.setBackground(yellow2);
+		yearly.setBackground(colour2);
 		yearly.setFont(newfont);
-		yearly.setForeground(yellow3);
-		yearly.setBorder(BorderFactory.createLineBorder(yellow2));
+		yearly.setForeground(colour3);
+		yearly.setBorder(BorderFactory.createLineBorder(colour2));
 
 
 		username = new JLabel(userDisplay); // get a different public variable to store user input

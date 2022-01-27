@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.io.*;
 import java.awt.event.*;
 
-public class ColourPallette extends JFrame implements ActionListener{
+public class ColourPallette extends JFrame{
 	
 	// declare the colours 
 	
@@ -30,86 +30,8 @@ public class ColourPallette extends JFrame implements ActionListener{
 	static Color blossom4 = new Color(48, 2, 6);	    // text colour (auburn)
 	static Color blossom5 = new Color(252, 194, 220); // panel background colour 
 	
-	// constructor for ColourPallette class
-	public ColourPallette(String colorInfo) {
-		getColorInfo(colorInfo);
-		
-	}
+
 	
 	
-	private void getColorInfo(String colorInfo) {	//TODO: make the return statements work :'D
-	
-		// color values theme: ocean 
-		if (colorInfo.equals("ocean1")) {
-			return ocean1;
-		}
-		
-		if (colorInfo.equals("ocean2")) {
-			return ocean2;
-		}
-		
-		if (colorInfo.equals("ocean3")) {
-			return ocean3;
-		}
-		
-		if (colorInfo.equals("ocean4")) {
-			return ocean4;
-		}
-		
-		if (colorInfo.equals("ocean5")) {
-			return ocean5;
-		}
-		
-		
-		// colour values theme: bumble 
-		if (colorInfo.equals("bumble1")) {
-			return bumble1;
-		}
-		
-		if (colorInfo.equals("bumble2")) {
-			return bumble2;
-		}
-		
-		if (colorInfo.equals("bumble3")) {
-			return bumble3;
-		}
-		
-		if (colorInfo.equals("bumble4")) {
-			return bumble4;
-		}
-		
-		if (colorInfo.equals("bumble5")) {
-			return bumble5;
-		}
-		
-		
-		// colour values theme: blossom
-		if (colorInfo.equals("blossom1")) {
-			return blossom1;
-		}
-		
-		if (colorInfo.equals("blossom2")) {
-			return blossom2;
-		}
-		
-		if (colorInfo.equals("blossom3")) {
-			return blossom3;
-		}
-		
-		if (colorInfo.equals("blossom4")) {
-			return blossom4;
-		}
-		
-		if (colorInfo.equals("blossom5")) {
-			return blossom5;
-		}
-	}
-	
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

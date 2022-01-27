@@ -8,6 +8,12 @@ import java.awt.event.*;
 public class ColourCSTM extends JFrame implements ActionListener{
 
 	// variable declaration
+	static Color firstcolour;
+	static Color secondcolour;
+	static Color thirdcolour;
+	
+	int i = 0;
+
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	private JLabel colourtitle = new JLabel("Colour Customization?");
@@ -80,7 +86,12 @@ public class ColourCSTM extends JFrame implements ActionListener{
 		yellowbtn.addActionListener(this);
 		pinkbtn.addActionListener(this);
 		frame.setVisible(true);
+		
+		// getting current User String
+		
 	}
+	
+	
 
 	/*
 	 * implementing ActionListener, based on the event of user (which button clicked), different methods performed 
@@ -90,9 +101,73 @@ public class ColourCSTM extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 
 		if(e.getSource() == pinkbtn){
-			
+			i = 1;
+			JOptionPane.showMessageDialog(this, "Changing to blossom theme... ");
+			setColours();
+			try {
+				new Mainscreen();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			frame.dispose();
+		}
 		
+		if(e.getSource() == bluebtn) {
+			i = 2;
+			JOptionPane.showMessageDialog(this, "Changing to ocean theme... ");
+			setColours();
+			try {
+				new Mainscreen();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			frame.dispose();
+		}
+		if (e.getSource() == yellowbtn) {
+			i = 3;
+			JOptionPane.showMessageDialog(this, "Changing to bumble theme... ");
+			setColours();
+			try {
+				new Mainscreen();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			frame.dispose();
 		}
 	}
+	
+	public void setColours() {
+		if(i == 1) {
+			firstcolour = new Color(240, 156, 166);
+			secondcolour = new Color(240, 156, 166);
+			thirdcolour = new Color(138, 39, 58);
 
+		}
+		if (i == 2) {
+			firstcolour = new Color(164, 210, 237);
+			secondcolour = new Color(76, 150, 194);
+			thirdcolour = new Color(35, 61, 77);
+		}
+		
+		if(i == 3) {
+			firstcolour = new Color(255, 208, 37);
+			secondcolour = new Color(245, 208, 76);
+			thirdcolour = new Color(69, 62, 39);
+		}
+	}
+	
+	public static Color getFirstColour() {
+		return firstcolour;
+	}
+	
+	public static Color getSecondColour() {
+		return secondcolour;
+	}
+	public static Color getThirdColour() {
+		return thirdcolour;
+	}
+	
 }
