@@ -129,6 +129,9 @@ public class AccountCfm extends JFrame implements ActionListener{
 				readUsers(); // read in all users
 				userinput = username.getText(); // getting user's typed in username
 				if (Arrays.asList(totalAcc[0]).contains(userinput)) { // if totalAcc[0] contains username input
+					ColourCSTM.firstcolour = null;
+					ColourCSTM.secondcolour = null;
+					ColourCSTM.secondcolour = null;
 					JOptionPane.showMessageDialog(this, "Found User! Returning to login page...");
 					new Main(); // return to main class
 					frame.dispose(); // dispose frame

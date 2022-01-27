@@ -228,8 +228,8 @@ public class Mainscreen extends JFrame implements ActionListener{
 		}
 
 		if (e.getSource()== colourCSTM) {
-			new ColourCSTM();
 			frame.dispose();
+			new ColourCSTM();
 			
 		}
 		if (e.getSource()== help) {
@@ -237,6 +237,10 @@ public class Mainscreen extends JFrame implements ActionListener{
 		}
 
 
+	}
+	
+	public static void main(String[]args) throws IOException {
+		new Mainscreen();
 	}
 
 }

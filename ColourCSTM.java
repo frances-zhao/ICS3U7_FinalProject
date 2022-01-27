@@ -8,11 +8,11 @@ import java.awt.event.*;
 public class ColourCSTM extends JFrame implements ActionListener{
 
 	// variable declaration
-	static Color firstcolour;
-	static Color secondcolour;
-	static Color thirdcolour;
-	
-	int colourpicker = 0;
+	public static Color firstcolour;
+	public static Color secondcolour;
+	public static Color thirdcolour;
+
+	public static int colourpicker = 0;
 
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
@@ -70,20 +70,20 @@ public class ColourCSTM extends JFrame implements ActionListener{
 		Icon watericon = new ImageIcon("images/water.gif");
 		watergif = new JLabel(watericon);
 		watergif.setBounds(123, 346, 287, 263);
-		
+
 		Icon beeicon = new ImageIcon("images/bee.gif");
 		beegif = new JLabel(beeicon);
 		beegif.setBounds(562, 346, 287, 263);
-		
+
 		Icon flowericon = new ImageIcon("images/flower.gif");
 		flowergif = new JLabel(flowericon);
 		flowergif.setBounds(991, 346, 321, 263);
-		
+
 		frame.add(watergif);
 		frame.add(beegif);
 		frame.add(flowergif);
 
-		
+
 		// actual GUI
 		frame.add(colourtitle);
 		frame.add(colourlabel);
@@ -96,12 +96,12 @@ public class ColourCSTM extends JFrame implements ActionListener{
 		yellowbtn.addActionListener(this);
 		pinkbtn.addActionListener(this);
 		frame.setVisible(true);
-		
+
 		// getting current User String
-		
+
 	}
-	
-	
+
+
 
 	/*
 	 * implementing ActionListener, based on the event of user (which button clicked), different methods performed 
@@ -122,18 +122,19 @@ public class ColourCSTM extends JFrame implements ActionListener{
 			}
 			frame.dispose();
 		}
-		
+
 		if(e.getSource() == bluebtn) {
 			colourpicker = 2;
 			JOptionPane.showMessageDialog(this, "Changing to ocean theme... ");
 			setColours();
 			try {
 				new Mainscreen();
+				frame.dispose();
+
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			frame.dispose();
 		}
 		if (e.getSource() == yellowbtn) {
 			colourpicker = 3;
@@ -141,14 +142,15 @@ public class ColourCSTM extends JFrame implements ActionListener{
 			setColours();
 			try {
 				new Mainscreen();
+				frame.dispose();
+
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			frame.dispose();
 		}
 	}
-	
+
 	public void setColours() {
 		if(colourpicker == 1) {
 			firstcolour = new Color(240, 156, 166);
@@ -161,20 +163,15 @@ public class ColourCSTM extends JFrame implements ActionListener{
 			secondcolour = new Color(76, 150, 194);
 			thirdcolour = new Color(35, 61, 77);
 		}
-		
+
 		if(colourpicker == 3) {
 			firstcolour = new Color(255, 208, 37);
 			secondcolour = new Color(245, 208, 76);
 			thirdcolour = new Color(69, 62, 39);
 		}
-		if (colourpicker == 4) {
-			firstcolour = null;
-			secondcolour = null;
-			thirdcolour = null;
-		}
-		
+
 	}
-	
+
 	public static Color getFirstColour() {
 		return firstcolour;
 	}
@@ -184,10 +181,6 @@ public class ColourCSTM extends JFrame implements ActionListener{
 	public static Color getThirdColour() {
 		return thirdcolour;
 	}
-	
-	
-	public static void main(String[]args) {
-		new ColourCSTM();
-	}
-	
+
+
 }

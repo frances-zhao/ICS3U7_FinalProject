@@ -5,7 +5,7 @@ import java.io.*;
 import java.awt.event.*;
 
 
-public class Logout extends ColourCSTM implements ActionListener{
+public class Logout extends JFrame implements ActionListener{
 
 	// variable declaration
 	private static final long serialVersionUID = 1L;
@@ -15,20 +15,23 @@ public class Logout extends ColourCSTM implements ActionListener{
 	private JButton confirmbtn;
 	private JButton cancelbtn;
 
+
 	// font declarations
 	Font newfont;
 	Font newfont1;
 
-	
+
 	public Logout() {
-		
+
+
 		try {
 			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(13f);
 			newfont1 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
 		} catch (IOException | FontFormatException e){
-			
+
 		}
 		
+
 		// initializing frame
 		final int HEIGHT = 250;
 		final int WIDTH = 400;
@@ -40,7 +43,7 @@ public class Logout extends ColourCSTM implements ActionListener{
 		frame.setResizable(false);
 		frame.setLayout(null);
 
-		
+
 		logouttitle.setFont(newfont1);
 		logouttitle.setHorizontalAlignment(SwingConstants.CENTER);
 		logouttitle.setBounds(155, 6, 90, 46);
@@ -49,7 +52,7 @@ public class Logout extends ColourCSTM implements ActionListener{
 		logoutlabel.setHorizontalAlignment(SwingConstants.CENTER);
 		logoutlabel.setFont(newfont);
 		logoutlabel.setBounds(42, 43, 321, 46);
-		
+
 		logoutlabel1 = new JLabel("to log out of your account?");
 		logoutlabel1.setHorizontalAlignment(SwingConstants.CENTER);
 		logoutlabel1.setFont(newfont);
@@ -79,14 +82,16 @@ public class Logout extends ColourCSTM implements ActionListener{
 	/*
 	 * implementing ActionListener, based on the event of user (which button clicked), different methods performed 
 	 */
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == confirmbtn) { // if confirm button clicked
 			try {
-				colourpicker = 4;
-				setColours();
+				ColourCSTM.firstcolour = null;
+				ColourCSTM.secondcolour = null;
+				ColourCSTM.secondcolour = null;
+
 				JOptionPane.showMessageDialog(this, "Logging out...");
 				new Main(); // redirect to main class
 				frame.dispose();
@@ -104,4 +109,6 @@ public class Logout extends ColourCSTM implements ActionListener{
 	}
 
 	
+
+
 }
