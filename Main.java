@@ -17,7 +17,7 @@ public class Main extends JFrame implements ActionListener{
 	private JButton loginButton;
 	private JButton createAccount;
 	private JPasswordField confirmPWTEXT;
-	
+	File filename1, filename2;
 	
 	Font newfont;
 	Font btnfont = new Font("Tahoma", Font.PLAIN, 13);
@@ -26,8 +26,8 @@ public class Main extends JFrame implements ActionListener{
 	private BufferedWriter output;
 	private BufferedReader input;
 	// login variables
-	private String[][] totalAcc = new String[2][1000]; // maximum number of totalAcc creation: 1000
-	String [] usernames, passwords;
+	private String[][] totalAcc = new String[4][1000]; // maximum number of totalAcc creation: 1000
+	String [] usernames, passwords, eventnamefile, eventdescfile;
 	int usernum;
 	public static String currentUser;
 	private static String currentPW;
@@ -49,10 +49,15 @@ public class Main extends JFrame implements ActionListener{
 
 		usernames = input.readLine().split(", ");
 		passwords = input.readLine().split(", ");
+		eventnamefile = input.readLine().split(", ");
+		eventdescfile = input.readLine().split(", ");
 		usernum = usernames.length;
 		for(int i = 0; i < usernum; i++) {
 			totalAcc[0][i] = usernames[i];
 			totalAcc[1][i] = passwords[i];
+			totalAcc[2][i] = eventnamefile[i];
+			totalAcc[3][i] = eventdescfile[i];
+
 		}
 		input.close(); //closing input
 
@@ -175,7 +180,13 @@ public class Main extends JFrame implements ActionListener{
 	public void addNewUser() throws IOException {
 		totalAcc[1][usernum] = currentPW;
 		totalAcc[0][usernum] = currentUser;
+		totalAcc[2][usernum] = usernum + "eventname";
+		totalAcc[3][usernum] = usernum + "eventdesc";
 		usernum++; // increasing the length of the 2D array to allow for bug-proof adding of account info
+		 
+		filename1 = new File(totalAcc[2][usernum] + ".txt");
+		
+		filename1 = new File(totalAcc[2][usernum] + ".txt");
 		savedUsers();
 	}
 
@@ -191,6 +202,17 @@ public class Main extends JFrame implements ActionListener{
 			output.write(totalAcc[1][i] + ", "); // separating each password with ", "
 		}
 		output.newLine();
+		
+		for(int i = 0; i < usernum; i++) {
+			output.write(totalAcc[2][i] +", "); // separating each file name with ", "
+		}
+		output.newLine();
+		
+		for(int i = 0; i < usernum; i++) {
+			output.write(totalAcc[3][i] +", "); // separating each file name with ", "
+		}
+		output.newLine();
+		
 		output.close(); // closing Bufferedwriter
 	}
 
