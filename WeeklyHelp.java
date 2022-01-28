@@ -104,12 +104,7 @@ public class WeeklyHelp implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == returnbtn) {
-			try {
-				new Mainscreen();
-				frame.dispose();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			frame.dispose();
 		}
 
 
