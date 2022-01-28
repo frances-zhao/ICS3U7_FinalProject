@@ -26,6 +26,7 @@ public class Main extends JFrame implements ActionListener{
 	private BufferedWriter output;
 	private BufferedReader input;
 	// login variables
+	
 	private String[][] totalAcc = new String[4][1000]; // maximum number of totalAcc creation: 1000
 	String [] usernames, passwords, eventnamefile, eventdescfile;
 	int usernum;
@@ -193,6 +194,21 @@ public class Main extends JFrame implements ActionListener{
 		filename1.createNewFile();
 		filename2.createNewFile();
 		
+		BufferedWriter out_t = new BufferedWriter(new FileWriter(filename1)); // title+time of event 
+		BufferedWriter out_d = new BufferedWriter(new FileWriter(filename2)); // event description 
+		
+		for(int i = 0; i < 8; i++) {
+			out_t.write("Sample, ");
+			out_t.newLine();
+		}
+		for(int i = 0; i < 7; i++) {
+			out_d.write("Sample, ");
+			out_d.newLine();
+
+		}
+		out_t.close();
+		out_d.close();
+
 		savedUsers();
 		
 	}
