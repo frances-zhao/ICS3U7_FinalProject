@@ -4,7 +4,11 @@ import javax.swing.*;
 import java.io.*;
 import java.awt.event.*;
 
-
+/**
+ * class that helps customize the colour based on what is clicked
+ * @author Frances Zhao
+ *
+ */
 public class ColourCSTM extends JFrame implements ActionListener{
 
 	// variable declaration
@@ -41,7 +45,6 @@ public class ColourCSTM extends JFrame implements ActionListener{
 		frame.setLayout(null);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
-
 
 		colourtitle.setFont(newfont1);
 		colourtitle.setHorizontalAlignment(SwingConstants.CENTER);
@@ -101,6 +104,53 @@ public class ColourCSTM extends JFrame implements ActionListener{
 
 	}
 
+	/**
+	 * method that sets the three colours differently based on its click
+	 */
+	public void setColours() {
+		if(colourpicker == 1) {
+			firstcolour = new Color(255, 168, 178);
+			secondcolour = new Color(237, 157, 166);
+			thirdcolour = new Color(150, 51, 71);
+
+		}
+		if (colourpicker == 2) {
+			firstcolour = new Color(164, 210, 237);
+			secondcolour = new Color(114, 180, 219);
+			thirdcolour = new Color(36, 70, 92);
+		}
+
+		if(colourpicker == 3) {
+			firstcolour = new Color(252, 208, 45);
+			secondcolour = new Color(237, 189, 19);
+			thirdcolour = new Color(69, 63, 43);
+		}
+
+	}
+
+	/**
+	 * getter method for first colour
+	 * @return first colour
+	 */
+	public static Color getFirstColour() {
+		return firstcolour;
+	}
+	
+	/**
+	 * getter method for second colour
+	 * @return second colour
+	 */
+	public static Color getSecondColour() {
+		return secondcolour;
+	}
+	
+	/**
+	 * getter method for third colour
+	 * @return third colour
+	 */
+	public static Color getThirdColour() {
+		return thirdcolour;
+	}
 
 
 	/*
@@ -151,36 +201,7 @@ public class ColourCSTM extends JFrame implements ActionListener{
 		}
 	}
 
-	public void setColours() {
-		if(colourpicker == 1) {
-			firstcolour = new Color(255, 168, 178);
-			secondcolour = new Color(237, 157, 166);
-			thirdcolour = new Color(150, 51, 71);
-
-		}
-		if (colourpicker == 2) {
-			firstcolour = new Color(164, 210, 237);
-			secondcolour = new Color(114, 180, 219);
-			thirdcolour = new Color(36, 70, 92);
-		}
-
-		if(colourpicker == 3) {
-			firstcolour = new Color(252, 208, 45);
-			secondcolour = new Color(237, 189, 19);
-			thirdcolour = new Color(69, 63, 43);
-		}
-
-	}
-
-	public static Color getFirstColour() {
-		return firstcolour;
-	}
-	public static Color getSecondColour() {
-		return secondcolour;
-	}
-	public static Color getThirdColour() {
-		return thirdcolour;
-	}
+	
 
 
 }

@@ -1,9 +1,14 @@
+// import packages
 import java.awt.*;
 import javax.swing.*;
 import java.io.*;
 import java.awt.event.*;
 
-
+/**
+ * class that asks user if they want to switch accounts
+ * @author Frances Zhao
+ *
+ */
 public class SwitchAcc extends JFrame implements ActionListener{
 
 	// variable declaration
@@ -19,13 +24,16 @@ public class SwitchAcc extends JFrame implements ActionListener{
 	Font newnewfont;
 
 
+	/**
+	 * constructor implementing GUI components
+	 */
 	public SwitchAcc() {
 
 		try {
 			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(13f);
 			newnewfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
 		} catch (IOException | FontFormatException e){
-
+			System.out.println("SwitchAcc - cannot import font.");
 		}
 
 		// initializing frame
@@ -52,8 +60,7 @@ public class SwitchAcc extends JFrame implements ActionListener{
 		switchlabel1.setHorizontalAlignment(SwingConstants.CENTER);
 		switchlabel1.setFont(newfont);
 		switchlabel1.setBounds(42, 55, 321, 46);
-
-
+		
 		confirmbtn = new JButton("Confirm");
 		confirmbtn.setFont(newfont);
 		confirmbtn.setBounds(226, 120, 117, 56);
@@ -70,7 +77,6 @@ public class SwitchAcc extends JFrame implements ActionListener{
 		frame.add(switchlabel1);
 		frame.add(confirmbtn);
 		frame.add(cancelbtn);
-
 		frame.setVisible(true);
 	}
 
@@ -81,12 +87,7 @@ public class SwitchAcc extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == confirmbtn) { // if confirm button clicked
-			try {
-				new AccountCfm(); // redirect to accountCfm class
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			new AccountCfm(); // redirect to accountCfm class
 			frame.dispose();
 
 		}

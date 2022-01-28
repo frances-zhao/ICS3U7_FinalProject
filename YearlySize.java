@@ -5,7 +5,11 @@ import java.text.*;
 import java.util.*;
 import javax.swing.*;
 
-
+/**
+ * class that helps design what the yearly calendar looks like (every month)
+ * @author Frances Zhao
+ *
+ */
 public class YearlySize extends JPanel {
 
 	// variable declarations
@@ -23,29 +27,38 @@ public class YearlySize extends JPanel {
 	Color colour2 = ColourCSTM.getSecondColour();
 	Color colour3 = ColourCSTM.getThirdColour();
 
+	/**
+	 * constructor, sets the preferred size of the month
+	 */
 	public YearlySize() {
 		// setting size and colour background of tiny calendar
 		setPreferredSize(new Dimension(280, 260));
 		setBackground(colour1);
-
 	}
 
+	/**
+	 * setter method that sets the date as the current date
+	 * @param date the date
+	 */
 	public void setDate(Date date) {
 		this.date = date;
 	}
 
-	public void paintComponent(Graphics g) { // customizing the mini calendars using paintComponent
+	/**
+	 * method that draws out each of the mini calendars
+	 */
+	public void paint(Graphics g) { // customizing the mini calendars using paintComponent
 		// try/catch importing the font
 		try {
 			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
 			smallfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(12f);
 
 		} catch (IOException | FontFormatException e){
-
+			
+			System.out.println("YearlySize - cannot import font.");
 		}
 
-		super.paintComponent(g);
-
+		super.paint(g);
 		g.setFont(newfont); // setting font
 		g.drawString(monthformat.format(date), 34, 40); // setting its display in the mini 'panel'
 		g.setColor(Color.black); // setting colour of month

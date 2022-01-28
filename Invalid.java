@@ -1,13 +1,16 @@
 import javax.swing.*;
-import javax.swing.text.DefaultEditorKit;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.util.Scanner;
-
+/**
+ * class that pops up a screen to inform user the day of the week doesnt exist if wrongly inputted
+ * @author Lucia Kim
+ *
+ */
 public class Invalid extends JFrame implements ActionListener{
 
+	// variable declarations 
+	private static final long serialVersionUID = 1L;
 	// declaring major GUI components 
 	JFrame frame = new JFrame("error");
 	JPanel panel; 
@@ -23,6 +26,7 @@ public class Invalid extends JFrame implements ActionListener{
 		try {
 			title = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
 			desc = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(15f);
+			System.out.println("Invalid - Cannot import font.");
 
 		}
 		catch (IOException | FontFormatException e) {
@@ -65,13 +69,14 @@ public class Invalid extends JFrame implements ActionListener{
 		frame.setVisible(true);
 	} 
 	
-
+	/*
+	 * implementing ActionListener, based on the event of user (which button clicked), different methods performed 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == ok) {
 			frame.dispose();
 		}
-		
 		
 	}
 

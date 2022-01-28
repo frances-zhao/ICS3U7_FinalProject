@@ -5,6 +5,11 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
+/**
+ * class Calendarview that helps design the monthly calendar's days (boxes)
+ * @author Frances Zhao
+ * with reference to Ra Ven's youtube video: https://youtu.be/YivaMCfichQ 
+ */
 class CalendarView extends JPanel {
 
 	// variable declaration
@@ -35,6 +40,10 @@ class CalendarView extends JPanel {
 	// font declaration
 	static Font newfont;
 
+	/**
+	 * constructor that implements GUI interface as well as finding the current dates
+	 * @param calendar
+	 */
 	public CalendarView(Calendar calendar) {
 
 		// try/catch the font
@@ -42,6 +51,7 @@ class CalendarView extends JPanel {
 			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
 
 		} catch (IOException | FontFormatException e){
+			System.out.println("CalendarView - Cannot import font.");
 
 		}
 
@@ -144,7 +154,7 @@ class CalendarView extends JPanel {
 			panel.add(date); // adding the date to the panel
 		}
 
-		
+
 		for (int j = 1 ; i <= 42; j++, i++) { // adding a JLabel for all days that are in the next month (grey numbers after the current month)
 			JLabel date = new JLabel(" " + j);
 			date.setBorder(border); // adding label in border layout
@@ -160,7 +170,11 @@ class CalendarView extends JPanel {
 
 	}
 
-	// getting the previous month
+	/**
+	 * method that gets the previous month
+	 * @param month
+	 * @return integer based on the current month
+	 */
 	private int getPreviousMonth(int month) {
 		if (month == 0) { // if the month is december, return january
 			return 11;
@@ -169,7 +183,11 @@ class CalendarView extends JPanel {
 		return month - 1; // return the month before the current month
 	}
 
-	// method to convert the month (as int) into its String version
+	/**
+	 * method to convert the month (as int) into its String version
+	 * @param thisMonth
+	 * @return string of the current month
+	 */
 	private String monthname(int thisMonth) {
 		String name = "";
 		switch(thisMonth) {
@@ -213,7 +231,11 @@ class CalendarView extends JPanel {
 		return name; // returning the name of month
 	}
 
-	// method to get the maximum number of days in the month
+	/**
+	 * method to get the maximum number of days in the month
+	 * @param month
+	 * @return int of the maximum days in the month, checks for leap year
+	 */
 	private int getMax(int month) {
 		int max = 0;
 		switch (month) {
@@ -230,24 +252,34 @@ class CalendarView extends JPanel {
 			max = 30;
 		break;
 		}
-		
+
 		return max; // returning the max days
 	}
 
-	// checking if the current year is a leap year or not
+	/**
+	 * 
+	 * method to check if the current year is a leap year or not
+	 * @return boolean based on result
+	 */
 	private boolean isLeap() {
 		return (thisYear % 4 == 0 && thisYear % 100 != 0) || 
 				thisYear % 400 == 0;
 	}
 
-	// getting the last month 
+	/**
+	 * method to get the last month
+	 * @return the previous month
+	 */
 	public CalendarView lastMonth() {
 		return new CalendarView(new GregorianCalendar(
 				thisYear, 
 				thisMonth - 1, 1));
 	}
 
-	// getting the next month
+	/**
+	 * method to get the next month
+	 * @return the next month
+	 */
 	public CalendarView nextMonth() {
 		return new CalendarView(new GregorianCalendar(
 				thisYear, 

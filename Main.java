@@ -3,7 +3,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.*;
-
+/**
+ * Main class, run this class.
+ * @author Frances Zhao
+ *
+ */
 public class Main extends JFrame implements ActionListener{
 
 	// variable declaration
@@ -18,15 +22,14 @@ public class Main extends JFrame implements ActionListener{
 	private JButton createAccount;
 	private JPasswordField confirmPWTEXT;
 	static File filename1, filename2;
-	
+
 	Font newfont;
-	Font btnfont = new Font("Tahoma", Font.PLAIN, 13);
 	// file IO variables
 	private String fileName = "userInfo.txt";
 	private BufferedWriter output;
 	private BufferedReader input;
 	// login variables
-	
+
 	private String[][] totalAcc = new String[4][1000]; // maximum number of totalAcc creation: 1000
 	String [] usernames, passwords, eventnamefile, eventdescfile;
 	static int usernum = 0, userslot;
@@ -36,13 +39,16 @@ public class Main extends JFrame implements ActionListener{
 	public static String fname1, fname2; 
 
 
-	// Main Login Page Class
+	/**
+	 * constructor of Main.java implements the GUI interface and reads in userInfo.txt 
+	 * @throws IOException
+	 */
 	Main() throws IOException{
 
 		try {
 			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(13f);
 		} catch (IOException | FontFormatException e){
-			
+
 		}
 		// reading in all usernames and passwords
 		input = new BufferedReader(new FileReader(fileName));
@@ -126,11 +132,11 @@ public class Main extends JFrame implements ActionListener{
 		credentials = new JLabel("Creators: Frances Zhao, Lucia Kim");
 		credentials.setFont(newfont);
 		credentials.setBounds(6, 700, 272, 26);
-		
+
 		credentials_1 = new JLabel("Course: ICS3U7-01");
 		credentials_1.setFont(newfont);
 		credentials_1.setBounds(6, 720, 272, 26);
-		
+
 		credentials_2 = new JLabel("Teacher: Ms. Xie");
 		credentials_2.setFont(newfont);
 		credentials_2.setBounds(6, 740, 272, 26);
@@ -144,7 +150,7 @@ public class Main extends JFrame implements ActionListener{
 		confirmnote = new JLabel("*confirm password only ");
 		confirmnote.setFont(newfont);
 		confirmnote.setBounds(673, 441, 176, 40);
-		
+
 		confirmnote_1 = new JLabel("if creating new account");
 		confirmnote_1.setFont(newfont);
 		confirmnote_1.setBounds(673, 455, 176, 40);
@@ -170,36 +176,41 @@ public class Main extends JFrame implements ActionListener{
 		frame.setVisible(true); // making JFrame visible
 	}
 
-	// getting current User String
+	/**
+	 * getter method for currentUser
+	 * @return current user string
+	 */
 	public static String getUser() {
 		return Main.currentUser;
 	}
 
 
-	// adding a new user
+	/**
+	 * adding a new user method
+	 * @throws IOException
+	 */
 	public void addNewUser() throws IOException {
 		totalAcc[1][usernum] = currentPW;
 		totalAcc[0][usernum] = currentUser;
 		totalAcc[2][usernum] = usernum + "eventname";
 		totalAcc[3][usernum] = usernum + "eventdesc";
-		
+
 		userslot = usernum;
-		
+
 		// new file names for new account
-		
 		filename1 = new File(usernum + "eventname.txt");
 		filename2 = new File(usernum + "eventdesc.txt");
 
 		usernum++; // increasing the length of the 2D array to allow for bug-proof adding of account info
-		
+
 		// creating new files
 		filename1.createNewFile();
 		filename2.createNewFile();
-		
+
 		// new buffered writer
 		BufferedWriter out_t = new BufferedWriter(new FileWriter(filename1)); // title+time of event 
 		BufferedWriter out_d = new BufferedWriter(new FileWriter(filename2)); // event description 
-		
+
 		// writing Sample, into new files
 		for(int i = 0; i < 8; i++) {
 			out_t.write("Sample, ");
@@ -210,28 +221,37 @@ public class Main extends JFrame implements ActionListener{
 			out_d.newLine();
 
 		}
-		out_t.close();
-		out_d.close();
+		out_t.close(); // closing buffer writer
+		out_d.close(); // closing buffer writer
 
 		// saved user method
 		savedUsers();
-		
+
 	}
-	
-	// getter method for current file1
+
+	/**
+	 * getter method for the current file1
+	 * @return string of first file
+	 */
 	public static String getfile1() {
 		fname1 = userslot + "eventname.txt";
 		return fname1;
 	}
 
-	// getter method for current file2
+	/**
+	 * getter method for the current file2
+	 * @return string of second file
+	 */
 	public static String getfile2() {
 		fname2 = userslot + "eventdesc.txt";
 
 		return fname2;
 	}
-	
-	// class for savedUsers, writes out all account information – username and password, into fileName (userinfo.txt)
+
+	/**
+	 * class for savedUsers, writes out all account information – username and password, into fileName (userinfo.txt)
+	 * @throws IOException
+	 */
 	public void savedUsers() throws IOException {
 		output = new BufferedWriter(new FileWriter(fileName));
 		for(int i = 0; i < usernum; i++) {
@@ -243,23 +263,26 @@ public class Main extends JFrame implements ActionListener{
 			output.write(totalAcc[1][i] + ", "); // separating each password with ", "
 		}
 		output.newLine();
-		
+
 		for(int i = 0; i < usernum; i++) {
 			output.write(totalAcc[2][i] +", "); // separating each file name with ", "
 		}
 		output.newLine();
-		
+
 		for(int i = 0; i < usernum; i++) {
 			output.write(totalAcc[3][i] +", "); // separating each file name with ", "
 		}
 		output.newLine();
-		
+
 		output.close(); // closing Bufferedwriter
-		
-		
+
+
 	}
 
-	//checking if username and password match up
+	/**
+	 * checking if username and password match up
+	 * @return result of comparison (boolean)
+	 */
 	public boolean loginResult() {
 		for(int i = 0; i < usernum; i++) {
 			if(currentUser.equals(totalAcc[0][i]) && currentPW.equals(totalAcc[1][i])) {
@@ -270,11 +293,12 @@ public class Main extends JFrame implements ActionListener{
 		}
 		return false;
 	}
-	
+
 
 	/*
 	 * implementing ActionListener, based on the event of user (which button clicked), different methods performed 
 	 */
+	@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() ==loginButton) { // if login button clicked
@@ -328,7 +352,11 @@ public class Main extends JFrame implements ActionListener{
 	} // end actionPerformed
 
 
-	// testing the main program
+
+	/**
+	 * main program
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		try {
 			new Main();

@@ -1,3 +1,4 @@
+// importing packages
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -5,12 +6,15 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.ArrayList;
-
 import javax.swing.*;
-
+/**
+ * class that shows the weekly scheduler with addevent option and clear scheduler option 
+ * @author Lucia Kim, Frances Zhao
+ *
+ */
 public class Weekly extends JPanel implements ActionListener{
 
+	private static final long serialVersionUID = 1L;
 	// declaring the major components 
 	JFrame frame = new JFrame("Weekly Calendar");
 	JPanel m_panel = new JPanel(new FlowLayout()); 
@@ -20,14 +24,7 @@ public class Weekly extends JPanel implements ActionListener{
 	JButton addEvent, return_main, clear;
 	JLabel mon, tue, wed, thu, fri, sat, sun; 
 	JLabel todo, notes, week_yearLabel, general_dateLabel; 
-	JTextField weekly; 
-	//	JCheckBox tm1, tm2, tm3, tm4, tm5, tm6, tm7, tm8, tm9, tm0, // monday tasks
-	//	tt1, tt2, tt3, tt4, tt5, tt6, tt7, tt8, tt9, tt0,           // tuesday tasks
-	//	tw1, tw2, tw3, tw4, tw5, tw6, tw7, tw8, tw9, tw0,           // wednesday tasks 
-	//	ttt1, ttt2, ttt3, ttt4, ttt5, ttt6, ttt7, ttt8, ttt9, ttt0, // thursday tasks 
-	//	tf1, tf2, tf3, tf4, tf5, tf6, tf7, tf8, tf9, tf0,           // friday tasks 
-	//	ts1, ts2, ts3, ts4, ts5, ts6, ts7, ts8, ts9, ts0,           // saturday taks  
-	//	tss1, tss2, tss3, tss4, tss5, tss6, tss7, tss8, tss9, tss0; // sunday tasks 
+	JTextField weekly;
 
 	ImageIcon add = new ImageIcon("images/add.png");
 	ImageIcon logo = new ImageIcon("images/image.png");
@@ -42,10 +39,7 @@ public class Weekly extends JPanel implements ActionListener{
 	String filename2 = Main.getfile2();
 
 
-	//  -------------- declare the misc. variables --------------------------------
-
-	//WeeklyLook look = new WeeklyLook();
-	
+	//  -------------- declare the misc. variables --------------------------------	
 
 	public static String[][] aen1 = new String[8][50]; // add event name
 	public static String[][] aed1 = new String[7][50]; // add event desc. 
@@ -64,6 +58,10 @@ public class Weekly extends JPanel implements ActionListener{
 	Color colour2 = ColourCSTM.getSecondColour();
 	Color colour3 = ColourCSTM.getThirdColour();
 
+	/**
+	 * constructor of Weekly.java, uses methods and implements GUI interface
+	 * @throws IOException
+	 */
 	public Weekly() throws IOException{
 
 		// declare fonts that'll be used in this class
@@ -77,7 +75,7 @@ public class Weekly extends JPanel implements ActionListener{
 		} 
 
 		catch (IOException | FontFormatException e){
-
+			System.out.println("Weekly - cannot import font.");
 		}
 
 		readin();
@@ -90,11 +88,11 @@ public class Weekly extends JPanel implements ActionListener{
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 
+		// designing GUI components
 		deco1 = new JPanel();
 		deco1.setBounds(0, 0, 25, 800);
 		deco1.setBackground(colour3);
 		deco1.setBorder(BorderFactory.createLineBorder(colour3, 2, true));
-
 
 		wdp1 = new JPanel();
 		wdp1.setLayout(null);
@@ -148,40 +146,6 @@ public class Weekly extends JPanel implements ActionListener{
 		mon.setHorizontalAlignment(SwingConstants.CENTER);
 		mon.setBorder(BorderFactory.createLineBorder(colour3));
 
-		//TODO: skip to here; temporary ez access 
-		//		String[] content = input_en.readLine().split(", ");
-		//		String checkeu = content[1];
-		//		
-		//		taskm = new JCheckBox(checkeu);
-		//		
-
-		// adding the tasks 
-
-		//		String[] content = input_en.readLine().split(", ");
-		//		for (int i = 1; i < AddEvent_.mon; i++) {
-		//			JCheckBox chek = new JCheckBox(content[i]);
-		////			wdp1.add(chek);
-		////		}
-		////		
-		//		String[] content = input_en.readLine().split(", ");
-		//		
-		//		String cm = content[1];
-		//		tm1 = new JCheckBox();
-		//		tm1.setBackground(bumble2);
-		//		
-		////		String ct = content[2];
-		////		tm2 = new JCheckBox();
-		////		tm2.setBackground(bumble2);
-		////		
-		////		String cw = content[3];
-		////		tm3 = new JCheckBox();
-		//		tm3.setBackground(bumble2); 
-		//		
-		//		String ctt = content[4];
-		//		tm4 = new JCheckBox();
-		//		tm4.setBackground(bumble2);
-
-
 		tue = new JLabel("Tuesday"); 
 		tue.setBounds(264, 115, 175, 21);
 		tue.setFont(newfont);
@@ -230,9 +194,7 @@ public class Weekly extends JPanel implements ActionListener{
 		sun.setHorizontalAlignment(SwingConstants.CENTER);
 		sun.setBorder(BorderFactory.createLineBorder(colour3));
 
-
 		// declaring the characteristics of the components
-
 		general_date = new SimpleDateFormat("");
 		general_dateLabel = new JLabel();
 		general_dateLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -246,8 +208,6 @@ public class Weekly extends JPanel implements ActionListener{
 		Image image_logo = logo.getImage(); // transforming the logo image 
 		Image image_n2 = image_logo.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
 		logo = new ImageIcon(image_n2);
-
-		Icon icon = new ImageIcon("images/image.png");
 
 		return_main = new JButton(logo);
 		return_main.setBounds(90, 25, 50, 50);
@@ -281,7 +241,7 @@ public class Weekly extends JPanel implements ActionListener{
 		return_main.addActionListener(this);
 		clear.addActionListener(this);
 		
-		// add the components
+		// actual GUI
 		frame.add(addEvent);
 		frame.add(weekly);
 		frame.add(return_main);
@@ -295,23 +255,23 @@ public class Weekly extends JPanel implements ActionListener{
 		frame.add(sun);
 		frame.setVisible(true);
 
+		// adding in checkboxes for each of the events in the array, based on day of the week 
+		
 		int x = 20;
-		for(int i = 1; i < monlen; i++) {
-			System.out.println(aen[0][i]);
-			JCheckBox check = new JCheckBox(aen[0][i]);
-			check.setText(aen[0][i] + "");
-			check.setForeground(Color.black);
-			check.setBounds(6, x, 160, 24);
-			check.setFont(newfont);
-			wdp1.add(check);
-			x += 22;
+		for(int i = 1; i < monlen; i++) { // monday
+			JCheckBox check = new JCheckBox(aen[0][i]); // the string/label of the checkbox is the first item (excluding Sample)
+			check.setText(aen[0][i] + ""); // setting the text to the first item of the line (excluding sample)
+			check.setForeground(Color.black); // setting font of text to black
+			check.setBounds(6, x, 160, 24); // setting bounds
+			check.setFont(newfont); // setting font of text
+			wdp1.add(check); // adding the checkbox to the panel of the day
+			x += 22; // add to the integer so the next checkbox is below the first
 		}
 		frame.add(wdp1);
 		
 		
 		x = 20;
-		for(int i = 1; i < tuelen; i++) {
-			System.out.println(aen[1][i]);
+		for(int i = 1; i < tuelen; i++) { // tuesday
 			JCheckBox check = new JCheckBox(aen[1][i]);
 			check.setText(aen[1][i] + "");
 			check.setForeground(Color.black);
@@ -324,8 +284,7 @@ public class Weekly extends JPanel implements ActionListener{
 
 		
 		x = 20;
-		for(int i = 1; i < wedlen; i++) {
-			System.out.println(aen[2][i]);
+		for(int i = 1; i < wedlen; i++) { // wednesday
 			JCheckBox check = new JCheckBox(aen[2][i]);
 			check.setText(aen[2][i] + "");
 			check.setForeground(Color.black);
@@ -338,8 +297,7 @@ public class Weekly extends JPanel implements ActionListener{
 
 		
 		x = 20;
-		for(int i = 1; i < thulen; i++) {
-			System.out.println(aen[3][i]);
+		for(int i = 1; i < thulen; i++) { // thursday
 			JCheckBox check = new JCheckBox(aen[3][i]);
 			check.setText(aen[3][i] + "");
 			check.setForeground(Color.black);
@@ -351,8 +309,7 @@ public class Weekly extends JPanel implements ActionListener{
 		
 		frame.add(wdp4);
 		x = 20;
-		for(int i = 1; i < frilen; i++) {
-			System.out.println(aen[4][i]);
+		for(int i = 1; i < frilen; i++) { // friday
 			JCheckBox check = new JCheckBox(aen[4][i]);
 			check.setText(aen[4][i] + "");
 			check.setForeground(Color.black);
@@ -364,8 +321,7 @@ public class Weekly extends JPanel implements ActionListener{
 		frame.add(wdp5);
 
 		x = 20;
-		for(int i = 1; i < satlen; i++) {
-			System.out.println(aen[5][i]);
+		for(int i = 1; i < satlen; i++) { // saturday
 			JCheckBox check = new JCheckBox(aen[5][i]);
 			check.setText(aen[5][i] + "");
 			check.setForeground(Color.black);
@@ -377,8 +333,7 @@ public class Weekly extends JPanel implements ActionListener{
 		frame.add(wep1);
 		
 		x = 20;
-		for(int i = 1; i < sunlen; i++) {
-			System.out.println(aen[6][i]);
+		for(int i = 1; i < sunlen; i++) { // sunday
 			JCheckBox check = new JCheckBox(aen[6][i]);
 			check.setText(aen[6][i] + "");
 			check.setForeground(Color.black);
@@ -387,92 +342,42 @@ public class Weekly extends JPanel implements ActionListener{
 			wep2.add(check);
 			x += 22;
 		}
-		frame.add(wep2);
-
-		frame.add(deco1);
 		
-
+		// revalidate and set visible
+		frame.add(wep2);
+		frame.add(deco1);	
 		frame.repaint();
 		frame.revalidate();
 
-		//		wdp1.add(tm1);
-		//		
-
-
-
-		// frame visibility toggle 
 		frame.setVisible(true);
 
 	}
-
-
-
-	//	public void writeEventM() {
-	//		
-	//		String[] content;
-	//
-	//		content = new String[AddEvent_.mon];
-	//		try {
-	//			content = input_en.readLine().split(", ");
-	//		} catch (IOException e) {
-	//			e.printStackTrace();
-	//		}
-	//
-	//		for(int i = 1; i < AddEvent_.mon + 1; i++) {
-	//			taskm = new JCheckBox(content[i]);
-	//			wdp1.add(taskm);
-	//		}
-	//	}
-
-
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-
-		if (e.getSource() == addEvent) {
-			try {
-				new AddEvent_();
-				frame.dispose();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-		
-		if (e.getSource() == clear) {
-			frame.dispose();
-			new ClearCfm();
-		}
-
-		if (e.getSource() == return_main) {
-			try {
-				new Mainscreen();
-				frame.dispose();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		}
-	}
+	
+	/**
+	 * method that reads in the txt files 
+	 * @throws IOException
+	 */
 	public void readin() throws IOException {
-		BufferedReader input_t = new BufferedReader(new FileReader(filename1));
-		BufferedReader input_d = new BufferedReader(new FileReader(filename2));
-		
-		monname = input_t.readLine().split(", ");
-		tuename = input_t.readLine().split(", ");
-		wedname = input_t.readLine().split(", ");
-		thuname = input_t.readLine().split(", ");
-		friname = input_t.readLine().split(", ");
-		satname = input_t.readLine().split(", ");
-		sunname = input_t.readLine().split(", ");
+		try (BufferedReader input_t = new BufferedReader(new FileReader(filename1))) {
+			try (BufferedReader input_d = new BufferedReader(new FileReader(filename2))) {
+				monname = input_t.readLine().split(", ");
+				tuename = input_t.readLine().split(", ");
+				wedname = input_t.readLine().split(", ");
+				thuname = input_t.readLine().split(", ");
+				friname = input_t.readLine().split(", ");
+				satname = input_t.readLine().split(", ");
+				sunname = input_t.readLine().split(", ");
 
-		mondesc = input_d.readLine().split(", ");
-		tuedesc = input_d.readLine().split(", ");
-		weddesc = input_d.readLine().split(", ");
-		thudesc = input_d.readLine().split(", ");
-		fridesc = input_d.readLine().split(", ");
-		satdesc = input_d.readLine().split(", ");
-		sundesc = input_d.readLine().split(", ");
-
+				mondesc = input_d.readLine().split(", ");
+				tuedesc = input_d.readLine().split(", ");
+				weddesc = input_d.readLine().split(", ");
+				thudesc = input_d.readLine().split(", ");
+				fridesc = input_d.readLine().split(", ");
+				satdesc = input_d.readLine().split(", ");
+				sundesc = input_d.readLine().split(", ");
+			}
+		}
+		// refer to AddEvent_ for comments
 		monlen = monname.length;
 		tuelen = tuename.length;
 		wedlen = wedname.length;
@@ -511,8 +416,36 @@ public class Weekly extends JPanel implements ActionListener{
 		}
 
 	}
-	public static void main(String[]args) throws IOException {
-		new Weekly();
+	
+	/*
+	 * implementing ActionListener, based on the event of user (which button clicked), different methods performed 
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		if (e.getSource() == addEvent) {
+			try {
+				new AddEvent_();
+				frame.dispose();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
+		if (e.getSource() == clear) {
+			frame.dispose();
+			new ClearCfm();
+		}
+
+		if (e.getSource() == return_main) {
+			try {
+				new Mainscreen();
+				frame.dispose();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
 	}
 
 }

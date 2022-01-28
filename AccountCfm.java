@@ -1,10 +1,14 @@
 import java.awt.*;
 import javax.swing.*;
 import java.io.*;
-import java.util.Arrays;
+import java.util.*;
 import java.awt.event.*;
 
-
+/**
+ * this class appears after confirmation of switching account
+ * @author Frances Zhao
+ *
+ */
 public class AccountCfm extends JFrame implements ActionListener{
 
 	// variable declaration
@@ -16,6 +20,8 @@ public class AccountCfm extends JFrame implements ActionListener{
 	private JButton cancelbtn;
 	private JLabel userlabel;
 	private JTextField username;
+	public static String userinput;
+	public static String pwinput;
 
 
 	// font declaration
@@ -29,21 +35,19 @@ public class AccountCfm extends JFrame implements ActionListener{
 	int usernum;
 	private String[][] totalAcc = new String[2][1000]; // maximum number of totalAcc creation: 1000
 
-	public static String userinput;
-	public static String pwinput;
-
 
 
 	/**
-	 * @throws IOException 
+	 * this constructor implements the GUI interface
 	 */
-	public AccountCfm() throws IOException {
-		
+	public AccountCfm() {
+
 		try {
 			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(13f);
 			newnewfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
 		} catch (IOException | FontFormatException e){
-			
+			System.out.println("AccountCfm - Cannot import font.");
+
 		}
 
 		// initializing frame
@@ -66,7 +70,7 @@ public class AccountCfm extends JFrame implements ActionListener{
 		acclabel.setHorizontalAlignment(SwingConstants.CENTER);
 		acclabel.setFont(newfont);
 		acclabel.setBounds(42, 43, 321, 46);
-		
+
 		acclabel = new JLabel("you'd like to switch to:");
 		acclabel.setHorizontalAlignment(SwingConstants.CENTER);
 		acclabel.setFont(newfont);
@@ -91,7 +95,7 @@ public class AccountCfm extends JFrame implements ActionListener{
 		userlabel.setFont(newfont);
 		userlabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		userlabel.setBounds(42, 95, 61, 16);
-		
+
 		// actual GUI
 		frame.add(acctitle);
 		frame.add(acclabel);
@@ -99,12 +103,16 @@ public class AccountCfm extends JFrame implements ActionListener{
 		frame.add(cancelbtn);
 		frame.add(userlabel);
 		frame.add(username);
-		
+
 		frame.setVisible(true);
 	}
 
 
-	// reading in users on text file "userInfo.txt"
+	/**
+	 * 	this method reading in users on text file "userInfo.txt"
+	 *
+	 * @throws IOException for readers
+	 */
 	public void readUsers() throws IOException {
 		input = new BufferedReader(new FileReader(fileName));
 
@@ -120,7 +128,7 @@ public class AccountCfm extends JFrame implements ActionListener{
 	/*
 	 * implementing ActionListener, based on the event of user (which button clicked), different methods performed 
 	 */
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 

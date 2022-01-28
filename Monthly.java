@@ -5,7 +5,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 
-
+/**
+ * class for the monthly calendar
+ * @author Frances Zhao
+ *
+ */
 public class Monthly extends JFrame implements ActionListener {
 
 	// variable declarations 
@@ -26,6 +30,10 @@ public class Monthly extends JFrame implements ActionListener {
 	Color colour2 = ColourCSTM.getSecondColour();
 	Color colour3 = ColourCSTM.getThirdColour();
 
+	/**
+	 * constructor for the monthly calendar, implements GUI interface and components from CalendarView.java
+	 */
+	@SuppressWarnings("deprecation")
 	Monthly() {
 
 		// try/catch importing the font
@@ -33,7 +41,7 @@ public class Monthly extends JFrame implements ActionListener {
 			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
 
 		} catch (IOException | FontFormatException e){
-
+			System.out.println("Monthly - cannot import font.");
 		}
 
 		// importing mini logo as icon
@@ -75,10 +83,11 @@ public class Monthly extends JFrame implements ActionListener {
 		frame.setVisible(true); // set frame visible
 
 
-
 	}
 
-
+	/*
+	 * implementing ActionListener, based on the event of user (which button clicked), different methods performed 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 

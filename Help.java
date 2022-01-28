@@ -1,11 +1,17 @@
+// importing packages
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import javax.swing.*;
 
-
+/**
+ * class that helps user with tutorials on how to use special features
+ * @author Frances Zhao
+ *
+ */
 public class Help implements ActionListener{
 
+	// variable declarations
 	private JFrame frame;
 	private JLabel helptitle = new JLabel("Help");
 	private JLabel helplabel, helplabel1;
@@ -20,12 +26,17 @@ public class Help implements ActionListener{
 	private JLabel duckimage;
 
 
+	/**
+	 * constructor that implements GUI interface 
+	 */
 	public Help() {
 
+		// trying fonts
 		try {
 			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(13f);
 			newfont1 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
 		} catch (IOException | FontFormatException e){
+			System.out.println("Help - Cannot import font.");
 
 		}
 
@@ -53,20 +64,16 @@ public class Help implements ActionListener{
 		helplabel1.setFont(newfont);
 		helplabel1.setBounds(28, 58, 738, 46);
 
-
 		weeklytut = new JButton("Weekly Help");
 		weeklytut.setBounds(200, 101, 117, 41);
 		weeklytut.setFont(newfont);
 		weeklytut.addActionListener(this);
-
 		
 		monthlytut = new JButton("Monthly Help");
 		monthlytut.setBounds(332, 101, 127, 41);
 		monthlytut.setFont(newfont);
 		monthlytut.setHorizontalAlignment(SwingConstants.CENTER);
 		monthlytut.addActionListener(this);
-
-
 		
 		yearlytut = new JButton("Yearly Help");
 		yearlytut.setBounds(471, 101, 117, 41);
@@ -79,6 +86,9 @@ public class Help implements ActionListener{
 		returnbtn.setBounds(332, 154, 127, 41);
 		returnbtn.addActionListener(this);
 
+		Icon icon = new ImageIcon("images/ducklings.gif");
+		duckimage = new JLabel(icon);
+		duckimage.setBounds(105, 207, 541, 178);
 		
 		// actual GUI
 		frame.add(helptitle);
@@ -87,12 +97,7 @@ public class Help implements ActionListener{
 		frame.add(weeklytut);
 		frame.add(monthlytut);
 		frame.add(yearlytut);
-		frame.add(returnbtn);
-		
-		Icon icon = new ImageIcon("images/ducklings.gif");
-		duckimage = new JLabel(icon);
-		
-		duckimage.setBounds(105, 207, 541, 178);
+		frame.add(returnbtn);	
 		frame.add(duckimage);
 
 		frame.setVisible(true);
@@ -101,8 +106,6 @@ public class Help implements ActionListener{
 	/*
 	 * implementing ActionListener, based on the event of user (which button clicked), different methods performed 
 	 */
-
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 

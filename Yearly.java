@@ -1,13 +1,15 @@
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.io.IOException;
 // import packages
+import java.awt.*;
 import java.awt.event.*;
-import java.text.*;
+import java.io.*;
 import java.util.*;
 import javax.swing.*;
 
-
+/**
+ * class for the yearly calendar
+ * @author Frances Zhao
+ *
+ */
 public class Yearly extends YearlySize implements ActionListener{
 
 	// variable declarations
@@ -19,6 +21,10 @@ public class Yearly extends YearlySize implements ActionListener{
 	JFrame frame= new JFrame();
 
 
+	/**
+	 * constructor for Yearly.java, implements GUI interface
+	 */
+	@SuppressWarnings("deprecation")
 	public Yearly() {
 
 		// frame settings
@@ -72,7 +78,6 @@ public class Yearly extends YearlySize implements ActionListener{
 		frame.setVisible(true);
 
 	}
-
 
 	// if button clicked, using Action Listener continue accordingly
 	@Override

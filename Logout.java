@@ -4,7 +4,11 @@ import javax.swing.*;
 import java.io.*;
 import java.awt.event.*;
 
-
+/**
+ * class that logouts of the mainscreen for the user, brings user back to home screen
+ * @author Frances Zhao
+ *
+ */
 public class Logout extends JFrame implements ActionListener{
 
 	// variable declaration
@@ -21,6 +25,9 @@ public class Logout extends JFrame implements ActionListener{
 	Font newfont1;
 
 
+	/**
+	 * constructor that implements GUI interface
+	 */
 	public Logout() {
 
 
@@ -28,6 +35,7 @@ public class Logout extends JFrame implements ActionListener{
 			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(13f);
 			newfont1 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
 		} catch (IOException | FontFormatException e){
+			System.out.println("Logout - Cannot import font.");
 
 		}
 		

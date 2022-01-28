@@ -1,3 +1,4 @@
+// import packages
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -6,6 +7,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
 
+/**
+ * class with the main screen and all functionalities in the program originate from this screen
+ * @author Frances Zhao, Lucia Kim
+ *
+ */
 public class Mainscreen extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
@@ -16,20 +22,6 @@ public class Mainscreen extends JFrame implements ActionListener{
 	private static JButton weekly, monthly, yearly, testluck, onlymotiv; //buttons for week, month, year 
 	private static JLabel username; 
 	private static JLabel scheduleLabel, warninglbl;
-
-	String filename = "motivation.txt";
-	String filename1 = "lucktester.txt";
-	Mainscreen page;
-	Color colour1 = ColourCSTM.getFirstColour();
-	Color colour2 = ColourCSTM.getSecondColour();
-	Color colour3 = ColourCSTM.getThirdColour();
-	static Color yellow1 = new Color(255, 208, 37); // tackle logo bg yellow color 
-	static Color yellow2 = new Color(232, 180, 2); // buttons color (dark)
-	static Color yellow3 = new Color(255, 255, 255); // white
-	static Font newfont, newfontsmall, newfont1,newfont2, madefont, newfont3, newfont4;
-
-	static Icon icon = new ImageIcon("images/logo.png");
-	Icon duckicon = new ImageIcon("images/duckwaddle.gif");
 	private static JMenuBar menuBar;
 	private static JMenu settings;
 	private static JMenuItem help;
@@ -37,10 +29,25 @@ public class Mainscreen extends JFrame implements ActionListener{
 	private static JMenuItem switchAcc;
 	private static JMenuItem logout;
 	private static JLabel duckdance;
+	
+	// txt file variables
+	String filename = "motivation.txt";
+	String filename1 = "lucktester.txt";
+
+	// colour declarations 
+	Color colour1 = ColourCSTM.getFirstColour();
+	Color colour2 = ColourCSTM.getSecondColour();
+	Color colour3 = ColourCSTM.getThirdColour();
+	// font declarations
+	static Font newfont, newfontsmall, newfont1,newfont2, madefont, newfont3, newfont4;
+
+	// icon declarations
+	static Icon icon = new ImageIcon("images/logo.png");
+	Icon duckicon = new ImageIcon("images/duckwaddle.gif");
+	
+	// time and date variables
 	JLabel timeLabel, dayLabel, dateLabel;
-
 	int hour, second, minute;
-
 	String time, day, date;
 	Calendar calendar;
 	SimpleDateFormat formatTime;
@@ -50,9 +57,13 @@ public class Mainscreen extends JFrame implements ActionListener{
 
 	String[][]randomline = new String[15][1];
 	
+	/**
+	 * constructor that implements different methods and GUI interface
+	 * @throws IOException
+	 */
 	public Mainscreen() throws IOException{
 
-		try {
+		try { // trying fonts
 			newfontsmall = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(15f);
 			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
 			newfont1 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(30f);
@@ -63,9 +74,19 @@ public class Mainscreen extends JFrame implements ActionListener{
 
 		} catch (IOException | FontFormatException e){
 
+			System.out.println("Mainscreen - Cannot import font.");
 		}
-		String f1 = Main.getfile1();
-		String f2 = Main.getfile2();
+		
+		// adding java components
+		final int HEIGHT = 800;
+		final int WIDTH = 1400;
+		frame = new JFrame("Tackle"); // title of application
+		frame.setSize(WIDTH,HEIGHT);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setBackground(colour1);
+		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
+		
 		userDisplay = Main.getUser();
 		formatTime = new SimpleDateFormat("hh : mm: ss a");
 		timeLabel = new JLabel();
@@ -85,16 +106,6 @@ public class Mainscreen extends JFrame implements ActionListener{
 		dateLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		dateLabel.setFont(newfont2);		
 		dateLabel.setBounds(43, 170, 622, 141);
-
-
-		final int HEIGHT = 800;
-		final int WIDTH = 1400;
-		frame = new JFrame("Tackle"); // title of application
-		frame.setSize(WIDTH,HEIGHT);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setBackground(colour1);
-		frame.setLocationRelativeTo(null);
-		frame.setResizable(false);
 
 		weekly = new JButton("Weekly");
 		weekly.setBounds(919, 117, 135, 77);
@@ -116,7 +127,6 @@ public class Mainscreen extends JFrame implements ActionListener{
 		yearly.setFont(newfont);
 		yearly.setForeground(colour3);
 		yearly.setBorder(BorderFactory.createLineBorder(Color.black));
-
 
 		username = new JLabel("Welcome, " + userDisplay); // get a different public variable to store user input
 		username.setHorizontalAlignment(SwingConstants.CENTER);
@@ -177,6 +187,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 		duckdance = new JLabel(duckicon);
 		duckdance.setBounds(107, 300, 410, 445);
 
+		// adding action listeners
 		testluck.addActionListener(this);
 		onlymotiv.addActionListener(this);
 		help.addActionListener(this);
@@ -187,6 +198,8 @@ public class Mainscreen extends JFrame implements ActionListener{
 		monthly.addActionListener(this);
 		yearly.addActionListener(this);
 		frame.setLayout(null);
+		
+		// actual GUI
 		frame.add(weekly);
 		frame.add(monthly);
 		frame.add(yearly);
@@ -198,15 +211,16 @@ public class Mainscreen extends JFrame implements ActionListener{
 		frame.add(dateLabel);
 		frame.add(duckdance);
 		frame.add(onlymotiv);
-		
-		
 		frame.add(warninglbl);
 		frame.setVisible(true);
 
 
-		setTime(); 
+		setTime(); // set time method
 	}
 
+	/**
+	 * setting the current time and date, with help from Demeng Chen
+	 */
 	public void setTime() {
 
 		Timer timer = new Timer(1000, e -> {
@@ -224,7 +238,9 @@ public class Mainscreen extends JFrame implements ActionListener{
 	}
 
 
-
+	/*
+	 * implementing ActionListener, based on the event of user (which button clicked), different methods performed 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -284,18 +300,22 @@ public class Mainscreen extends JFrame implements ActionListener{
 	
 	public void returnmotiv() throws IOException {
 		try {
-			BufferedReader input = new BufferedReader(new FileReader(filename));
-			Random r = new Random();
+			try (BufferedReader input = new BufferedReader(new FileReader(filename))) {
+				Random r = new Random();
 
-			int rand = Math.abs(r.nextInt()) % 11;
-			
-			for (int i = 0; i < 15; i ++) {
-				randomline[i][0] = input.readLine();
+				int rand = Math.abs(r.nextInt()) % 11;
+				
+				for (int i = 0; i < 15; i ++) {
+					randomline[i][0] = input.readLine();
+				}
+				JOptionPane.showMessageDialog(this, randomline[rand][0]);
+			} catch (FileNotFoundException e) {
+				throw e;
+			} catch (HeadlessException e) {
+				e.printStackTrace();
 			}
-			JOptionPane.showMessageDialog(this, randomline[rand][0]);
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -303,15 +323,21 @@ public class Mainscreen extends JFrame implements ActionListener{
 	
 	public void returnluck() throws IOException {
 		try {
-			BufferedReader input = new BufferedReader(new FileReader(filename1));
-			Random r = new Random();
+			try (BufferedReader input = new BufferedReader(new FileReader(filename1))) {
+				Random r = new Random();
 
-			int rand = Math.abs(r.nextInt()) % 11;
-			
-			for (int i = 0; i < 15; i ++) {
-				randomline[i][0] = input.readLine();
+				int rand = Math.abs(r.nextInt()) % 11;
+				
+				for (int i = 0; i < 15; i ++) {
+					randomline[i][0] = input.readLine();
+				}
+				JOptionPane.showMessageDialog(this, randomline[rand][0]);
+			} catch (FileNotFoundException e) {
+				throw e;
+			} catch (HeadlessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			JOptionPane.showMessageDialog(this, randomline[rand][0]);
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

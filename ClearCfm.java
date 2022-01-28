@@ -4,7 +4,11 @@ import javax.swing.*;
 import java.io.*;
 import java.awt.event.*;
 
-
+/**
+ * class that clears everything in the txt files of the events and reintializes it to its original state
+ * @author Frances Zhao
+ *
+ */
 public class ClearCfm extends JFrame implements ActionListener{
 
 	// variable declaration
@@ -22,23 +26,25 @@ public class ClearCfm extends JFrame implements ActionListener{
 	Font newfont;
 	Font newfont1;
 
-	public static String[][] aen1 = new String[8][50]; // add event name
-	public static String[][] aed1 = new String[7][50]; // add event desc. 
 	static String [] monname, mondesc, tuename, tuedesc, wedname, weddesc, thuname, thudesc, friname, fridesc, satname, satdesc, sunname, sundesc;
 	static int monlen = 0, tuelen = 0, wedlen = 0, thulen = 0, frilen = 0, satlen = 0, sunlen = 0;
 
 	// declaring the writers 
 
-	public static String[][] aen = new String[8][50]; // 
+	public static String[][] aen = new String[8][50]; 
 	public static String[][] aed = new String[7][50]; 
 
+	/**
+	 * constructor that implements GUI interface and methods
+	 */
 	public ClearCfm() {
 
-
+		// trying font
 		try {
 			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(13f);
 			newfont1 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
 		} catch (IOException | FontFormatException e){
+			System.out.println("ClearCfm - Cannot import font.");
 
 		}
 
@@ -55,6 +61,7 @@ public class ClearCfm extends JFrame implements ActionListener{
 		frame.setLayout(null);
 
 
+		// implementing java components
 		cleartitle.setFont(newfont1);
 		cleartitle.setHorizontalAlignment(SwingConstants.CENTER);
 		cleartitle.setBounds(155, 6, 90, 46);
@@ -86,10 +93,13 @@ public class ClearCfm extends JFrame implements ActionListener{
 		frame.add(clearlabel1);
 		frame.add(confirmbtn);
 		frame.add(cancelbtn);
-
 		frame.setVisible(true);
 	}
 
+	/**
+	 * method that clears up the entire txt file and reintializes it to its original state
+	 * @throws IOException
+	 */
 	public void cleartxt() throws IOException {
 
 		PrintWriter pw = new PrintWriter(filename1);
@@ -114,6 +124,7 @@ public class ClearCfm extends JFrame implements ActionListener{
 			out_d.newLine();
 
 		}
+		// closing writers
 		out_t.flush();
 		out_d.flush();
 		out_t.close();
@@ -121,26 +132,30 @@ public class ClearCfm extends JFrame implements ActionListener{
 
 	}
 
+	/**
+	 * method that reads in the file name 
+	 * @throws IOException
+	 */
 	public void readin() throws IOException {
-		BufferedReader input_t = new BufferedReader(new FileReader(filename1));
-		BufferedReader input_d = new BufferedReader(new FileReader(filename2));
+		try (BufferedReader input_t = new BufferedReader(new FileReader(filename1))) {
+			try (BufferedReader input_d = new BufferedReader(new FileReader(filename2))) {
+				monname = input_t.readLine().split(", ");
+				tuename = input_t.readLine().split(", ");
+				wedname = input_t.readLine().split(", ");
+				thuname = input_t.readLine().split(", ");
+				friname = input_t.readLine().split(", ");
+				satname = input_t.readLine().split(", ");
+				sunname = input_t.readLine().split(", ");
 
-		monname = input_t.readLine().split(", ");
-		tuename = input_t.readLine().split(", ");
-		wedname = input_t.readLine().split(", ");
-		thuname = input_t.readLine().split(", ");
-		friname = input_t.readLine().split(", ");
-		satname = input_t.readLine().split(", ");
-		sunname = input_t.readLine().split(", ");
-
-		mondesc = input_d.readLine().split(", ");
-		tuedesc = input_d.readLine().split(", ");
-		weddesc = input_d.readLine().split(", ");
-		thudesc = input_d.readLine().split(", ");
-		fridesc = input_d.readLine().split(", ");
-		satdesc = input_d.readLine().split(", ");
-		sundesc = input_d.readLine().split(", ");
-
+				mondesc = input_d.readLine().split(", ");
+				tuedesc = input_d.readLine().split(", ");
+				weddesc = input_d.readLine().split(", ");
+				thudesc = input_d.readLine().split(", ");
+				fridesc = input_d.readLine().split(", ");
+				satdesc = input_d.readLine().split(", ");
+				sundesc = input_d.readLine().split(", ");
+			}
+		}
 		monlen = monname.length;
 		tuelen = tuename.length;
 		wedlen = wedname.length;
@@ -149,31 +164,31 @@ public class ClearCfm extends JFrame implements ActionListener{
 		satlen = satname.length;
 		sunlen = sunname.length;
 
-		for(int i = 0; i < monlen; i++) {
+		for(int i = 0; i < monlen; i++) { // monday
 			aen[0][i] = monname[i];
 			aed[0][i] = mondesc[i];
 		}
-		for(int i = 0; i < tuelen; i++) {
+		for(int i = 0; i < tuelen; i++) { // tuesday
 			aen[1][i] = tuename[i];
 			aed[1][i] = tuedesc[i];
 		}
-		for(int i = 0; i < wedlen; i++) {
+		for(int i = 0; i < wedlen; i++) { // wednesday
 			aen[2][i] = wedname[i];
 			aed[2][i] = weddesc[i];
 		}
-		for(int i = 0; i < thulen; i++) {
+		for(int i = 0; i < thulen; i++) { // thursday
 			aen[3][i] = thuname[i];
 			aed[3][i] = thudesc[i];
 		}
-		for(int i = 0; i < frilen; i++) {
+		for(int i = 0; i < frilen; i++) { // friday
 			aen[4][i] = friname[i];
 			aed[4][i] = fridesc[i];
 		}
-		for(int i = 0; i < satlen; i++) {
+		for(int i = 0; i < satlen; i++) { // saturday
 			aen[5][i] = satname[i];
 			aed[5][i] = satdesc[i];
 		}
-		for(int i = 0; i < sunlen; i++) {
+		for(int i = 0; i < sunlen; i++) { // sunday
 			aen[6][i] = sunname[i];
 			aed[6][i] = sundesc[i];
 		}

@@ -1,16 +1,24 @@
+// import packages
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import javax.swing.*;
 import javax.swing.border.*;
-
+/**
+ * class that helps user understand how to use the monthly calendar
+ * @author Frances Zhao
+ *
+ */
 public class MonthlyHelp extends JFrame implements ActionListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	private JButton returnbtn;
 	private JLabel helptitle = new JLabel("Monthly Help");
 	private JLabel helplabel, helplabel1, helplabel2;
 	private JLabel monthlogo, duckimage;
-
 
 	// font declarations
 	Font newfont;
@@ -22,7 +30,7 @@ public class MonthlyHelp extends JFrame implements ActionListener {
 			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(13f);
 			newfont1 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
 		} catch (IOException | FontFormatException e){
-
+			System.out.println("Monthly Help - cannot import font.");
 		}
 
 		// initializing frame
@@ -35,6 +43,7 @@ public class MonthlyHelp extends JFrame implements ActionListener {
 		frame.setResizable(false);
 		frame.setLayout(null);
 
+		// adding gui java components
 		helptitle.setFont(newfont1);
 		helptitle.setHorizontalAlignment(SwingConstants.CENTER);
 		helptitle.setBounds(295, 6, 221, 46);
@@ -71,8 +80,7 @@ public class MonthlyHelp extends JFrame implements ActionListener {
 		duckimage = new JLabel(icon1);
 		duckimage.setBounds(164, 293, 454, 97);
 
-
-
+		// actual GUI
 		frame.add(monthlogo);
 		frame.add(duckimage);
 		frame.add(returnbtn);
@@ -80,11 +88,12 @@ public class MonthlyHelp extends JFrame implements ActionListener {
 		frame.add(helplabel);
 		frame.add(helplabel1);
 		frame.add(helplabel2);
-
 		frame.setVisible(true);
 
 	}
-
+	/*
+	 * implementing ActionListener, based on the event of user (which button clicked), different methods performed 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 

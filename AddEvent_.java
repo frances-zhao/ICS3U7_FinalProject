@@ -1,15 +1,15 @@
 import javax.swing.*;
-import javax.swing.text.DefaultEditorKit;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.util.Scanner;
-
-
-
+/**
+ * This class AddEvent_ adds an event to the correct day of the week in the weekly scheduler
+ * @author Lucia Kim, Frances Zhao
+ *
+ */
 public class AddEvent_ extends JPanel implements ActionListener{
 
+	private static final long serialVersionUID = 1L;
 	// -------------- declare the GUI variables --------------------------------
 	JPanel panel;
 	JFrame frame; 
@@ -26,8 +26,11 @@ public class AddEvent_ extends JPanel implements ActionListener{
 	String filename1 = Main.getfile1();
 	String filename2 = Main.getfile2();
 	public static BufferedWriter out; 
+	/**
+	 * more variable declarations for arrays
+	 */
 	public static String[][] aen = new String[8][50]; // add event name
-	public static String[][] aed = new String[7][50]; // add event desc. 
+	public static String[][] aed = new String[7][50]; // add event description
 	public static String[][] at = new String[24][60]; // add time 
 	public static int num_event_n, num_event_d; 
 	public static String event_n, event_d, time_; 
@@ -37,16 +40,6 @@ public class AddEvent_ extends JPanel implements ActionListener{
 	static int monlen = 0, tuelen = 0, wedlen = 0, thulen = 0, frilen = 0, satlen = 0, sunlen = 0;
 	static int mon = 0, tue = 0, wed = 0, thu = 0, fri = 0, sat = 0, sun = 0;
 
-	//	String[] hours = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", 
-	//			"11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
-	//	
-	//	String[] minutes = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", 
-	//			"11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22",
-	//			"23", "24", "25", "26", "27", "28", "28", "29", "30", "31", "32", "33", "34", 
-	//			"35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47",
-	//			"48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60"};
-
-	//TODO: buffered readers 
 	BufferedReader input_t = new BufferedReader(new FileReader(filename1));
 	BufferedReader input_d = new BufferedReader(new FileReader(filename2));
 
@@ -62,14 +55,10 @@ public class AddEvent_ extends JPanel implements ActionListener{
 	Color colour2 = ColourCSTM.getSecondColour();
 	Color colour3 = ColourCSTM.getThirdColour();
 
-//	static Color bumble1 = new Color(255, 208, 37);   // button background colour 
-//	static Color bumble2 = new Color(245, 208, 76);   // panel background colour 
-//	static Color bumble3 = new Color(252, 248, 219);  // outline 2 (yellowish gray)
-//	static Color bumble4 = new Color(202, 194, 150);  // button outline colour 
-//	static Color bumble5 = new Color(69, 62, 39);     // outline 2 (dark stale brown)
-//	static Color bumble6 = new Color(255, 248, 171);  // textfield fill colour 
-
-
+	/**
+	 * constructor implements GUI interface and adds event to weekly scheduler
+	 * @throws IOException
+	 */
 	AddEvent_() throws IOException{
 
 		// -------------- adding the attributes of the fonts --------------------
@@ -85,6 +74,7 @@ public class AddEvent_ extends JPanel implements ActionListener{
 
 
 		} catch (IOException | FontFormatException e){
+			System.out.println("AddEvent_ - Cannot import font.");
 
 		}
 		readin();
@@ -172,21 +162,6 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		discard_event.setBackground(colour2);
 		discard_event.setBorder(BorderFactory.createLineBorder(colour3));
 
-		// making time picker 
-		//		next1 = new JButton("+");
-		//		next1.setBounds(425, 105, 20, 16);
-		//		next1.setFont(newfont);
-		//		next1.setForeground(bumble5);
-		//		next1.setBackground(bumble6);
-		//		next1.setBorder(BorderFactory.createLineBorder(bumble6));
-		//
-		//		prev1 = new JButton("-");
-		//		prev1.setBounds(425, 120, 20, 16);
-		//		prev1.setFont(newfont);
-		//		prev1.setForeground(bumble5);
-		//		prev1.setBackground(bumble6);
-		//		prev1.setBorder(BorderFactory.createLineBorder(bumble6));
-
 		h = new JTextField();
 		h.setBounds(437, 105, 60, 32);
 		h.setFont(newfont2);
@@ -208,13 +183,7 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		colon.setBorder(BorderFactory.createLineBorder(colour3));
 		colon.setEditable(false);
 
-
-		// getting rid of the sound that jtextarea and field makes when backspace is out of range 
-		// a = event_desc.getActionMap().get(DefaultEditorKit.beepAction);
-		// a.setEnabled(false);	
-
 		// ------------- add the actionlisteners --------------------------------
-		importance.addActionListener(this);
 		add_event.addActionListener(this);
 		discard_event.addActionListener(this);
 
@@ -232,8 +201,6 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		frame.add(discard_event);
 		frame.add(day_);
 		frame.add(day);
-		//		frame.add(next1);
-		//		frame.add(prev1);
 		frame.add(h);
 		frame.add(m);
 		frame.add(colon);
@@ -242,7 +209,13 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		frame.setVisible(true);
 
 	}
+	
+	/**
+	 * reading in each line of the txt file
+	 * @throws IOException for readers
+	 */
 	public void readin() throws IOException {
+		// reading in the name of the event into array
 		monname = input_t.readLine().split(", ");
 		tuename = input_t.readLine().split(", ");
 		wedname = input_t.readLine().split(", ");
@@ -251,6 +224,7 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		satname = input_t.readLine().split(", ");
 		sunname = input_t.readLine().split(", ");
 
+		// reading in the description of the event into array
 		mondesc = input_d.readLine().split(", ");
 		tuedesc = input_d.readLine().split(", ");
 		weddesc = input_d.readLine().split(", ");
@@ -259,6 +233,7 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		satdesc = input_d.readLine().split(", ");
 		sundesc = input_d.readLine().split(", ");
 
+		// setting variable as the length of array
 		monlen = monname.length;
 		tuelen = tuename.length;
 		wedlen = wedname.length;
@@ -267,37 +242,43 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		satlen = satname.length;
 		sunlen = sunname.length;
 
-		for(int i = 0; i < monlen; i++) {
+		// setting 2d array as array names and descriptions per day of week
+		
+		for(int i = 0; i < monlen; i++) { // monday
 			aen[0][i] = monname[i];
 			aed[0][i] = mondesc[i];
 		}
-		for(int i = 0; i < tuelen; i++) {
+		for(int i = 0; i < tuelen; i++) { // tuesday
 			aen[1][i] = tuename[i];
 			aed[1][i] = tuedesc[i];
 		}
-		for(int i = 0; i < wedlen; i++) {
+		for(int i = 0; i < wedlen; i++) { // wednesday
 			aen[2][i] = wedname[i];
 			aed[2][i] = weddesc[i];
 		}
-		for(int i = 0; i < thulen; i++) {
+		for(int i = 0; i < thulen; i++) { // thursday
 			aen[3][i] = thuname[i];
 			aed[3][i] = thudesc[i];
 		}
-		for(int i = 0; i < frilen; i++) {
+		for(int i = 0; i < frilen; i++) { // friday
 			aen[4][i] = friname[i];
 			aed[4][i] = fridesc[i];
 		}
-		for(int i = 0; i < satlen; i++) {
+		for(int i = 0; i < satlen; i++) { // saturday
 			aen[5][i] = satname[i];
 			aed[5][i] = satdesc[i];
 		}
-		for(int i = 0; i < sunlen; i++) {
+		for(int i = 0; i < sunlen; i++) { // sunday
 			aen[6][i] = sunname[i];
 			aed[6][i] = sundesc[i];
 		}
 		
 	}
 
+	/**
+	 * method that leads to adding the event into the weekly calendar
+	 * @throws IOException for addE()
+	 */
 	public void addEventName() throws IOException{
 		if (day.getText().equalsIgnoreCase("monday")) {
 			monlen++;
@@ -363,36 +344,44 @@ public class AddEvent_ extends JPanel implements ActionListener{
 	}
 
 
-	public void addE(int n) throws IOException { // n and m represents the row of aen, aed arrays 
-		// out_t, out_d 
+	/**
+	 * method that writes out the new event into the txt files
+	 * @param n integer of day of the week
+	 * @throws IOException for writers
+	 */
+	public void addE(int n) throws IOException { // n represents the row of aen, aed arrays 
 
-		BufferedWriter out_t = new BufferedWriter(new FileWriter(filename1)); // title+time of event 
+		BufferedWriter out_t = new BufferedWriter(new FileWriter(filename1)); // title of event 
 		BufferedWriter out_d = new BufferedWriter(new FileWriter(filename2)); // event description 
 
+		// getting text of textfields
 		event_n = event_name.getText();
 		event_d = event_desc.getText();
 		time_ = ", ".concat(h.getText().concat(":"));
 		time_ = time_.concat(m.getText());
 
+		// setting the array of the event
 		aen[n][num_event_n] = event_n;
 		aen[7][num_event_n] = time_;
 		aed[n][num_event_d] = event_d;
 
-		for(int i = 0; i <= monlen-1; i++ ) {
+		// rewriting out all of the objects of array, including new array per day of the week
+		
+		for(int i = 0; i <= monlen-1; i++ ) { // monday is array[0]
 			out_t.write(aen[0][i] + ", ");
 			out_d.write(aed[0][i] + ", ");
 		}
 		out_t.newLine();
 		out_d.newLine();
 
-		for(int i = 0; i <= tuelen-1; i++ ) {
+		for(int i = 0; i <= tuelen-1; i++ ) { // tuesday is array[1]
 			out_t.write(aen[1][i] + ", ");
 			out_d.write(aed[1][i] + ", ");
 		}
 		out_t.newLine();
 		out_d.newLine();
 
-		for(int i = 0; i <= wedlen-1; i++ ) {
+		for(int i = 0; i <= wedlen-1; i++ ) { // wednesday is array[2]
 			out_t.write(aen[2][i] + ", ");
 			out_d.write(aed[2][i] + ", ");
 
@@ -400,7 +389,7 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		out_t.newLine();
 		out_d.newLine();
 
-		for(int i = 0; i <= thulen-1; i++ ) {
+		for(int i = 0; i <= thulen-1; i++ ) { // thursday is array[3]
 			out_t.write(aen[3][i] + ", ");
 			out_d.write(aed[3][i] + ", ");
 
@@ -408,7 +397,7 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		out_t.newLine();
 		out_d.newLine();
 
-		for(int i = 0; i <= frilen-1; i++ ) {
+		for(int i = 0; i <= frilen-1; i++ ) { // friday is array[4]
 			out_t.write(aen[4][i] + ", ");
 			out_d.write(aed[4][i] + ", ");
 
@@ -416,7 +405,7 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		out_t.newLine();
 		out_d.newLine();
 
-		for(int i = 0; i <= satlen-1; i++ ) {
+		for(int i = 0; i <= satlen-1; i++ ) { // saturday is array[5]
 			out_t.write(aen[5][i] + ", ");
 			out_d.write(aed[5][i] + ", ");
 
@@ -424,7 +413,7 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		out_t.newLine();
 		out_d.newLine();
 
-		for(int i = 0; i <= sunlen-1; i++ ) {
+		for(int i = 0; i <= sunlen-1; i++ ) { // sunday is array[6]
 			out_t.write(aen[6][i] + ", ");
 			out_d.write(aed[6][i] + ", ");
 
@@ -433,21 +422,17 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		out_d.newLine();
 
 
-		out_t.close();
+		out_t.close(); // closing buffered writers
 		out_d.close();
 
 	}
 
 
-
+	/*
+	 * implementing ActionListener, based on the event of user (which button clicked), different methods performed 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-
-		// setting the importance of the event as true 
-		if (e.getSource() == importance) {
-			important = true;
-		}
 
 		if (e.getSource() == discard_event) {
 
@@ -482,9 +467,6 @@ public class AddEvent_ extends JPanel implements ActionListener{
 
 		}
 
-	}
-	public static void main(String[]args) throws IOException {
-		new AddEvent_();
 	}
 
 }
