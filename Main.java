@@ -182,11 +182,14 @@ public class Main extends JFrame implements ActionListener{
 		totalAcc[0][usernum] = currentUser;
 		totalAcc[2][usernum] = usernum + "eventname";
 		totalAcc[3][usernum] = usernum + "eventdesc";
+		
+		// new file names for new account
 		filename1 = new File(usernum + "eventname.txt");
 		filename2 = new File(usernum + "eventdesc.txt");
 		System.out.println(filename1);
 		usernum++; // increasing the length of the 2D array to allow for bug-proof adding of account info
 		
+		// creating new files
 		filename1.createNewFile();
 		filename2.createNewFile();
 		

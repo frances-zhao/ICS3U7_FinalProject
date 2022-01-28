@@ -31,8 +31,11 @@ public class AddEvent_ extends JFrame implements ActionListener{
 	public static String[][] at = new String[24][60]; // add time 
 	public static int num_event_n, num_event_d; 
 	public static String event_n, event_d, time_; 
-	
 	public String en_string, ed_string, time_string;
+	String [] monname, mondesc, tuename, tuedesc, wedname, weddesc, thuname, thudesc, friname, fridesc, satname, satdesc, sunname, sundesc;
+
+	int monlen, tuelen, wedlen, thulen, frilen, satlen, sunlen;
+	static int mon = 0, tue = 0, wed = 0, thu = 0, fri = 0, sat = 0, sun = 0;
 
 	//	String[] hours = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", 
 	//			"11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
@@ -44,8 +47,9 @@ public class AddEvent_ extends JFrame implements ActionListener{
 	//			"48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60"};
 
 	//TODO: buffered readers 
-	BufferedWriter out_t = new BufferedWriter(new FileWriter("eventName.txt")); // title+time of event 
-	BufferedWriter out_d = new BufferedWriter(new FileWriter("eventInfo.txt")); // event description 
+	BufferedReader input_t = new BufferedReader(new FileReader(filename1));
+	BufferedReader input_d = new BufferedReader(new FileReader(filename2));
+	
 
 
 	// Action a;
@@ -80,8 +84,61 @@ public class AddEvent_ extends JFrame implements ActionListener{
 
 		}
 		
-
-
+		monname = input_t.readLine().split(", ");
+		tuename = input_t.readLine().split(", ");
+		wedname = input_t.readLine().split(", ");
+		thuname = input_t.readLine().split(", ");
+		friname = input_t.readLine().split(", ");
+		satname = input_t.readLine().split(", ");
+		sunname = input_t.readLine().split(", ");
+		
+		mondesc = input_d.readLine().split(", ");
+		tuedesc = input_d.readLine().split(", ");
+		weddesc = input_d.readLine().split(", ");
+		thudesc = input_d.readLine().split(", ");
+		fridesc = input_d.readLine().split(", ");
+		satdesc = input_d.readLine().split(", ");
+		sundesc = input_d.readLine().split(", ");
+		
+		monlen = monname.length;
+		tuelen = tuename.length;
+		wedlen = wedname.length;
+		thulen = thuname.length;
+		frilen = friname.length;
+		satlen = satname.length;
+		sunlen = sunname.length;
+		
+		for(int i = 0; i < monlen; i++) {
+			aen[0][i] = monname[i];
+			aed[0][i] = mondesc[i];
+		}
+		for(int i = 0; i < tuelen; i++) {
+			aen[1][i] = tuename[i];
+			aed[1][i] = tuedesc[i];
+		}
+		for(int i = 0; i < wedlen; i++) {
+			aen[2][i] = wedname[i];
+			aed[2][i] = weddesc[i];
+		}
+		for(int i = 0; i < thulen; i++) {
+			aen[3][i] = thuname[i];
+			aed[3][i] = thudesc[i];
+		}
+		for(int i = 0; i < frilen; i++) {
+			aen[4][i] = friname[i];
+			aed[4][i] = fridesc[i];
+		}
+		for(int i = 0; i < satlen; i++) {
+			aen[5][i] = satname[i];
+			aed[5][i] = satdesc[i];
+		}
+		for(int i = 0; i < sunlen; i++) {
+			aen[6][i] = sunname[i];
+			aed[6][i] = sundesc[i];
+		}
+		
+		input_t.close();
+		input_d.close();
 		// -------------- setting the basic outline of the GUI tab --------------
 		final int HEIGHT = 420; 
 		final int WIDTH = 690; 
@@ -162,19 +219,19 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		discard_event.setBorder(BorderFactory.createLineBorder(bumble3));
 
 		// making time picker 
-//		next1 = new JButton("+");
-//		next1.setBounds(425, 105, 20, 16);
-//		next1.setFont(newfont);
-//		next1.setForeground(bumble5);
-//		next1.setBackground(bumble6);
-//		next1.setBorder(BorderFactory.createLineBorder(bumble6));
-//
-//		prev1 = new JButton("-");
-//		prev1.setBounds(425, 120, 20, 16);
-//		prev1.setFont(newfont);
-//		prev1.setForeground(bumble5);
-//		prev1.setBackground(bumble6);
-//		prev1.setBorder(BorderFactory.createLineBorder(bumble6));
+		//		next1 = new JButton("+");
+		//		next1.setBounds(425, 105, 20, 16);
+		//		next1.setFont(newfont);
+		//		next1.setForeground(bumble5);
+		//		next1.setBackground(bumble6);
+		//		next1.setBorder(BorderFactory.createLineBorder(bumble6));
+		//
+		//		prev1 = new JButton("-");
+		//		prev1.setBounds(425, 120, 20, 16);
+		//		prev1.setFont(newfont);
+		//		prev1.setForeground(bumble5);
+		//		prev1.setBackground(bumble6);
+		//		prev1.setBorder(BorderFactory.createLineBorder(bumble6));
 
 		h = new JTextField();
 		h.setBounds(437, 105, 60, 32);
@@ -221,8 +278,8 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		frame.add(discard_event);
 		frame.add(day_);
 		frame.add(day);
-//		frame.add(next1);
-//		frame.add(prev1);
+		//		frame.add(next1);
+		//		frame.add(prev1);
 		frame.add(h);
 		frame.add(m);
 		frame.add(colon);
@@ -234,33 +291,61 @@ public class AddEvent_ extends JFrame implements ActionListener{
 
 	public void addEventName() throws IOException{
 		if (day.getText().equalsIgnoreCase("monday")) {
+			mon++;
+			num_event_n = mon;
+			num_event_d = mon;
+
 			addE(0);
 		}
 
 		else if (day.getText().equalsIgnoreCase("tuesday")) {
+			tue++;
+			num_event_n = tue;
+			num_event_d = tue;
+
 			addE(1);
 		}
 
 		else if (day.getText().equalsIgnoreCase("wednesday")) {
+			wed++;
+			num_event_n = wed;
+			num_event_d = wed;
+
 			addE(2);
 		}
 
 		else if (day.getText().equalsIgnoreCase("thursday")) {
+			thu++;
+			num_event_n = thu;
+			num_event_d = thu;
+
 			addE(3);
 		}
 
 		else if (day.getText().equalsIgnoreCase("friday")) {
+			fri++;
+			num_event_n = fri;
+			num_event_d = fri;
+
 			addE(4);
 		}
 
 		else if (day.getText().equalsIgnoreCase("saturday")) {
+			sat++;
+			num_event_n = sat;
+			num_event_d = sat;
+
 			addE(5);
 		}
 
 		else if (day.getText().equalsIgnoreCase("sunday")) {
+			sun++;
+			num_event_n = sun;
+			num_event_d = sun;
+
 			addE(6);
 		}
-		
+
 		else {
 			new Invalid();
 			frame.dispose();
@@ -268,9 +353,13 @@ public class AddEvent_ extends JFrame implements ActionListener{
 
 	}
 
-	
+
 	public void addE(int n) throws IOException { // n and m represents the row of aen, aed arrays 
 		// out_t, out_d 
+		
+		BufferedWriter out_t = new BufferedWriter(new FileWriter(filename1)); // title+time of event 
+		BufferedWriter out_d = new BufferedWriter(new FileWriter(filename2)); // event description 
+		
 		event_n = event_name.getText();
 		event_d = event_desc.getText();
 		time_ = ", ".concat(h.getText().concat(":"));
@@ -279,20 +368,68 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		aen[n][num_event_n] = event_n;
 		aen[7][num_event_n] = time_;
 		aed[n][num_event_d] = event_d;
-		out_t.write(aen[n][num_event_n] + ", ");
-		out_t.write(aen[7][num_event_n] + ", ");
-		out_d.write(aed[n][num_event_d] + ", ");
 
+		for(int i = 0; i <= mon; i++ ) {
+			out_t.write(aen[0][i] + ", ");
+			out_d.write(aed[0][i] + ", ");
+		}
 		out_t.newLine();
 		out_d.newLine();
+
+		for(int i = 0; i <= tue; i++ ) {
+			out_t.write(aen[1][i] + ", ");
+			out_d.write(aed[1][i] + ", ");
+		}
+		out_t.newLine();
+		out_d.newLine();
+
+		for(int i = 0; i <= wed; i++ ) {
+			out_t.write(aen[2][i] + ", ");
+			out_d.write(aed[2][i] + ", ");
+
+		}
+		out_t.newLine();
+		out_d.newLine();
+
+		for(int i = 0; i <= thu; i++ ) {
+			out_t.write(aen[3][i] + ", ");
+			out_d.write(aed[3][i] + ", ");
+
+		}
+		out_t.newLine();
+		out_d.newLine();
+
+		for(int i = 0; i <= fri; i++ ) {
+			out_t.write(aen[4][i] + ", ");
+			out_d.write(aed[4][i] + ", ");
+
+		}
+		out_t.newLine();
+		out_d.newLine();
+
+		for(int i = 0; i <= sat; i++ ) {
+			out_t.write(aen[5][i] + ", ");
+			out_d.write(aed[5][i] + ", ");
+
+		}
+		out_t.newLine();
+		out_d.newLine();
+
+		for(int i = 0; i <= sun; i++ ) {
+			out_t.write(aen[6][i] + ", ");
+			out_d.write(aed[6][i] + ", ");
+
+		}
+		out_t.newLine();
+		out_d.newLine();
+
+		
 		out_t.close();
 		out_d.close();
 
-		num_event_n++; 
-		num_event_d++;
 	}
 
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -310,7 +447,7 @@ public class AddEvent_ extends JFrame implements ActionListener{
 
 		if (e.getSource() == add_event) {
 			String empty = "";
-			if (day.getText().equals(empty) || event_name.equals(empty) || event_desc.equals(empty)) {
+			if (day.getText().equals(empty) || event_name.equals(empty) || event_desc.equals(empty) || h.equals(empty) || m.equals(empty)) {
 				JOptionPane.showMessageDialog(this, "Cannot have empty spaces!");
 			}
 
