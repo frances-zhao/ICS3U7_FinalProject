@@ -183,6 +183,8 @@ public class Main extends JFrame implements ActionListener{
 		totalAcc[2][usernum] = usernum + "eventname";
 		totalAcc[3][usernum] = usernum + "eventdesc";
 		
+		userslot = usernum;
+		
 		// new file names for new account
 		
 		filename1 = new File(usernum + "eventname.txt");
