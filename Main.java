@@ -126,21 +126,21 @@ public class Main extends JFrame implements ActionListener{
 		// credentials for application
 		credentials = new JLabel("Creators: Frances Zhao, Lucia Kim");
 		credentials.setFont(newfont);
-		credentials.setBounds(6, 719, 272, 26);
+		credentials.setBounds(6, 700, 272, 26);
 		
 		credentials_1 = new JLabel("Course: ICS3U7-01");
 		credentials_1.setFont(newfont);
-		credentials_1.setBounds(6, 733, 272, 26);
+		credentials_1.setBounds(6, 720, 272, 26);
 		
 		credentials_2 = new JLabel("Teacher: Ms. Xie");
 		credentials_2.setFont(newfont);
-		credentials_2.setBounds(6, 746, 272, 26);
+		credentials_2.setBounds(6, 740, 272, 26);
 
-		projectVer = new JLabel("Main.java version 1.8 01/26/2021");
+		projectVer = new JLabel("Main.java version final 01/27/2022");
 		projectVer.setForeground(Color.LIGHT_GRAY);
 		projectVer.setFont(newfont);
 		projectVer.setHorizontalAlignment(SwingConstants.RIGHT);
-		projectVer.setBounds(1063, 746, 331, 26);
+		projectVer.setBounds(1063, 740, 331, 26);
 
 		confirmnote = new JLabel("*confirm password only ");
 		confirmnote.setFont(newfont);
