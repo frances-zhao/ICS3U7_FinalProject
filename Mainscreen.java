@@ -65,6 +65,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 
 		}
 		String f1 = Main.getfile1();
+		String f2 = Main.getfile2();
 		userDisplay = Main.getUser();
 		formatTime = new SimpleDateFormat("hh : mm: ss a");
 		timeLabel = new JLabel();

@@ -34,8 +34,6 @@ public class Main extends JFrame implements ActionListener{
 	private static String currentPW;
 	private static String PWconfirm;
 	public static String fname1, fname2; 
-	
-	
 
 
 	// Main Login Page Class
@@ -196,9 +194,11 @@ public class Main extends JFrame implements ActionListener{
 		filename1.createNewFile();
 		filename2.createNewFile();
 		
+		// new buffered writer
 		BufferedWriter out_t = new BufferedWriter(new FileWriter(filename1)); // title+time of event 
 		BufferedWriter out_d = new BufferedWriter(new FileWriter(filename2)); // event description 
 		
+		// writing Sample, into new files
 		for(int i = 0; i < 8; i++) {
 			out_t.write("Sample, ");
 			out_t.newLine();
@@ -211,15 +211,18 @@ public class Main extends JFrame implements ActionListener{
 		out_t.close();
 		out_d.close();
 
+		// saved user method
 		savedUsers();
 		
 	}
+	
+	// getter method for current file1
 	public static String getfile1() {
 		fname1 = usernum-1 + "eventname.txt";
 		return fname1;
 	}
 
-
+	// getter method for current file2
 	public static String getfile2() {
 		fname2 = usernum-1 + "eventdesc.txt";
 		return fname2;
