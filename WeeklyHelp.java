@@ -104,6 +104,7 @@ public class WeeklyHelp implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == returnbtn) {
+			new Help();
 			frame.dispose();
 		}
 
