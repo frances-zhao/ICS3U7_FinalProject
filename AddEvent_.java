@@ -9,18 +9,18 @@ import java.util.Scanner;
 
 
 public class AddEvent_ extends JFrame implements ActionListener{
-	
+
 	// -------------- declare the GUI variables --------------------------------
 	JPanel panel;
 	JFrame frame; 
-	
+
 	JCheckBox importance;
 	JLabel class_title, importance_, event_name_, event_desc_, day_;
 	JTextField event_name, h, m, colon, day; 
 	JTextArea event_desc;
 	JButton add_event, discard_event, prev1, next1;
-	
-	
+
+
 	//  -------------- declare the misc. variables --------------------------------
 	Boolean important = false; 
 	String filename1 = "eventName.txt";
@@ -31,39 +31,39 @@ public class AddEvent_ extends JFrame implements ActionListener{
 	public static int num_event_n, num_event_d; 
 	public static String event_n; 
 	public static String event_d; 
-	
+
 	public String en_string, ed_string, time_string;
 
-//	String[] hours = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", 
-//			"11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
-//	
-//	String[] minutes = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", 
-//			"11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22",
-//			"23", "24", "25", "26", "27", "28", "28", "29", "30", "31", "32", "33", "34", 
-//			"35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47",
-//			"48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60"};
-	
+	//	String[] hours = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", 
+	//			"11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
+	//	
+	//	String[] minutes = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", 
+	//			"11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22",
+	//			"23", "24", "25", "26", "27", "28", "28", "29", "30", "31", "32", "33", "34", 
+	//			"35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47",
+	//			"48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60"};
+
 	//TODO: buffered readers 
 	BufferedWriter out_t = new BufferedWriter(new FileWriter("eventName.txt")); // title+time of event 
 	BufferedWriter out_d = new BufferedWriter(new FileWriter("eventInfo.txt")); // event description 
-	
-	
+
+
 	// Action a;
-	
+
 	// -------------- declaring the fonts --------------------------------------
 	static Font newfont, newfont1, newfont2, newfont3, newfont4, newfont5, newfont6, newfont7; 
-	
+
 	// -------------- declaring the colours -------------------------------------
-		static Color bumble1 = new Color(255, 208, 37);   // button background colour 
-		static Color bumble2 = new Color(245, 208, 76);   // panel background colour 
-		static Color bumble3 = new Color(252, 248, 219);  // outline 2 (yellowish gray)
-		static Color bumble4 = new Color(202, 194, 150);  // button outline colour 
-		static Color bumble5 = new Color(69, 62, 39);     // outline 2 (dark stale brown)
-		static Color bumble6 = new Color(255, 248, 171);  // textfield fill colour 
-	
-		
+	static Color bumble1 = new Color(255, 208, 37);   // button background colour 
+	static Color bumble2 = new Color(245, 208, 76);   // panel background colour 
+	static Color bumble3 = new Color(252, 248, 219);  // outline 2 (yellowish gray)
+	static Color bumble4 = new Color(202, 194, 150);  // button outline colour 
+	static Color bumble5 = new Color(69, 62, 39);     // outline 2 (dark stale brown)
+	static Color bumble6 = new Color(255, 248, 171);  // textfield fill colour 
+
+
 	AddEvent_() throws IOException{
-		
+
 		// -------------- adding the attributes of the fonts --------------------
 		try {
 			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(15f);
@@ -74,13 +74,14 @@ public class AddEvent_ extends JFrame implements ActionListener{
 			newfont5 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(35f);
 			newfont6 =  Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(40f);
 			newfont7 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(60f);
-			
+
 
 		} catch (IOException | FontFormatException e){
 
 		}
 		
-		
+
+
 		// -------------- setting the basic outline of the GUI tab --------------
 		final int HEIGHT = 420; 
 		final int WIDTH = 690; 
@@ -89,61 +90,61 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		frame.getContentPane().setBackground(bumble2);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
-		
+
 		// -------------- declaring the characteristics of the components -------
 		class_title = new JLabel("Add Event");
 		class_title.setHorizontalAlignment(SwingConstants.CENTER);
 		class_title.setBounds(28, 20, 160, 30);
 		class_title.setFont(newfont3);
 		class_title.setForeground(bumble5);
-		
+
 		event_name_ = new JLabel("Event Name");
 		event_name_.setHorizontalAlignment(SwingConstants.CENTER);
 		event_name_.setBounds(35, 65, 160, 30);
 		event_name_.setFont(newfont2);
 		event_name_.setForeground(bumble5);
 		event_name_.setBorder(BorderFactory.createLineBorder(bumble3));
-		
+
 		event_name = new JTextField();
 		event_name.setBounds(194, 65, 200, 30);
 		event_name.setFont(newfont);
 		event_name.setBackground(bumble6);
 		event_name.setBorder(BorderFactory.createLineBorder(bumble3));
-		
+
 		event_desc_ = new JLabel("Event Info");
 		event_desc_.setHorizontalAlignment(SwingConstants.CENTER);
 		event_desc_.setBounds(35, 130, 160, 30);
 		event_desc_.setFont(newfont2);
 		event_desc_.setForeground(bumble5);
 		event_desc_.setBorder(BorderFactory.createLineBorder(bumble3));
-		
+
 		event_desc = new JTextArea();
 		event_desc.setBounds(35, 159, 350, 180);
 		event_desc.setFont(newfont);
 		event_desc.setBackground(bumble6);
 		event_desc.setLineWrap(true);
 		event_desc.setBorder(BorderFactory.createLineBorder(bumble3));
-				
+
 		importance = new JCheckBox("important");
 		importance.setBounds(425, 71, 160, 20);
 		importance.setFont(newfont2);
 		importance.setForeground(bumble5);
 		importance.setBackground(bumble2);
-		
+
 		day_ = new JLabel("Day of Event");
 		day_.setBounds(425, 160, 150, 30);
 		day_.setForeground(bumble5);
 		day_.setFont(newfont2);
 		day_.setHorizontalAlignment(SwingConstants.CENTER);
 		day_.setBorder(BorderFactory.createLineBorder(bumble3));
-		
+
 		day = new JTextField(); 
 		day.setBounds(425, 190, 150, 30);
 		day.setFont(newfont1);
 		day.setBackground(bumble6);
 		day.setHorizontalAlignment(SwingConstants.CENTER);
 		day.setBorder(BorderFactory.createLineBorder(bumble3));
-	
+
 		add_event = new JButton("ADD");
 		add_event.setBounds(425, 245, 150, 40);
 		add_event.setHorizontalAlignment(SwingConstants.CENTER);
@@ -151,7 +152,7 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		add_event.setForeground(bumble5);
 		add_event.setBackground(bumble6);
 		add_event.setBorder(BorderFactory.createLineBorder(bumble3));
-		
+
 		discard_event = new JButton("Discard");
 		discard_event.setBounds(425, 300, 150, 40);
 		discard_event.setHorizontalAlignment(SwingConstants.CENTER);
@@ -167,26 +168,26 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		next1.setForeground(bumble5);
 		next1.setBackground(bumble6);
 		next1.setBorder(BorderFactory.createLineBorder(bumble6));
-		
+
 		prev1 = new JButton("-");
 		prev1.setBounds(425, 120, 20, 16);
 		prev1.setFont(newfont);
 		prev1.setForeground(bumble5);
 		prev1.setBackground(bumble6);
 		prev1.setBorder(BorderFactory.createLineBorder(bumble6));
-		
+
 		h = new JTextField("0");
 		h.setBounds(445, 105, 60, 32);
 		h.setFont(newfont2);
 		h.setForeground(bumble5);
 		h.setBackground(bumble6);
-		
+
 		m = new JTextField("0");
 		m.setBounds(515, 105, 60, 32);
 		m.setFont(newfont2);
 		m.setForeground(bumble5);
 		m.setBackground(bumble6);
-	
+
 		colon = new JTextField(":");
 		colon.setBounds(504, 105, 12, 32);
 		colon.setFont(newfont2);
@@ -195,20 +196,20 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		colon.setHorizontalAlignment(SwingConstants.CENTER);
 		colon.setBorder(BorderFactory.createLineBorder(bumble6));
 		colon.setEditable(false);
-		
-		
+
+
 		// getting rid of the sound that jtextarea and field makes when backspace is out of range 
 		// a = event_desc.getActionMap().get(DefaultEditorKit.beepAction);
 		// a.setEnabled(false);	
-		
+
 		// ------------- add the actionlisteners --------------------------------
 		importance.addActionListener(this);
 		add_event.addActionListener(this);
 		discard_event.addActionListener(this);
-		
+
 		// ------------- frame on screen location null --------------------------
 		frame.setLayout(null);
-		
+
 		// ------------- add the components -------------------------------------
 		frame.add(class_title);
 		frame.add(event_name_);
@@ -225,37 +226,37 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		frame.add(h);
 		frame.add(m);
 		frame.add(colon);
-		
+
 		// ------------- frame visibility toggle --------------------------------
 		frame.setVisible(true);
-		
+
 	}
-	
+
 	public void addEventName() throws IOException{
 		if (day.getText().equalsIgnoreCase("monday")) {
 			addE(0);
 		}
-		
+
 		else if (day.getText().equalsIgnoreCase("tuesday")) {
 			addE(1);
 		}
-		
+
 		else if (day.getText().equalsIgnoreCase("wednesday")) {
 			addE(2);
 		}
-		
+
 		else if (day.getText().equalsIgnoreCase("thursday")) {
 			addE(3);
 		}
-		
+
 		else if (day.getText().equalsIgnoreCase("friday")) {
 			addE(4);
 		}
-		
+
 		else if (day.getText().equalsIgnoreCase("saturday")) {
 			addE(5);
 		}
-		
+
 		else if (day.getText().equalsIgnoreCase("sunday")) {
 			addE(6);
 		}
@@ -264,60 +265,68 @@ public class AddEvent_ extends JFrame implements ActionListener{
 			new Invalid();
 			frame.dispose();
 		}
+
 	}
-	
+
 	public void addE(int n) throws IOException { // n and m represents the row of aen, aed arrays 
 		// out_t, out_d 
 		event_n = event_name.getText();
 		event_d = event_desc.getText();
-		
-		aen[n][num_event_n] = event_n;
+
+		aen[0][num_event_n] = event_n;
 		aed[n][num_event_d] = event_d; 
 		out_t.write(aen[n][num_event_n] + ", ");
 		out_d.write(aed[n][num_event_d] + ", ");
-		
+
 		out_t.newLine();
 		out_t.close();
 		out_d.newLine();
 		out_d.close();
-		
+
 		num_event_n++; 
 		num_event_d++;
 	}
-	
 
-	
-	
-	
+
+
+
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-	
+
 
 		// setting the importance of the event as true 
 		if (e.getSource() == importance) {
 			important = true;
 		}
-		
+
 		if (e.getSource() == discard_event) {
-			
+
 			frame.dispose();
-			
+
 		}
-		
+
 		if (e.getSource() == add_event) {
-		
-			try {
-				addEventName();
-				
-			} 
-			
-			catch (IOException e1) {
-				e1.printStackTrace();
-				
-			} 
-			frame.dispose();
+			String empty = "";
+			if (day.getText().equals(empty) || event_name.equals(empty) || event_desc.equals(empty)) {
+				JOptionPane.showMessageDialog(this, "Cannot have empty spaces!");
+			}
+
+			else{
+				try {
+
+					addEventName();
+					frame.dispose();
+				} 
+
+				catch (IOException e1) {
+					e1.printStackTrace();
+
+				} }
+
+
 		}
-		
+
 	}
 
 }

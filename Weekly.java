@@ -272,6 +272,10 @@ public class Weekly extends JFrame implements ActionListener{
 			}
 		}
 	}
+	
+	public static void main(String[]args) throws IOException {
+		new Weekly();
+	}
 }
 
 
