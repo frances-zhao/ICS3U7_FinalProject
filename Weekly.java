@@ -44,7 +44,13 @@ public class Weekly extends JPanel implements ActionListener{
 
 	//  -------------- declare the misc. variables --------------------------------
 
-	WeeklyLook look = new WeeklyLook();
+	//WeeklyLook look = new WeeklyLook();
+	
+
+	public static String[][] aen1 = new String[8][50]; // add event name
+	public static String[][] aed1 = new String[7][50]; // add event desc. 
+	static String [] monname, mondesc, tuename, tuedesc, wedname, weddesc, thuname, thudesc, friname, fridesc, satname, satdesc, sunname, sundesc;
+	static int monlen = 0, tuelen = 0, wedlen = 0, thulen = 0, frilen = 0, satlen = 0, sunlen = 0;
 
 	// declaring the writers 
 	BufferedReader input_en = new BufferedReader(new FileReader(filename1));
@@ -74,6 +80,7 @@ public class Weekly extends JPanel implements ActionListener{
 
 		}
 
+		readin();
 		// setting the basic outline of the GUI tab 
 		final int HEIGHT = 800;
 		final int WIDTH = 1400;
@@ -90,44 +97,48 @@ public class Weekly extends JPanel implements ActionListener{
 
 
 		wdp1 = new JPanel();
-		wdp1.setLayout(new BoxLayout(wdp1, BoxLayout.Y_AXIS));
-		wdp1.add(Box.createRigidArea(new Dimension(10, 30)));
+		wdp1.setLayout(null);
 		wdp1.setBounds(90, 115, 175, 300);
-		wdp1.setBackground(colour2);
+		wdp1.setOpaque(false);
 		wdp1.setBorder(BorderFactory.createLineBorder(colour3, 2, true));
 
 		wdp2 = new JPanel();
-		wdp2.setLayout(new BoxLayout(wdp2, BoxLayout.Y_AXIS));
-		wdp2.add(Box.createRigidArea(new Dimension(10,30)));
+		wdp2.setLayout(null);
 		wdp2.setBounds(264, 115, 175, 300);
-		wdp2.setBackground(colour2);
+		wdp2.setOpaque(false);
 		wdp2.setBorder(BorderFactory.createLineBorder(colour3, 2, true));
 
 		wdp3 = new JPanel();
+		wdp3.setLayout(null);
 		wdp3.setBounds(439, 115, 175, 300);
-		wdp3.setBackground(colour2);
+		wdp3.setOpaque(false);
 		wdp3.setBorder(BorderFactory.createLineBorder(colour3, 2, true));
 
 		wdp4 = new JPanel();
+		wdp4.setLayout(null);
 		wdp4.setBounds(614, 115, 175, 300);
-		wdp4.setBackground(colour2);
+		wdp4.setOpaque(false);
 		wdp4.setBorder(BorderFactory.createLineBorder(colour3, 2, true));
 
 		wdp5 = new JPanel();
+		wdp5.setLayout(null);
 		wdp5.setBounds(789, 115, 175, 300);
-		wdp5.setBackground(colour2);
+		wdp5.setOpaque(false);
 		wdp5.setBorder(BorderFactory.createLineBorder(colour3, 2, true));
 
 		wep1 = new JPanel();
+		wep1.setLayout(null);
 		wep1.setBounds(90, 414, 175, 300);
-		wep1.setBackground(colour2);
+		wep1.setOpaque(false);
 		wep1.setBorder(BorderFactory.createLineBorder(colour3, 2, true));
 
 
 		wep2 = new JPanel();
+		wep2.setLayout(null);
 		wep2.setBounds(264, 414, 175, 300);
-		wep2.setBackground(colour2);
+		wep2.setOpaque(false);
 		wep2.setBorder(BorderFactory.createLineBorder(colour3, 2, true));
+		
 
 		mon = new JLabel("Monday"); 
 		mon.setBounds(90, 115, 175, 21);
@@ -269,8 +280,7 @@ public class Weekly extends JPanel implements ActionListener{
 		addEvent.addActionListener(this);
 		return_main.addActionListener(this);
 		clear.addActionListener(this);
-
-
+		
 		// add the components
 		frame.add(addEvent);
 		frame.add(weekly);
@@ -283,15 +293,105 @@ public class Weekly extends JPanel implements ActionListener{
 		frame.add(fri);
 		frame.add(sat);
 		frame.add(sun);
+		frame.setVisible(true);
+
+		int x = 20;
+		for(int i = 1; i < monlen; i++) {
+			System.out.println(aen[0][i]);
+			JCheckBox check = new JCheckBox(aen[0][i]);
+			check.setText(aen[0][i] + "");
+			check.setForeground(Color.black);
+			check.setBounds(6, x, 160, 24);
+			check.setFont(newfont);
+			wdp1.add(check);
+			x += 22;
+		}
 		frame.add(wdp1);
+		
+		
+		x = 20;
+		for(int i = 1; i < tuelen; i++) {
+			System.out.println(aen[1][i]);
+			JCheckBox check = new JCheckBox(aen[1][i]);
+			check.setText(aen[1][i] + "");
+			check.setForeground(Color.black);
+			check.setBounds(6, x, 160, 24);
+			check.setFont(newfont);
+			wdp2.add(check);
+			x += 22;
+		}
 		frame.add(wdp2);
+
+		
+		x = 20;
+		for(int i = 1; i < wedlen; i++) {
+			System.out.println(aen[2][i]);
+			JCheckBox check = new JCheckBox(aen[2][i]);
+			check.setText(aen[2][i] + "");
+			check.setForeground(Color.black);
+			check.setBounds(6, x, 160, 24);
+			check.setFont(newfont);
+			wdp3.add(check);
+			x += 22;
+		}
 		frame.add(wdp3);
+
+		
+		x = 20;
+		for(int i = 1; i < thulen; i++) {
+			System.out.println(aen[3][i]);
+			JCheckBox check = new JCheckBox(aen[3][i]);
+			check.setText(aen[3][i] + "");
+			check.setForeground(Color.black);
+			check.setBounds(6, x, 160, 24);
+			check.setFont(newfont);
+			wdp4.add(check);
+			x += 22;
+		}
+		
 		frame.add(wdp4);
+		x = 20;
+		for(int i = 1; i < frilen; i++) {
+			System.out.println(aen[4][i]);
+			JCheckBox check = new JCheckBox(aen[4][i]);
+			check.setText(aen[4][i] + "");
+			check.setForeground(Color.black);
+			check.setBounds(6, x, 160, 24);
+			check.setFont(newfont);
+			wdp5.add(check);
+			x += 22;
+		}
 		frame.add(wdp5);
+
+		x = 20;
+		for(int i = 1; i < satlen; i++) {
+			System.out.println(aen[5][i]);
+			JCheckBox check = new JCheckBox(aen[5][i]);
+			check.setText(aen[5][i] + "");
+			check.setForeground(Color.black);
+			check.setBounds(6, x, 160, 24);
+			check.setFont(newfont);
+			wep1.add(check);
+			x += 22;
+		}
 		frame.add(wep1);
+		
+		x = 20;
+		for(int i = 1; i < sunlen; i++) {
+			System.out.println(aen[6][i]);
+			JCheckBox check = new JCheckBox(aen[6][i]);
+			check.setText(aen[6][i] + "");
+			check.setForeground(Color.black);
+			check.setBounds(6, x, 160, 24);
+			check.setFont(newfont);
+			wep2.add(check);
+			x += 22;
+		}
 		frame.add(wep2);
+
 		frame.add(deco1);
-		frame.add(look);
+		
+
 		frame.repaint();
 		frame.revalidate();
 
@@ -347,10 +447,68 @@ public class Weekly extends JPanel implements ActionListener{
 			}
 		}
 	}
+	public void readin() throws IOException {
+		BufferedReader input_t = new BufferedReader(new FileReader(filename1));
+		BufferedReader input_d = new BufferedReader(new FileReader(filename2));
+		
+		monname = input_t.readLine().split(", ");
+		tuename = input_t.readLine().split(", ");
+		wedname = input_t.readLine().split(", ");
+		thuname = input_t.readLine().split(", ");
+		friname = input_t.readLine().split(", ");
+		satname = input_t.readLine().split(", ");
+		sunname = input_t.readLine().split(", ");
 
+		mondesc = input_d.readLine().split(", ");
+		tuedesc = input_d.readLine().split(", ");
+		weddesc = input_d.readLine().split(", ");
+		thudesc = input_d.readLine().split(", ");
+		fridesc = input_d.readLine().split(", ");
+		satdesc = input_d.readLine().split(", ");
+		sundesc = input_d.readLine().split(", ");
+
+		monlen = monname.length;
+		tuelen = tuename.length;
+		wedlen = wedname.length;
+		thulen = thuname.length;
+		frilen = friname.length;
+		satlen = satname.length;
+		sunlen = sunname.length;
+
+		for(int i = 0; i < monlen; i++) {
+			aen[0][i] = monname[i];
+			aed[0][i] = mondesc[i];
+		}
+		for(int i = 0; i < tuelen; i++) {
+			aen[1][i] = tuename[i];
+			aed[1][i] = tuedesc[i];
+		}
+		for(int i = 0; i < wedlen; i++) {
+			aen[2][i] = wedname[i];
+			aed[2][i] = weddesc[i];
+		}
+		for(int i = 0; i < thulen; i++) {
+			aen[3][i] = thuname[i];
+			aed[3][i] = thudesc[i];
+		}
+		for(int i = 0; i < frilen; i++) {
+			aen[4][i] = friname[i];
+			aed[4][i] = fridesc[i];
+		}
+		for(int i = 0; i < satlen; i++) {
+			aen[5][i] = satname[i];
+			aed[5][i] = satdesc[i];
+		}
+		for(int i = 0; i < sunlen; i++) {
+			aen[6][i] = sunname[i];
+			aed[6][i] = sundesc[i];
+		}
+
+	}
 	public static void main(String[]args) throws IOException {
 		new Weekly();
 	}
+
 }
 
 

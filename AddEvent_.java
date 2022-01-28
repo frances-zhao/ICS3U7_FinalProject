@@ -34,7 +34,7 @@ public class AddEvent_ extends JPanel implements ActionListener{
 	public String en_string, ed_string, time_string;
 	static String [] monname, mondesc, tuename, tuedesc, wedname, weddesc, thuname, thudesc, friname, fridesc, satname, satdesc, sunname, sundesc;
 
-	static int monlen, tuelen, wedlen, thulen, frilen, satlen, sunlen;
+	static int monlen = 0, tuelen = 0, wedlen = 0, thulen = 0, frilen = 0, satlen = 0, sunlen = 0;
 	static int mon = 0, tue = 0, wed = 0, thu = 0, fri = 0, sat = 0, sun = 0;
 
 	//	String[] hours = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", 
@@ -301,58 +301,57 @@ public class AddEvent_ extends JPanel implements ActionListener{
 
 	public void addEventName() throws IOException{
 		if (day.getText().equalsIgnoreCase("monday")) {
-			mon++;
-			num_event_n = mon;
-			num_event_d = mon;
+			monlen++;
+			num_event_n = monlen-1;
+			num_event_d = monlen-1;
 
 			addE(0);
-			addin(0);
 		}
 
 		else if (day.getText().equalsIgnoreCase("tuesday")) {
-			tue++;
-			num_event_n = tue;
-			num_event_d = tue;
+			tuelen++;
+			num_event_n = tuelen-1;
+			num_event_d = tuelen-1;
 
 			addE(1);
 		}
 
 		else if (day.getText().equalsIgnoreCase("wednesday")) {
-			wed++;
-			num_event_n = wed;
-			num_event_d = wed;
+			wedlen++;
+			num_event_n = wedlen-1;
+			num_event_d = wedlen-1;
 
 			addE(2);
 		}
 
 		else if (day.getText().equalsIgnoreCase("thursday")) {
-			thu++;
-			num_event_n = thu;
-			num_event_d = thu;
+			thulen++;
+			num_event_n = thulen-1;
+			num_event_d = thulen-1;
 
 			addE(3);
 		}
 
 		else if (day.getText().equalsIgnoreCase("friday")) {
-			fri++;
-			num_event_n = fri;
-			num_event_d = fri;
+			frilen++;
+			num_event_n = frilen-1;
+			num_event_d = frilen-1;
 
 			addE(4);
 		}
 
 		else if (day.getText().equalsIgnoreCase("saturday")) {
-			sat++;
-			num_event_n = sat;
-			num_event_d = sat;
+			satlen++;
+			num_event_n = satlen-1;
+			num_event_d = satlen-1;
 
 			addE(5);
 		}
 
 		else if (day.getText().equalsIgnoreCase("sunday")) {
-			sun++;
-			num_event_n = sun;
-			num_event_d = sun;
+			sunlen++;
+			num_event_n = sunlen-1;
+			num_event_d = sunlen-1;
 
 			addE(6);
 		}
@@ -380,21 +379,21 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		aen[7][num_event_n] = time_;
 		aed[n][num_event_d] = event_d;
 
-		for(int i = 0; i <= mon; i++ ) {
+		for(int i = 0; i <= monlen-1; i++ ) {
 			out_t.write(aen[0][i] + ", ");
 			out_d.write(aed[0][i] + ", ");
 		}
 		out_t.newLine();
 		out_d.newLine();
 
-		for(int i = 0; i <= tue; i++ ) {
+		for(int i = 0; i <= tuelen-1; i++ ) {
 			out_t.write(aen[1][i] + ", ");
 			out_d.write(aed[1][i] + ", ");
 		}
 		out_t.newLine();
 		out_d.newLine();
 
-		for(int i = 0; i <= wed; i++ ) {
+		for(int i = 0; i <= wedlen-1; i++ ) {
 			out_t.write(aen[2][i] + ", ");
 			out_d.write(aed[2][i] + ", ");
 
@@ -402,7 +401,7 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		out_t.newLine();
 		out_d.newLine();
 
-		for(int i = 0; i <= thu; i++ ) {
+		for(int i = 0; i <= thulen-1; i++ ) {
 			out_t.write(aen[3][i] + ", ");
 			out_d.write(aed[3][i] + ", ");
 
@@ -410,7 +409,7 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		out_t.newLine();
 		out_d.newLine();
 
-		for(int i = 0; i <= fri; i++ ) {
+		for(int i = 0; i <= frilen-1; i++ ) {
 			out_t.write(aen[4][i] + ", ");
 			out_d.write(aed[4][i] + ", ");
 
@@ -418,7 +417,7 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		out_t.newLine();
 		out_d.newLine();
 
-		for(int i = 0; i <= sat; i++ ) {
+		for(int i = 0; i <= satlen-1; i++ ) {
 			out_t.write(aen[5][i] + ", ");
 			out_d.write(aed[5][i] + ", ");
 
@@ -426,7 +425,7 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		out_t.newLine();
 		out_d.newLine();
 
-		for(int i = 0; i <= sun; i++ ) {
+		for(int i = 0; i <= sunlen-1; i++ ) {
 			out_t.write(aen[6][i] + ", ");
 			out_d.write(aed[6][i] + ", ");
 
@@ -440,41 +439,6 @@ public class AddEvent_ extends JPanel implements ActionListener{
 
 	}
 
-	public void addin(int n){
-
-		if (n == 0) {
-			int x = 115;
-			System.out.println(event_n);
-			JCheckBox check = new JCheckBox(event_n);
-			check.setBounds(90, x, 175, 300);
-			add(check);
-			x += 0;
-		}
-		else if (n == 1) {
-			JCheckBox check = new JCheckBox(event_n);
-			Weekly.wdp2.add(check);
-		}
-		else if (n == 2) {
-			JCheckBox check = new JCheckBox(event_n);
-			Weekly.wdp3.add(check);
-		}
-		else if (n == 3) {
-			JCheckBox check = new JCheckBox(event_n);
-			Weekly.wdp4.add(check);
-		}
-		else if (n == 4) {
-			JCheckBox check = new JCheckBox(event_n);
-			Weekly.wdp5.add(check);
-		}
-		else if (n == 5) {
-			JCheckBox check = new JCheckBox(event_n);
-			Weekly.wep1.add(check);
-		}
-		else if (n == 6) {
-			JCheckBox check = new JCheckBox(event_n);
-			Weekly.wep2.add(check);
-		}
-	}
 
 
 	@Override
