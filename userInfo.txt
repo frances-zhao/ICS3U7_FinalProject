@@ -1,4 +1,4 @@
-francestester, 
+francestester, lucia
 0106, 
 0eventname, 
 0eventdesc, 
