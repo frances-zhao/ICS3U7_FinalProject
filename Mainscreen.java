@@ -4,6 +4,7 @@ import java.awt.event.*;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Random;
 
 public class Mainscreen extends JFrame implements ActionListener{
 
@@ -12,10 +13,12 @@ public class Mainscreen extends JFrame implements ActionListener{
 	// declare all components to be used for the main screen 
 	static JFrame frame = new JFrame("Tackle");
 	static JPanel panel; 
-	private static JButton weekly, monthly, yearly; //buttons for week, month, year 
+	private static JButton weekly, monthly, yearly, testluck, onlymotiv; //buttons for week, month, year 
 	private static JLabel username; 
-	private static JLabel scheduleLabel, todoLabel;
+	private static JLabel scheduleLabel, warninglbl;
 
+	String filename = "motivation.txt";
+	String filename1 = "lucktester.txt";
 	Mainscreen page;
 	Color colour1 = ColourCSTM.getFirstColour();
 	Color colour2 = ColourCSTM.getSecondColour();
@@ -45,6 +48,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 	SimpleDateFormat dateFormat;
 	String userDisplay;
 
+	String[][]randomline = new String[15][1];
 
 	public Mainscreen() throws IOException{
 
@@ -97,21 +101,21 @@ public class Mainscreen extends JFrame implements ActionListener{
 		weekly.setBackground(colour2);
 		weekly.setFont(newfont);
 		weekly.setForeground(colour3);
-		weekly.setBorder(BorderFactory.createLineBorder(colour2));
+		weekly.setBorder(BorderFactory.createLineBorder(Color.black));
 
 		monthly = new JButton("Monthly");
 		monthly.setBounds(1066, 117, 135, 77);
 		monthly.setBackground(colour2);
 		monthly.setFont(newfont);
 		monthly.setForeground(colour3);
-		monthly.setBorder(BorderFactory.createLineBorder(colour2));
+		monthly.setBorder(BorderFactory.createLineBorder(Color.black));
 
 		yearly = new JButton("Yearly");
 		yearly.setBounds(1213, 117, 135, 77);
 		yearly.setBackground(colour2);
 		yearly.setFont(newfont);
 		yearly.setForeground(colour3);
-		yearly.setBorder(BorderFactory.createLineBorder(colour2));
+		yearly.setBorder(BorderFactory.createLineBorder(Color.black));
 
 
 		username = new JLabel(userDisplay); // get a different public variable to store user input
@@ -144,24 +148,41 @@ public class Mainscreen extends JFrame implements ActionListener{
 		logout.setFont(newfontsmall);
 		settings.add(logout);
 
-		help.addActionListener(this);
-		colourCSTM.addActionListener(this);
-		switchAcc.addActionListener(this);
-		logout.addActionListener(this);
-
 		scheduleLabel = new JLabel("SCHEDULER");
 		scheduleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		scheduleLabel.setBounds(920, 60, 429, 51);
 		scheduleLabel.setFont(newfont1);
 
-		todoLabel = new JLabel ("// TODO");
-		todoLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		todoLabel.setBounds(1030, 240, 200, 41);
-		todoLabel.setFont(newfont1);
+		testluck = new JButton ("WHAT DOES YOUR DAY LOOK LIKE!");
+		testluck.setHorizontalAlignment(SwingConstants.CENTER);
+		testluck.setBackground(colour2);
+		testluck.setForeground(colour3);
+		testluck.setBorder(BorderFactory.createLineBorder(Color.black));
+		testluck.setBounds(919, 239, 429, 193);
+		testluck.setFont(newfont);
+		
+		warninglbl = new JLabel("(cannot guarantee it's positive)");
+		warninglbl.setHorizontalAlignment(SwingConstants.CENTER);
+		warninglbl.setFont(newfont);
+		warninglbl.setBounds(919, 436, 429, 37);
+		
+		onlymotiv = new JButton("WANT ONLY MOTIVATION?");
+		onlymotiv.setHorizontalAlignment(SwingConstants.CENTER);
+		onlymotiv.setBackground(colour2);
+		onlymotiv.setForeground(colour3);
+		onlymotiv.setBorder(BorderFactory.createLineBorder(Color.black));
+		onlymotiv.setFont(newfont1);
+		onlymotiv.setBounds(919, 508, 429, 193);
 
 		duckdance = new JLabel(duckicon);
 		duckdance.setBounds(107, 300, 410, 445);
 
+		testluck.addActionListener(this);
+		onlymotiv.addActionListener(this);
+		help.addActionListener(this);
+		colourCSTM.addActionListener(this);
+		switchAcc.addActionListener(this);
+		logout.addActionListener(this);
 		weekly.addActionListener(this);
 		monthly.addActionListener(this);
 		yearly.addActionListener(this);
@@ -171,11 +192,15 @@ public class Mainscreen extends JFrame implements ActionListener{
 		frame.add(yearly);
 		frame.add(username);
 		frame.add(scheduleLabel);
-		frame.add(todoLabel);
+		frame.add(testluck);
 		frame.add(timeLabel);
 		frame.add(dayLabel);
 		frame.add(dateLabel);
 		frame.add(duckdance);
+		frame.add(onlymotiv);
+		
+		
+		frame.add(warninglbl);
 		frame.setVisible(true);
 
 
@@ -235,9 +260,63 @@ public class Mainscreen extends JFrame implements ActionListener{
 		if (e.getSource()== help) {
 			new Help();
 		}
-
-
+		
+		if (e.getSource() == testluck) {
+			try {
+				returnluck();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+		
+		if (e.getSource() == onlymotiv) {
+			try {
+				returnmotiv();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 	}
 	
+	
+	public void returnmotiv() throws IOException {
+		try {
+			BufferedReader input = new BufferedReader(new FileReader(filename));
+			Random r = new Random();
 
+			int rand = Math.abs(r.nextInt()) % 11;
+			
+			for (int i = 0; i < 15; i ++) {
+				randomline[i][0] = input.readLine();
+			}
+			JOptionPane.showMessageDialog(this, randomline[rand][0]);
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void returnluck() throws IOException {
+		try {
+			BufferedReader input = new BufferedReader(new FileReader(filename1));
+			Random r = new Random();
+
+			int rand = Math.abs(r.nextInt()) % 11;
+			
+			for (int i = 0; i < 15; i ++) {
+				randomline[i][0] = input.readLine();
+			}
+			JOptionPane.showMessageDialog(this, randomline[rand][0]);
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public static void main(String[]args) throws IOException {
+		new Mainscreen();
+	}
 }
