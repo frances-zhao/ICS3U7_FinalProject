@@ -8,9 +8,9 @@ public class WeeklyHelp extends JFrame implements ActionListener {
 	// declaring the major components
 	JFrame frame = new JFrame("Help || Weekly");
 	JPanel panel = new JPanel();
-	JButton return_main, next_monthly;
+	JButton return_main;
 	JLabel title; 
-	JTextField desc;
+	JTextArea desc;
 	
 	//declaring fonts 
 	static Font newfont, newfont1, newfont2, newfont3, newfont4, newfont5; //declaring all fonts 
@@ -52,12 +52,28 @@ public class WeeklyHelp extends JFrame implements ActionListener {
 			title.setFont(newfont1);
 			title.setForeground(bumble5);
 						
+			desc = new JTextArea();
+			desc.setAlignmentY(WIDTH);
+			desc.setLineWrap(true);
+			desc.setText("To add an event in the weekly scheduler, you need to"
+					+ " click on the ADD button. There you will be directed to "
+					+ "a tab where you can specify the event name, info, time, "
+					+ "etc. When you're finished, click add on the tab and your"
+					+ "event will be displayed on the scheduler. Click the Clear"
+					+ " button to start a fresh weekly scheduler!");
+			desc.setBounds(70, 65, 590, 350);
+			desc.setFont(newfont);
+			
+			return_main = new JButton("Return Home");
+			return_main.setFont(newfont);
+			return_main.setBounds(326, 700, 170, 41);
 			
 			// add the actionlisteners
-			
+			return_main.addActionListener(this);
 			
 			// add the components 
 			frame.add(title);
+			frame.add(desc);
 			
 			// frame visibility toggle 
 			frame.setVisible(true);
@@ -68,10 +84,10 @@ public class WeeklyHelp extends JFrame implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getSource() == return_main) {
+			new Help();
+			frame.dispose();
+		}
 		
 	}
-
-		
-	
 }
