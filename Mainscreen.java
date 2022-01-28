@@ -297,7 +297,10 @@ public class Mainscreen extends JFrame implements ActionListener{
 		}
 	}
 	
-	
+	/**
+	 * method that reads in motivation and shows a pop up message with it
+	 * @throws IOException for reader
+	 */
 	public void returnmotiv() throws IOException {
 		try {
 			try (BufferedReader input = new BufferedReader(new FileReader(filename))) {
@@ -320,7 +323,10 @@ public class Mainscreen extends JFrame implements ActionListener{
 		}
 	}
 	
-	
+	/**
+	 * 
+	 * @throws IOException
+	 */
 	public void returnluck() throws IOException {
 		try {
 			try (BufferedReader input = new BufferedReader(new FileReader(filename1))) {
