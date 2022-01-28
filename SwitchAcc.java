@@ -13,19 +13,19 @@ public class SwitchAcc extends JFrame implements ActionListener{
 	private JLabel switchlabel, switchlabel1;
 	private JButton confirmbtn;
 	private JButton cancelbtn;
-	
+
 	// font declarations
 	Font newfont;
 	Font newnewfont;
 
 
 	public SwitchAcc() {
-		
+
 		try {
 			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(13f);
 			newnewfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
 		} catch (IOException | FontFormatException e){
-			
+
 		}
 
 		// initializing frame
@@ -47,13 +47,13 @@ public class SwitchAcc extends JFrame implements ActionListener{
 		switchlabel.setHorizontalAlignment(SwingConstants.CENTER);
 		switchlabel.setFont(newfont);
 		switchlabel.setBounds(42, 43, 321, 46);
-		
+
 		switchlabel1 = new JLabel("to switch accounts?");
 		switchlabel1.setHorizontalAlignment(SwingConstants.CENTER);
 		switchlabel1.setFont(newfont);
 		switchlabel1.setBounds(42, 55, 321, 46);
 
-		
+
 		confirmbtn = new JButton("Confirm");
 		confirmbtn.setFont(newfont);
 		confirmbtn.setBounds(226, 120, 117, 56);
@@ -63,7 +63,7 @@ public class SwitchAcc extends JFrame implements ActionListener{
 		cancelbtn.setFont(newfont);
 		cancelbtn.setBounds(42, 120, 117, 56);
 		cancelbtn.addActionListener(this);
-		
+
 		// actual GUI
 		frame.add(switchtitle);
 		frame.add(switchlabel);
@@ -73,13 +73,13 @@ public class SwitchAcc extends JFrame implements ActionListener{
 
 		frame.setVisible(true);
 	}
-	
+
 	/*
 	 * implementing ActionListener, based on the event of user (which button clicked), different methods performed 
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
- 
+
 		if (e.getSource() == confirmbtn) { // if confirm button clicked
 			try {
 				new AccountCfm(); // redirect to accountCfm class
@@ -93,8 +93,14 @@ public class SwitchAcc extends JFrame implements ActionListener{
 
 		if (e.getSource() == cancelbtn) { // if cancel button clicked
 			frame.dispose(); // dispose frame
+			try {
+				new Mainscreen();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
-	
+
 }

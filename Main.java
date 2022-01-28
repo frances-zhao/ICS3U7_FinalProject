@@ -29,7 +29,7 @@ public class Main extends JFrame implements ActionListener{
 	
 	private String[][] totalAcc = new String[4][1000]; // maximum number of totalAcc creation: 1000
 	String [] usernames, passwords, eventnamefile, eventdescfile;
-	static int usernum;
+	static int usernum = 0, userslot;
 	public static String currentUser;
 	private static String currentPW;
 	private static String PWconfirm;
@@ -218,13 +218,16 @@ public class Main extends JFrame implements ActionListener{
 	
 	// getter method for current file1
 	public static String getfile1() {
-		fname1 = usernum-1 + "eventname.txt";
+		fname1 = userslot + "eventname.txt";
+		System.out.println(fname1);
 		return fname1;
 	}
 
 	// getter method for current file2
 	public static String getfile2() {
-		fname2 = usernum-1 + "eventdesc.txt";
+		fname2 = userslot + "eventdesc.txt";
+		System.out.println(fname2);
+
 		return fname2;
 	}
 	
@@ -260,6 +263,7 @@ public class Main extends JFrame implements ActionListener{
 	public boolean loginResult() {
 		for(int i = 0; i < usernum; i++) {
 			if(currentUser.equals(totalAcc[0][i]) && currentPW.equals(totalAcc[1][i])) {
+				userslot = i;
 				return true;
 			}
 

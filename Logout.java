@@ -105,6 +105,12 @@ public class Logout extends JFrame implements ActionListener{
 
 		if (e.getSource() == cancelbtn) { // if cancel button clicked
 			frame.dispose(); // dispose of current frame
+			try {
+				new Mainscreen();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 

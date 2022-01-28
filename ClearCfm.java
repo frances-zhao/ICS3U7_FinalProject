@@ -15,8 +15,8 @@ public class ClearCfm extends JFrame implements ActionListener{
 	private JButton confirmbtn;
 	private JButton cancelbtn;
 
-	String filename1 = "eventName.txt";
-	String filename2 = "eventInfo.txt";
+	String filename1 = Main.getfile1();
+	String filename2 = Main.getfile2();
 
 	// font declarations
 	Font newfont;

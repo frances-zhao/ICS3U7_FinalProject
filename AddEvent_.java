@@ -23,8 +23,8 @@ public class AddEvent_ extends JPanel implements ActionListener{
 
 	//  -------------- declare the misc. variables --------------------------------
 	Boolean important = false; 
-	String filename1 = "eventName.txt";
-	String filename2 = "eventInfo.txt";
+	String filename1 = Main.getfile1();
+	String filename2 = Main.getfile2();
 	public static BufferedWriter out; 
 	public static String[][] aen = new String[8][50]; // add event name
 	public static String[][] aed = new String[7][50]; // add event desc. 

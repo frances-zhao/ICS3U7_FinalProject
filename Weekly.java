@@ -38,8 +38,8 @@ public class Weekly extends JPanel implements ActionListener{
 	public static String event_n, event_d, time_; 
 	SimpleDateFormat week_year; 
 	SimpleDateFormat general_date; 
-	String filename1 = "eventName.txt";
-	String filename2 = "eventInfo.txt";
+	String filename1 = Main.getfile1();
+	String filename2 = Main.getfile2();
 
 
 	//  -------------- declare the misc. variables --------------------------------

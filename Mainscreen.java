@@ -246,9 +246,11 @@ public class Mainscreen extends JFrame implements ActionListener{
 			frame.dispose(); // dispose of current frame
 		}
 		if (e.getSource()== logout) {
+			frame.dispose();
 			new Logout();
 		}
 		if (e.getSource()== switchAcc) {
+			frame.dispose();
 			new SwitchAcc();
 		}
 
