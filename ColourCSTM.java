@@ -153,21 +153,21 @@ public class ColourCSTM extends JFrame implements ActionListener{
 
 	public void setColours() {
 		if(colourpicker == 1) {
-			firstcolour = new Color(240, 156, 166);
-			secondcolour = new Color(240, 156, 166);
-			thirdcolour = new Color(138, 39, 58);
+			firstcolour = new Color(255, 168, 178);
+			secondcolour = new Color(237, 157, 166);
+			thirdcolour = new Color(150, 51, 71);
 
 		}
 		if (colourpicker == 2) {
 			firstcolour = new Color(164, 210, 237);
-			secondcolour = new Color(76, 150, 194);
-			thirdcolour = new Color(35, 61, 77);
+			secondcolour = new Color(114, 180, 219);
+			thirdcolour = new Color(36, 70, 92);
 		}
 
 		if(colourpicker == 3) {
-			firstcolour = new Color(255, 208, 37);
-			secondcolour = new Color(245, 208, 76);
-			thirdcolour = new Color(69, 62, 39);
+			firstcolour = new Color(252, 208, 45);
+			secondcolour = new Color(237, 189, 19);
+			thirdcolour = new Color(69, 63, 43);
 		}
 
 	}

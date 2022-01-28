@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 
 
-public class AddEvent_ extends JFrame implements ActionListener{
+public class AddEvent_ extends JPanel implements ActionListener{
 
 	// -------------- declare the GUI variables --------------------------------
 	JPanel panel;
@@ -32,14 +32,14 @@ public class AddEvent_ extends JFrame implements ActionListener{
 	public static int num_event_n, num_event_d; 
 	public static String event_n, event_d, time_; 
 	public String en_string, ed_string, time_string;
-	String [] monname, mondesc, tuename, tuedesc, wedname, weddesc, thuname, thudesc, friname, fridesc, satname, satdesc, sunname, sundesc;
+	static String [] monname, mondesc, tuename, tuedesc, wedname, weddesc, thuname, thudesc, friname, fridesc, satname, satdesc, sunname, sundesc;
 
-	int monlen, tuelen, wedlen, thulen, frilen, satlen, sunlen;
-	public static int mon = 0, tue = 0, wed = 0, thu = 0, fri = 0, sat = 0, sun = 0;
-	
+	static int monlen, tuelen, wedlen, thulen, frilen, satlen, sunlen;
+	static int mon = 0, tue = 0, wed = 0, thu = 0, fri = 0, sat = 0, sun = 0;
+
 	//	String[] hours = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", 
 	//			"11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
-
+	//	
 	//	String[] minutes = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", 
 	//			"11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22",
 	//			"23", "24", "25", "26", "27", "28", "28", "29", "30", "31", "32", "33", "34", 
@@ -49,8 +49,8 @@ public class AddEvent_ extends JFrame implements ActionListener{
 	//TODO: buffered readers 
 	BufferedReader input_t = new BufferedReader(new FileReader(filename1));
 	BufferedReader input_d = new BufferedReader(new FileReader(filename2));
-	
-	
+
+
 
 	// Action a;
 
@@ -58,12 +58,16 @@ public class AddEvent_ extends JFrame implements ActionListener{
 	static Font newfont, newfont1, newfont2, newfont3, newfont4, newfont5, newfont6, newfont7; 
 
 	// -------------- declaring the colours -------------------------------------
-	static Color bumble1 = new Color(255, 208, 37);   // button background colour 
-	static Color bumble2 = new Color(245, 208, 76);   // panel background colour 
-	static Color bumble3 = new Color(252, 248, 219);  // outline 2 (yellowish gray)
-	static Color bumble4 = new Color(202, 194, 150);  // button outline colour 
-	static Color bumble5 = new Color(69, 62, 39);     // outline 2 (dark stale brown)
-	static Color bumble6 = new Color(255, 248, 171);  // textfield fill colour 
+	Color colour1 = ColourCSTM.getFirstColour();
+	Color colour2 = ColourCSTM.getSecondColour();
+	Color colour3 = ColourCSTM.getThirdColour();
+
+//	static Color bumble1 = new Color(255, 208, 37);   // button background colour 
+//	static Color bumble2 = new Color(245, 208, 76);   // panel background colour 
+//	static Color bumble3 = new Color(252, 248, 219);  // outline 2 (yellowish gray)
+//	static Color bumble4 = new Color(202, 194, 150);  // button outline colour 
+//	static Color bumble5 = new Color(69, 62, 39);     // outline 2 (dark stale brown)
+//	static Color bumble6 = new Color(255, 248, 171);  // textfield fill colour 
 
 
 	AddEvent_() throws IOException{
@@ -83,140 +87,91 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		} catch (IOException | FontFormatException e){
 
 		}
-		
-		monname = input_t.readLine().split(", ");
-		tuename = input_t.readLine().split(", ");
-		wedname = input_t.readLine().split(", ");
-		thuname = input_t.readLine().split(", ");
-		friname = input_t.readLine().split(", ");
-		satname = input_t.readLine().split(", ");
-		sunname = input_t.readLine().split(", ");
-		
-		mondesc = input_d.readLine().split(", ");
-		tuedesc = input_d.readLine().split(", ");
-		weddesc = input_d.readLine().split(", ");
-		thudesc = input_d.readLine().split(", ");
-		fridesc = input_d.readLine().split(", ");
-		satdesc = input_d.readLine().split(", ");
-		sundesc = input_d.readLine().split(", ");
-		
-		monlen = monname.length;
-		tuelen = tuename.length;
-		wedlen = wedname.length;
-		thulen = thuname.length;
-		frilen = friname.length;
-		satlen = satname.length;
-		sunlen = sunname.length;
-		
-		for(int i = 0; i < monlen; i++) {
-			aen[0][i] = monname[i];
-			aed[0][i] = mondesc[i];
-		}
-		for(int i = 0; i < tuelen; i++) {
-			aen[1][i] = tuename[i];
-			aed[1][i] = tuedesc[i];
-		}
-		for(int i = 0; i < wedlen; i++) {
-			aen[2][i] = wedname[i];
-			aed[2][i] = weddesc[i];
-		}
-		for(int i = 0; i < thulen; i++) {
-			aen[3][i] = thuname[i];
-			aed[3][i] = thudesc[i];
-		}
-		for(int i = 0; i < frilen; i++) {
-			aen[4][i] = friname[i];
-			aed[4][i] = fridesc[i];
-		}
-		for(int i = 0; i < satlen; i++) {
-			aen[5][i] = satname[i];
-			aed[5][i] = satdesc[i];
-		}
-		for(int i = 0; i < sunlen; i++) {
-			aen[6][i] = sunname[i];
-			aed[6][i] = sundesc[i];
-		}
-		
+		readin();
 		input_t.close();
 		input_d.close();
+		
 		// -------------- setting the basic outline of the GUI tab --------------
 		final int HEIGHT = 420; 
 		final int WIDTH = 690; 
 		frame = new JFrame("Tackle");
 		frame.setSize(WIDTH, HEIGHT);
-		frame.getContentPane().setBackground(bumble2);
+		frame.getContentPane().setBackground(colour1);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 
 		// -------------- declaring the characteristics of the components -------
+
+	
+
 		class_title = new JLabel("Add Event");
 		class_title.setHorizontalAlignment(SwingConstants.CENTER);
 		class_title.setBounds(28, 20, 160, 30);
 		class_title.setFont(newfont3);
-		class_title.setForeground(bumble5);
+		class_title.setForeground(Color.black);
 
 		event_name_ = new JLabel("Event Name");
 		event_name_.setHorizontalAlignment(SwingConstants.CENTER);
 		event_name_.setBounds(35, 65, 160, 30);
 		event_name_.setFont(newfont2);
-		event_name_.setForeground(bumble5);
-		event_name_.setBorder(BorderFactory.createLineBorder(bumble3));
+		event_name_.setForeground(Color.black);
+		event_name_.setBorder(BorderFactory.createLineBorder(colour3));
 
 		event_name = new JTextField();
 		event_name.setBounds(194, 65, 200, 30);
 		event_name.setFont(newfont);
-		event_name.setBackground(bumble6);
-		event_name.setBorder(BorderFactory.createLineBorder(bumble3));
+		event_name.setBackground(colour2);
+		event_name.setBorder(BorderFactory.createLineBorder(colour3));
 
 		event_desc_ = new JLabel("Event Info");
 		event_desc_.setHorizontalAlignment(SwingConstants.CENTER);
 		event_desc_.setBounds(35, 130, 160, 30);
 		event_desc_.setFont(newfont2);
-		event_desc_.setForeground(bumble5);
-		event_desc_.setBorder(BorderFactory.createLineBorder(bumble3));
+		event_desc_.setForeground(Color.black);
+		event_desc_.setBorder(BorderFactory.createLineBorder(colour3));
 
 		event_desc = new JTextArea();
 		event_desc.setBounds(35, 159, 350, 180);
 		event_desc.setFont(newfont);
-		event_desc.setBackground(bumble6);
+		event_desc.setBackground(colour2);
 		event_desc.setLineWrap(true);
-		event_desc.setBorder(BorderFactory.createLineBorder(bumble3));
+		event_desc.setBorder(BorderFactory.createLineBorder(colour3));
 
 		importance = new JCheckBox("important");
 		importance.setBounds(425, 71, 160, 20);
 		importance.setFont(newfont2);
-		importance.setForeground(bumble5);
-		importance.setBackground(bumble2);
+		importance.setForeground(Color.black);
+		importance.setBackground(colour1);
 
 		day_ = new JLabel("Day of Event");
 		day_.setBounds(425, 160, 150, 30);
-		day_.setForeground(bumble5);
+		day_.setForeground(Color.black);
 		day_.setFont(newfont2);
 		day_.setHorizontalAlignment(SwingConstants.CENTER);
-		day_.setBorder(BorderFactory.createLineBorder(bumble3));
+		day_.setBorder(BorderFactory.createLineBorder(colour3));
 
 		day = new JTextField(); 
 		day.setBounds(425, 190, 150, 30);
 		day.setFont(newfont1);
-		day.setBackground(bumble6);
+		day.setBackground(colour2);
 		day.setHorizontalAlignment(SwingConstants.CENTER);
-		day.setBorder(BorderFactory.createLineBorder(bumble3));
+		day.setBorder(BorderFactory.createLineBorder(colour3));
 
 		add_event = new JButton("ADD");
 		add_event.setBounds(425, 245, 150, 40);
 		add_event.setHorizontalAlignment(SwingConstants.CENTER);
 		add_event.setFont(newfont3);
-		add_event.setForeground(bumble5);
-		add_event.setBackground(bumble6);
-		add_event.setBorder(BorderFactory.createLineBorder(bumble3));
+		add_event.setForeground(Color.black);
+		add_event.setBackground(colour2);
+		add_event.setBorder(BorderFactory.createLineBorder(colour3));
 
 		discard_event = new JButton("Discard");
 		discard_event.setBounds(425, 300, 150, 40);
 		discard_event.setHorizontalAlignment(SwingConstants.CENTER);
 		discard_event.setFont(newfont3);
-		discard_event.setForeground(bumble5);
-		discard_event.setBackground(bumble6);
-		discard_event.setBorder(BorderFactory.createLineBorder(bumble3));
+		discard_event.setForeground(Color.black);
+		discard_event.setBackground(colour2);
+		discard_event.setBorder(BorderFactory.createLineBorder(colour3));
 
 		// making time picker 
 		//		next1 = new JButton("+");
@@ -236,22 +191,22 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		h = new JTextField();
 		h.setBounds(437, 105, 60, 32);
 		h.setFont(newfont2);
-		h.setForeground(bumble5);
-		h.setBackground(bumble6);
+		h.setForeground(Color.black);
+		h.setBackground(colour2);
 
 		m = new JTextField();
 		m.setBounds(507, 105, 60, 32);
 		m.setFont(newfont2);
-		m.setForeground(bumble5);
-		m.setBackground(bumble6);
+		m.setForeground(Color.black);
+		m.setBackground(colour2);
 
 		colon = new JTextField(":");
 		colon.setBounds(496, 105, 12, 32);
 		colon.setFont(newfont2);
-		colon.setForeground(bumble5);
-		colon.setBackground(bumble6);
+		colon.setForeground(Color.black);
+		colon.setBackground(colour3);
 		colon.setHorizontalAlignment(SwingConstants.CENTER);
-		colon.setBorder(BorderFactory.createLineBorder(bumble6));
+		colon.setBorder(BorderFactory.createLineBorder(colour3));
 		colon.setEditable(false);
 
 
@@ -288,6 +243,61 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		frame.setVisible(true);
 
 	}
+	public void readin() throws IOException {
+		monname = input_t.readLine().split(", ");
+		tuename = input_t.readLine().split(", ");
+		wedname = input_t.readLine().split(", ");
+		thuname = input_t.readLine().split(", ");
+		friname = input_t.readLine().split(", ");
+		satname = input_t.readLine().split(", ");
+		sunname = input_t.readLine().split(", ");
+
+		mondesc = input_d.readLine().split(", ");
+		tuedesc = input_d.readLine().split(", ");
+		weddesc = input_d.readLine().split(", ");
+		thudesc = input_d.readLine().split(", ");
+		fridesc = input_d.readLine().split(", ");
+		satdesc = input_d.readLine().split(", ");
+		sundesc = input_d.readLine().split(", ");
+
+		monlen = monname.length;
+		tuelen = tuename.length;
+		wedlen = wedname.length;
+		thulen = thuname.length;
+		frilen = friname.length;
+		satlen = satname.length;
+		sunlen = sunname.length;
+
+		for(int i = 0; i < monlen; i++) {
+			aen[0][i] = monname[i];
+			aed[0][i] = mondesc[i];
+		}
+		for(int i = 0; i < tuelen; i++) {
+			aen[1][i] = tuename[i];
+			aed[1][i] = tuedesc[i];
+		}
+		for(int i = 0; i < wedlen; i++) {
+			aen[2][i] = wedname[i];
+			aed[2][i] = weddesc[i];
+		}
+		for(int i = 0; i < thulen; i++) {
+			aen[3][i] = thuname[i];
+			aed[3][i] = thudesc[i];
+		}
+		for(int i = 0; i < frilen; i++) {
+			aen[4][i] = friname[i];
+			aed[4][i] = fridesc[i];
+		}
+		for(int i = 0; i < satlen; i++) {
+			aen[5][i] = satname[i];
+			aed[5][i] = satdesc[i];
+		}
+		for(int i = 0; i < sunlen; i++) {
+			aen[6][i] = sunname[i];
+			aed[6][i] = sundesc[i];
+		}
+		
+	}
 
 	public void addEventName() throws IOException{
 		if (day.getText().equalsIgnoreCase("monday")) {
@@ -296,6 +306,7 @@ public class AddEvent_ extends JFrame implements ActionListener{
 			num_event_d = mon;
 
 			addE(0);
+			addin(0);
 		}
 
 		else if (day.getText().equalsIgnoreCase("tuesday")) {
@@ -356,10 +367,10 @@ public class AddEvent_ extends JFrame implements ActionListener{
 
 	public void addE(int n) throws IOException { // n and m represents the row of aen, aed arrays 
 		// out_t, out_d 
-		
+
 		BufferedWriter out_t = new BufferedWriter(new FileWriter(filename1)); // title+time of event 
 		BufferedWriter out_d = new BufferedWriter(new FileWriter(filename2)); // event description 
-		
+
 		event_n = event_name.getText();
 		event_d = event_desc.getText();
 		time_ = ", ".concat(h.getText().concat(":"));
@@ -423,10 +434,46 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		out_t.newLine();
 		out_d.newLine();
 
-		
+
 		out_t.close();
 		out_d.close();
 
+	}
+
+	public void addin(int n){
+
+		if (n == 0) {
+			int x = 115;
+			System.out.println(event_n);
+			JCheckBox check = new JCheckBox(event_n);
+			check.setBounds(90, x, 175, 300);
+			add(check);
+			x += 0;
+		}
+		else if (n == 1) {
+			JCheckBox check = new JCheckBox(event_n);
+			Weekly.wdp2.add(check);
+		}
+		else if (n == 2) {
+			JCheckBox check = new JCheckBox(event_n);
+			Weekly.wdp3.add(check);
+		}
+		else if (n == 3) {
+			JCheckBox check = new JCheckBox(event_n);
+			Weekly.wdp4.add(check);
+		}
+		else if (n == 4) {
+			JCheckBox check = new JCheckBox(event_n);
+			Weekly.wdp5.add(check);
+		}
+		else if (n == 5) {
+			JCheckBox check = new JCheckBox(event_n);
+			Weekly.wep1.add(check);
+		}
+		else if (n == 6) {
+			JCheckBox check = new JCheckBox(event_n);
+			Weekly.wep2.add(check);
+		}
 	}
 
 
@@ -467,5 +514,9 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		}
 
 	}
+	public static void main(String[]args) throws IOException {
+		new AddEvent_();
+	}
 
 }
+
