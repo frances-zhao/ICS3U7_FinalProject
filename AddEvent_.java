@@ -101,7 +101,6 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		frame.setResizable(false);
 
 		// -------------- declaring the characteristics of the components -------
-
 	
 
 		class_title = new JLabel("Add Event");
@@ -453,6 +452,12 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		if (e.getSource() == discard_event) {
 
 			frame.dispose();
+			try {
+				new Weekly();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
 		}
 

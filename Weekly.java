@@ -50,14 +50,12 @@ public class Weekly extends JPanel implements ActionListener{
 	public static String[][] aen1 = new String[8][50]; // add event name
 	public static String[][] aed1 = new String[7][50]; // add event desc. 
 	static String [] monname, mondesc, tuename, tuedesc, wedname, weddesc, thuname, thudesc, friname, fridesc, satname, satdesc, sunname, sundesc;
-	static String [] monname1, mondesc1, tuename1, tuedesc1, wedname1, weddesc1, thuname1, thudesc1, friname1, fridesc1, satname1, satdesc1, sunname1, sundesc1;
 	static int monlen = 0, tuelen = 0, wedlen = 0, thulen = 0, frilen = 0, satlen = 0, sunlen = 0;
 
 	// declaring the writers 
 	BufferedReader input_en = new BufferedReader(new FileReader(filename1));
 	BufferedReader input_ei = new BufferedReader(new FileReader(filename2));	
-	BufferedWriter output_en = new BufferedWriter(new FileWriter(filename1));
-	
+
 	//declaring fonts 
 	static Font newfont, newfont1, newfont2, newfont3, newfont4, newfont5; //declaring all fonts 
 
@@ -150,32 +148,39 @@ public class Weekly extends JPanel implements ActionListener{
 		mon.setHorizontalAlignment(SwingConstants.CENTER);
 		mon.setBorder(BorderFactory.createLineBorder(colour3));
 
-		BufferedReader input_t = new BufferedReader(new FileReader(filename1));
-		BufferedReader input_d = new BufferedReader(new FileReader(filename2));
-		
-		monname = input_t.readLine().split(", ");
-		tuename = input_t.readLine().split(", ");
-		wedname = input_t.readLine().split(", ");
-		thuname = input_t.readLine().split(", ");
-		friname = input_t.readLine().split(", ");
-		satname = input_t.readLine().split(", ");
-		sunname = input_t.readLine().split(", ");
+		//TODO: skip to here; temporary ez access 
+		//		String[] content = input_en.readLine().split(", ");
+		//		String checkeu = content[1];
+		//		
+		//		taskm = new JCheckBox(checkeu);
+		//		
 
-		mondesc = input_d.readLine().split(", ");
-		tuedesc = input_d.readLine().split(", ");
-		weddesc = input_d.readLine().split(", ");
-		thudesc = input_d.readLine().split(", ");
-		fridesc = input_d.readLine().split(", ");
-		satdesc = input_d.readLine().split(", ");
-		sundesc = input_d.readLine().split(", ");
+		// adding the tasks 
 
-		monlen = monname.length;
-		tuelen = tuename.length;
-		wedlen = wedname.length;
-		thulen = thuname.length;
-		frilen = friname.length;
-		satlen = satname.length;
-		sunlen = sunname.length;
+		//		String[] content = input_en.readLine().split(", ");
+		//		for (int i = 1; i < AddEvent_.mon; i++) {
+		//			JCheckBox chek = new JCheckBox(content[i]);
+		////			wdp1.add(chek);
+		////		}
+		////		
+		//		String[] content = input_en.readLine().split(", ");
+		//		
+		//		String cm = content[1];
+		//		tm1 = new JCheckBox();
+		//		tm1.setBackground(bumble2);
+		//		
+		////		String ct = content[2];
+		////		tm2 = new JCheckBox();
+		////		tm2.setBackground(bumble2);
+		////		
+		////		String cw = content[3];
+		////		tm3 = new JCheckBox();
+		//		tm3.setBackground(bumble2); 
+		//		
+		//		String ctt = content[4];
+		//		tm4 = new JCheckBox();
+		//		tm4.setBackground(bumble2);
+
 
 		tue = new JLabel("Tuesday"); 
 		tue.setBounds(264, 115, 175, 21);
@@ -433,6 +438,11 @@ public class Weekly extends JPanel implements ActionListener{
 				e1.printStackTrace();
 			}
 		}
+		
+		if (e.getSource() == clear) {
+			frame.dispose();
+			new ClearCfm();
+		}
 
 		if (e.getSource() == return_main) {
 			try {
@@ -442,77 +452,35 @@ public class Weekly extends JPanel implements ActionListener{
 				e1.printStackTrace();
 			}
 		}
-		
-
-		if (e.getSource() == clear) {
-
-			try {
-				clear_();
-				clear_();
-				clear_();
-				clear_();
-				clear_();
-				clear_();
-				
-			}
-			catch (IOException e1){
-				e1.printStackTrace();
-			}
-				frame.dispose();
-				
-			try {
-				new Weekly();
-			}
-			catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-
-		}
-		
 	}
-	
-
-	// clears all tasks
-	
-	public void clear_() throws IOException{
-		
-			for(int j = 0; j < monlen; j++) {
-				aen[0][j] = "";
-				aed[0][j] = "";
-			}
-			for(int j = 0; j < tuelen; j++) {
-				aen[1][j] = "";
-				aed[1][j] = "";
-			}
-			for(int j = 0; j < wedlen; j++) {
-				aen[2][j] = "";
-				aed[2][j] = "";
-			}
-			for(int j = 0; j < thulen; j++) {
-				aen[3][j] = "";
-				aed[3][j] = "";
-			}
-			for(int j = 0; j < frilen; j++) {
-				aen[4][j] = "";
-				aed[4][j] = "";
-			}
-			for(int j = 0; j < satlen; j++) {
-				aen[5][j] = "";
-				aed[5][j] = "";
-			}
-			for(int j = 0; j < sunlen; j++) {
-				aen[6][j] = "";
-				aed[6][j] = "";
-			}
-			
-		}
-	
-	
 	public void readin() throws IOException {
 		BufferedReader input_t = new BufferedReader(new FileReader(filename1));
 		BufferedReader input_d = new BufferedReader(new FileReader(filename2));
 		
+		monname = input_t.readLine().split(", ");
+		tuename = input_t.readLine().split(", ");
+		wedname = input_t.readLine().split(", ");
+		thuname = input_t.readLine().split(", ");
+		friname = input_t.readLine().split(", ");
+		satname = input_t.readLine().split(", ");
+		sunname = input_t.readLine().split(", ");
+
+		mondesc = input_d.readLine().split(", ");
+		tuedesc = input_d.readLine().split(", ");
+		weddesc = input_d.readLine().split(", ");
+		thudesc = input_d.readLine().split(", ");
+		fridesc = input_d.readLine().split(", ");
+		satdesc = input_d.readLine().split(", ");
+		sundesc = input_d.readLine().split(", ");
+
+		monlen = monname.length;
+		tuelen = tuename.length;
+		wedlen = wedname.length;
+		thulen = thuname.length;
+		frilen = friname.length;
+		satlen = satname.length;
+		sunlen = sunname.length;
+
 		for(int i = 0; i < monlen; i++) {
 			aen[0][i] = monname[i];
 			aed[0][i] = mondesc[i];
