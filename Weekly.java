@@ -432,6 +432,7 @@ public class Weekly extends JPanel implements ActionListener{
 		if (e.getSource() == addEvent) {
 			try {
 				new AddEvent_();
+				frame.dispose();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

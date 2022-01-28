@@ -464,8 +464,8 @@ public class AddEvent_ extends JPanel implements ActionListener{
 
 			else{
 				try {
-
 					addEventName();
+					new Weekly();
 					frame.dispose();
 				} 
 
