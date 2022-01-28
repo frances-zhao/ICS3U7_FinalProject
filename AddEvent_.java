@@ -26,12 +26,12 @@ public class AddEvent_ extends JFrame implements ActionListener{
 	String filename1 = "eventName.txt";
 	String filename2 = "eventInfo.txt";
 	public static BufferedWriter out; 
-	public static String[][] aen = new String[7][50]; // add event name
+	public static String[][] aen = new String[8][50]; // add event name
 	public static String[][] aed = new String[7][50]; // add event desc. 
+	public static String[][] at = new String[24][60]; // add time 
 	public static int num_event_n, num_event_d; 
-	public static String event_n; 
-	public static String event_d; 
-
+	public static String event_n, event_d, time_; 
+	
 	public String en_string, ed_string, time_string;
 
 	//	String[] hours = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", 
@@ -162,34 +162,34 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		discard_event.setBorder(BorderFactory.createLineBorder(bumble3));
 
 		// making time picker 
-		next1 = new JButton("+");
-		next1.setBounds(425, 105, 20, 16);
-		next1.setFont(newfont);
-		next1.setForeground(bumble5);
-		next1.setBackground(bumble6);
-		next1.setBorder(BorderFactory.createLineBorder(bumble6));
+//		next1 = new JButton("+");
+//		next1.setBounds(425, 105, 20, 16);
+//		next1.setFont(newfont);
+//		next1.setForeground(bumble5);
+//		next1.setBackground(bumble6);
+//		next1.setBorder(BorderFactory.createLineBorder(bumble6));
+//
+//		prev1 = new JButton("-");
+//		prev1.setBounds(425, 120, 20, 16);
+//		prev1.setFont(newfont);
+//		prev1.setForeground(bumble5);
+//		prev1.setBackground(bumble6);
+//		prev1.setBorder(BorderFactory.createLineBorder(bumble6));
 
-		prev1 = new JButton("-");
-		prev1.setBounds(425, 120, 20, 16);
-		prev1.setFont(newfont);
-		prev1.setForeground(bumble5);
-		prev1.setBackground(bumble6);
-		prev1.setBorder(BorderFactory.createLineBorder(bumble6));
-
-		h = new JTextField("0");
-		h.setBounds(445, 105, 60, 32);
+		h = new JTextField();
+		h.setBounds(437, 105, 60, 32);
 		h.setFont(newfont2);
 		h.setForeground(bumble5);
 		h.setBackground(bumble6);
 
-		m = new JTextField("0");
-		m.setBounds(515, 105, 60, 32);
+		m = new JTextField();
+		m.setBounds(507, 105, 60, 32);
 		m.setFont(newfont2);
 		m.setForeground(bumble5);
 		m.setBackground(bumble6);
 
 		colon = new JTextField(":");
-		colon.setBounds(504, 105, 12, 32);
+		colon.setBounds(496, 105, 12, 32);
 		colon.setFont(newfont2);
 		colon.setForeground(bumble5);
 		colon.setBackground(bumble6);
@@ -221,8 +221,8 @@ public class AddEvent_ extends JFrame implements ActionListener{
 		frame.add(discard_event);
 		frame.add(day_);
 		frame.add(day);
-		frame.add(next1);
-		frame.add(prev1);
+//		frame.add(next1);
+//		frame.add(prev1);
 		frame.add(h);
 		frame.add(m);
 		frame.add(colon);
@@ -268,29 +268,31 @@ public class AddEvent_ extends JFrame implements ActionListener{
 
 	}
 
+	
 	public void addE(int n) throws IOException { // n and m represents the row of aen, aed arrays 
 		// out_t, out_d 
 		event_n = event_name.getText();
 		event_d = event_desc.getText();
+		time_ = ", ".concat(h.getText().concat(":"));
+		time_ = time_.concat(m.getText());
 
-		aen[0][num_event_n] = event_n;
-		aed[n][num_event_d] = event_d; 
+		aen[n][num_event_n] = event_n;
+		aen[7][num_event_n] = time_;
+		aed[n][num_event_d] = event_d;
 		out_t.write(aen[n][num_event_n] + ", ");
+		out_t.write(aen[7][num_event_n] + ", ");
 		out_d.write(aed[n][num_event_d] + ", ");
 
 		out_t.newLine();
-		out_t.close();
 		out_d.newLine();
+		out_t.close();
 		out_d.close();
 
 		num_event_n++; 
 		num_event_d++;
 	}
 
-
-
-
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -330,3 +332,4 @@ public class AddEvent_ extends JFrame implements ActionListener{
 	}
 
 }
+
