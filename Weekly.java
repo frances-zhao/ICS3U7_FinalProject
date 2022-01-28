@@ -5,10 +5,11 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
-public class Weekly extends JFrame implements ActionListener{
+public class Weekly extends JPanel implements ActionListener{
 	
 	// declaring the major components 
 	JFrame frame = new JFrame("Weekly Calendar");
@@ -20,15 +21,25 @@ public class Weekly extends JFrame implements ActionListener{
 	JLabel mon, tue, wed, thu, fri, sat, sun; 
 	JLabel todo, notes, week_yearLabel, general_dateLabel; 
 	JTextField weekly; 
-	
+//	JCheckBox tm1, tm2, tm3, tm4, tm5, tm6, tm7, tm8, tm9, tm0, // monday tasks
+//	tt1, tt2, tt3, tt4, tt5, tt6, tt7, tt8, tt9, tt0,           // tuesday tasks
+//	tw1, tw2, tw3, tw4, tw5, tw6, tw7, tw8, tw9, tw0,           // wednesday tasks 
+//	ttt1, ttt2, ttt3, ttt4, ttt5, ttt6, ttt7, ttt8, ttt9, ttt0, // thursday tasks 
+//	tf1, tf2, tf3, tf4, tf5, tf6, tf7, tf8, tf9, tf0,           // friday tasks 
+//	ts1, ts2, ts3, ts4, ts5, ts6, ts7, ts8, ts9, ts0,           // saturday taks  
+//	tss1, tss2, tss3, tss4, tss5, tss6, tss7, tss8, tss9, tss0; // sunday tasks 
+
 	ImageIcon add = new ImageIcon("images/add.png");
 	ImageIcon logo = new ImageIcon("images/image.png");
 	Date d1 = new Date();
 	Calendar calendar = Calendar.getInstance();
-	private String filename1 = "eventName.txt";
-	private String filename2 = "eventInfo.txt";
+	public static String[][] aen = new String[8][50]; // 
+	public static String[][] aed = new String[7][50]; 
+	public static String event_n, event_d, time_; 
 	SimpleDateFormat week_year; 
 	SimpleDateFormat general_date; 
+	String filename1 = "eventName.txt";
+	String filename2 = "eventInfo.txt";
 
 	
 	//  -------------- declare the misc. variables --------------------------------
@@ -80,12 +91,17 @@ public class Weekly extends JFrame implements ActionListener{
 		deco1.setBackground(bumble6);
 		deco1.setBorder(BorderFactory.createLineBorder(bumble6, 2, true));
 		
+		
 		wdp1 = new JPanel();
+		wdp1.setLayout(new BoxLayout(wdp1, BoxLayout.Y_AXIS));
+		wdp1.add(Box.createRigidArea(new Dimension(10, 30)));
 		wdp1.setBounds(90, 115, 175, 300);
 		wdp1.setBackground(bumble2);
 		wdp1.setBorder(BorderFactory.createLineBorder(bumble6, 2, true));
 		
 		wdp2 = new JPanel();
+		wdp2.setLayout(new BoxLayout(wdp2, BoxLayout.Y_AXIS));
+		wdp2.add(Box.createRigidArea(new Dimension(10,30)));
 		wdp2.setBounds(264, 115, 175, 300);
 		wdp2.setBackground(bumble2);
 		wdp2.setBorder(BorderFactory.createLineBorder(bumble6, 2, true));
@@ -109,7 +125,7 @@ public class Weekly extends JFrame implements ActionListener{
 		wep1.setBounds(90, 414, 175, 300);
 		wep1.setBackground(bumble2);
 		wep1.setBorder(BorderFactory.createLineBorder(bumble6, 2, true));
-		
+				
 		
 		wep2 = new JPanel();
 		wep2.setBounds(264, 414, 175, 300);
@@ -123,6 +139,40 @@ public class Weekly extends JFrame implements ActionListener{
 		mon.setBackground(bumble4);
 		mon.setHorizontalAlignment(SwingConstants.CENTER);
 		mon.setBorder(BorderFactory.createLineBorder(bumble6));
+		
+		//TODO: skip to here; temporary ez access 
+//		String[] content = input_en.readLine().split(", ");
+//		String checkeu = content[1];
+//		
+//		taskm = new JCheckBox(checkeu);
+//		
+		
+		// adding the tasks 
+		
+//		String[] content = input_en.readLine().split(", ");
+//		for (int i = 1; i < AddEvent_.mon; i++) {
+//			JCheckBox chek = new JCheckBox(content[i]);
+//			wdp1.add(chek);
+//		}
+//		
+		String[] content = input_en.readLine().split(", ");
+		
+		String cm = content[1];
+		tm1 = new JCheckBox();
+		tm1.setBackground(bumble2);
+		
+//		String ct = content[2];
+//		tm2 = new JCheckBox();
+//		tm2.setBackground(bumble2);
+//		
+//		String cw = content[3];
+//		tm3 = new JCheckBox();
+//		tm3.setBackground(bumble2); 
+//		
+//		String ctt = content[4];
+//		tm4 = new JCheckBox();
+//		tm4.setBackground(bumble2);
+	
 		
 		tue = new JLabel("Tuesday"); 
 		tue.setBounds(264, 115, 175, 21);
@@ -242,15 +292,39 @@ public class Weekly extends JFrame implements ActionListener{
 		frame.add(wdp4);
 		frame.add(wdp5);
 		frame.add(wep1);
-		frame.add(deco1);
-
 		frame.add(wep2);
+		frame.add(deco1);
+		
+		wdp1.add(tm1);
+		
 
+		
+		
 		// frame visibility toggle 
 		frame.setVisible(true);
 		
 	}
+	
+	
+	
+//	public void writeEventM() {
+//		
+//		String[] content;
+//
+//		content = new String[AddEvent_.mon];
+//		try {
+//			content = input_en.readLine().split(", ");
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//
+//		for(int i = 1; i < AddEvent_.mon + 1; i++) {
+//			taskm = new JCheckBox(content[i]);
+//			wdp1.add(taskm);
+//		}
+//	}
 
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
@@ -277,7 +351,6 @@ public class Weekly extends JFrame implements ActionListener{
 		new Weekly();
 	}
 }
-
 
 
 
