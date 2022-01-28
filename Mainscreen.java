@@ -49,7 +49,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 	String userDisplay;
 
 	String[][]randomline = new String[15][1];
-
+	
 	public Mainscreen() throws IOException{
 
 		try {
@@ -64,9 +64,8 @@ public class Mainscreen extends JFrame implements ActionListener{
 		} catch (IOException | FontFormatException e){
 
 		}
-
+		String f1 = Main.getfile1();
 		userDisplay = Main.getUser();
-
 		formatTime = new SimpleDateFormat("hh : mm: ss a");
 		timeLabel = new JLabel();
 		timeLabel.setHorizontalAlignment(SwingConstants.CENTER);

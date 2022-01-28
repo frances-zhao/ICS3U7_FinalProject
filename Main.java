@@ -29,11 +29,12 @@ public class Main extends JFrame implements ActionListener{
 	
 	private String[][] totalAcc = new String[4][1000]; // maximum number of totalAcc creation: 1000
 	String [] usernames, passwords, eventnamefile, eventdescfile;
-	int usernum;
+	static int usernum;
 	public static String currentUser;
 	private static String currentPW;
 	private static String PWconfirm;
-
+	public static String fname1, fname2; 
+	
 	
 
 
@@ -175,7 +176,7 @@ public class Main extends JFrame implements ActionListener{
 	public static String getUser() {
 		return Main.currentUser;
 	}
-	
+
 
 	// adding a new user
 	public void addNewUser() throws IOException {
@@ -185,9 +186,10 @@ public class Main extends JFrame implements ActionListener{
 		totalAcc[3][usernum] = usernum + "eventdesc";
 		
 		// new file names for new account
+		
 		filename1 = new File(usernum + "eventname.txt");
 		filename2 = new File(usernum + "eventdesc.txt");
-		System.out.println(filename1);
+
 		usernum++; // increasing the length of the 2D array to allow for bug-proof adding of account info
 		
 		// creating new files
@@ -212,7 +214,17 @@ public class Main extends JFrame implements ActionListener{
 		savedUsers();
 		
 	}
+	public static String getfile1() {
+		fname1 = usernum-1 + "eventname.txt";
+		return fname1;
+	}
 
+
+	public static String getfile2() {
+		fname2 = usernum-1 + "eventdesc.txt";
+		return fname2;
+	}
+	
 	// class for savedUsers, writes out all account information – username and password, into fileName (userinfo.txt)
 	public void savedUsers() throws IOException {
 		output = new BufferedWriter(new FileWriter(fileName));
@@ -251,6 +263,8 @@ public class Main extends JFrame implements ActionListener{
 		}
 		return false;
 	}
+	
+
 	/*
 	 * implementing ActionListener, based on the event of user (which button clicked), different methods performed 
 	 */
@@ -305,6 +319,7 @@ public class Main extends JFrame implements ActionListener{
 		}
 
 	} // end actionPerformed
+
 
 	// testing the main program
 	public static void main(String[] args) {
