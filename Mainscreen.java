@@ -299,7 +299,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 	
 	/**
 	 * method that reads in motivation and shows a pop up message with it
-	 * @throws IOException for reader
+	 * @throws IOException for readers
 	 */
 	public void returnmotiv() throws IOException {
 		try {
@@ -324,8 +324,8 @@ public class Mainscreen extends JFrame implements ActionListener{
 	}
 	
 	/**
-	 * 
-	 * @throws IOException
+	 * method that reads in luck and shows a pop up message with it
+	 * @throws IOException for readers
 	 */
 	public void returnluck() throws IOException {
 		try {
@@ -349,10 +349,6 @@ public class Mainscreen extends JFrame implements ActionListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	
-	public static void main(String[]args) throws IOException {
-		new Mainscreen();
 	}
 	
 }
