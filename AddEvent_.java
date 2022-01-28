@@ -35,11 +35,11 @@ public class AddEvent_ extends JFrame implements ActionListener{
 	String [] monname, mondesc, tuename, tuedesc, wedname, weddesc, thuname, thudesc, friname, fridesc, satname, satdesc, sunname, sundesc;
 
 	int monlen, tuelen, wedlen, thulen, frilen, satlen, sunlen;
-	static int mon = 0, tue = 0, wed = 0, thu = 0, fri = 0, sat = 0, sun = 0;
-
+	public static int mon = 0, tue = 0, wed = 0, thu = 0, fri = 0, sat = 0, sun = 0;
+	
 	//	String[] hours = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", 
 	//			"11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
-	//	
+
 	//	String[] minutes = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", 
 	//			"11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22",
 	//			"23", "24", "25", "26", "27", "28", "28", "29", "30", "31", "32", "33", "34", 
@@ -50,7 +50,7 @@ public class AddEvent_ extends JFrame implements ActionListener{
 	BufferedReader input_t = new BufferedReader(new FileReader(filename1));
 	BufferedReader input_d = new BufferedReader(new FileReader(filename2));
 	
-
+	
 
 	// Action a;
 
@@ -469,4 +469,3 @@ public class AddEvent_ extends JFrame implements ActionListener{
 	}
 
 }
-
