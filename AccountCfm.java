@@ -149,8 +149,7 @@ public class AccountCfm extends JFrame implements ActionListener{
 
 				}
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				System.out.println("cannot get user confirmation.");
 			}
 
 		}
@@ -160,8 +159,7 @@ public class AccountCfm extends JFrame implements ActionListener{
 			try {
 				new Mainscreen();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				System.out.println("cannot return to main screen.");
 			}
 		}
 	}

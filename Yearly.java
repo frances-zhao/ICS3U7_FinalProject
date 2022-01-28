@@ -99,7 +99,7 @@ public class Yearly extends YearlySize implements ActionListener{
 			try {
 				new Mainscreen();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				System.out.println("cannot return to main screen");
 			}
 			frame.dispose();
 		}

@@ -29,7 +29,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 	private static JMenuItem switchAcc;
 	private static JMenuItem logout;
 	private static JLabel duckdance;
-	
+
 	// txt file variables
 	String filename = "motivation.txt";
 	String filename1 = "lucktester.txt";
@@ -44,7 +44,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 	// icon declarations
 	static Icon icon = new ImageIcon("images/logo.png");
 	Icon duckicon = new ImageIcon("images/duckwaddle.gif");
-	
+
 	// time and date variables
 	JLabel timeLabel, dayLabel, dateLabel;
 	int hour, second, minute;
@@ -56,7 +56,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 	String userDisplay;
 
 	String[][]randomline = new String[15][1];
-	
+
 	/**
 	 * constructor that implements different methods and GUI interface
 	 * @throws IOException
@@ -76,7 +76,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 
 			System.out.println("Mainscreen - Cannot import font.");
 		}
-		
+
 		// adding java components
 		final int HEIGHT = 800;
 		final int WIDTH = 1400;
@@ -86,7 +86,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 		frame.getContentPane().setBackground(colour1);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
-		
+
 		userDisplay = Main.getUser();
 		formatTime = new SimpleDateFormat("hh : mm: ss a");
 		timeLabel = new JLabel();
@@ -170,12 +170,12 @@ public class Mainscreen extends JFrame implements ActionListener{
 		testluck.setBorder(BorderFactory.createLineBorder(Color.black));
 		testluck.setBounds(919, 239, 429, 193);
 		testluck.setFont(newfont);
-		
+
 		warninglbl = new JLabel("(cannot guarantee it's positive)");
 		warninglbl.setHorizontalAlignment(SwingConstants.CENTER);
 		warninglbl.setFont(newfont);
 		warninglbl.setBounds(919, 436, 429, 37);
-		
+
 		onlymotiv = new JButton("WANT ONLY MOTIVATION?");
 		onlymotiv.setHorizontalAlignment(SwingConstants.CENTER);
 		onlymotiv.setBackground(colour2);
@@ -198,7 +198,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 		monthly.addActionListener(this);
 		yearly.addActionListener(this);
 		frame.setLayout(null);
-		
+
 		// actual GUI
 		frame.add(weekly);
 		frame.add(monthly);
@@ -238,6 +238,60 @@ public class Mainscreen extends JFrame implements ActionListener{
 	}
 
 
+	/**
+	 * method that reads in motivation and shows a pop up message with it
+	 * @throws IOException for readers
+	 */
+	public void returnmotiv() throws IOException {
+		try {
+			try (BufferedReader input = new BufferedReader(new FileReader(filename))) {
+				Random r = new Random();
+
+				int rand = Math.abs(r.nextInt()) % 11;
+
+				for (int i = 0; i < 15; i ++) {
+					randomline[i][0] = input.readLine();
+				}
+				JOptionPane.showMessageDialog(this, randomline[rand][0]);
+			} catch (FileNotFoundException e) {
+				throw e;
+			} catch (HeadlessException e) {
+				System.out.println("Error.");
+			}
+
+		} catch (FileNotFoundException e) {
+			System.out.println("file not found.");
+		}
+	}
+
+	/**
+	 * method that reads in luck and shows a pop up message with it
+	 * @throws IOException for readers
+	 */
+	public void returnluck() throws IOException {
+		try {
+			try (BufferedReader input = new BufferedReader(new FileReader(filename1))) {
+				Random r = new Random();
+
+				int rand = Math.abs(r.nextInt()) % 11;
+
+				for (int i = 0; i < 15; i ++) {
+					randomline[i][0] = input.readLine();
+				}
+				JOptionPane.showMessageDialog(this, randomline[rand][0]);
+			} catch (FileNotFoundException e) {
+				throw e;
+			} catch (HeadlessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} catch (FileNotFoundException e) {
+			System.out.println("file not found.");
+		}
+	}
+
+
 	/*
 	 * implementing ActionListener, based on the event of user (which button clicked), different methods performed 
 	 */
@@ -248,8 +302,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 			try {
 				new Weekly();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				System.out.println("unable to run");
 			}
 			frame.dispose(); // dispose of current frame
 		}
@@ -273,82 +326,28 @@ public class Mainscreen extends JFrame implements ActionListener{
 		if (e.getSource()== colourCSTM) {
 			new ColourCSTM();
 			frame.dispose();
-			
+
 		}
 		if (e.getSource()== help) {
 			new Help();
 		}
-		
+
 		if (e.getSource() == testluck) {
 			try {
 				returnluck();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				System.out.println("unable to run.");
 			}
 		}
-		
+
 		if (e.getSource() == onlymotiv) {
 			try {
 				returnmotiv();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				System.out.println("unable to run.");
 			}
 		}
 	}
-	
-	/**
-	 * method that reads in motivation and shows a pop up message with it
-	 * @throws IOException for readers
-	 */
-	public void returnmotiv() throws IOException {
-		try {
-			try (BufferedReader input = new BufferedReader(new FileReader(filename))) {
-				Random r = new Random();
 
-				int rand = Math.abs(r.nextInt()) % 11;
-				
-				for (int i = 0; i < 15; i ++) {
-					randomline[i][0] = input.readLine();
-				}
-				JOptionPane.showMessageDialog(this, randomline[rand][0]);
-			} catch (FileNotFoundException e) {
-				throw e;
-			} catch (HeadlessException e) {
-				e.printStackTrace();
-			}
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * method that reads in luck and shows a pop up message with it
-	 * @throws IOException for readers
-	 */
-	public void returnluck() throws IOException {
-		try {
-			try (BufferedReader input = new BufferedReader(new FileReader(filename1))) {
-				Random r = new Random();
 
-				int rand = Math.abs(r.nextInt()) % 11;
-				
-				for (int i = 0; i < 15; i ++) {
-					randomline[i][0] = input.readLine();
-				}
-				JOptionPane.showMessageDialog(this, randomline[rand][0]);
-			} catch (FileNotFoundException e) {
-				throw e;
-			} catch (HeadlessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
 }

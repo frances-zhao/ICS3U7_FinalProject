@@ -80,7 +80,7 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		readin();
 		input_t.close();
 		input_d.close();
-		
+
 		// -------------- setting the basic outline of the GUI tab --------------
 		final int HEIGHT = 420; 
 		final int WIDTH = 690; 
@@ -91,7 +91,7 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		frame.setResizable(false);
 
 		// -------------- declaring the characteristics of the components -------
-	
+
 
 		class_title = new JLabel("Add Event");
 		class_title.setHorizontalAlignment(SwingConstants.CENTER);
@@ -209,7 +209,7 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		frame.setVisible(true);
 
 	}
-	
+
 	/**
 	 * reading in each line of the txt file
 	 * @throws IOException for readers
@@ -243,7 +243,7 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		sunlen = sunname.length;
 
 		// setting 2d array as array names and descriptions per day of week
-		
+
 		for(int i = 0; i < monlen; i++) { // monday
 			aen[0][i] = monname[i];
 			aed[0][i] = mondesc[i];
@@ -272,7 +272,7 @@ public class AddEvent_ extends JPanel implements ActionListener{
 			aen[6][i] = sunname[i];
 			aed[6][i] = sundesc[i];
 		}
-		
+
 	}
 
 	/**
@@ -366,7 +366,7 @@ public class AddEvent_ extends JPanel implements ActionListener{
 		aed[n][num_event_d] = event_d;
 
 		// rewriting out all of the objects of array, including new array per day of the week
-		
+
 		for(int i = 0; i <= monlen-1; i++ ) { // monday is array[0]
 			out_t.write(aen[0][i] + ", ");
 			out_d.write(aed[0][i] + ", ");
@@ -440,8 +440,7 @@ public class AddEvent_ extends JPanel implements ActionListener{
 			try {
 				new Weekly();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				System.out.println("cannot go to weekly.");
 			}
 
 		}
@@ -460,9 +459,10 @@ public class AddEvent_ extends JPanel implements ActionListener{
 				} 
 
 				catch (IOException e1) {
-					e1.printStackTrace();
+					System.out.println("cannot add event.");
 
-				} }
+				} 
+			}
 
 
 		}

@@ -104,8 +104,7 @@ public class Logout extends JFrame implements ActionListener{
 				frame.dispose();
 				new Main(); // redirect to main class
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				System.out.println("cannot return to login");
 			}
 
 
@@ -116,8 +115,7 @@ public class Logout extends JFrame implements ActionListener{
 			try {
 				new Mainscreen();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				System.out.println("cannot return to main screen");
 			}
 		}
 	}

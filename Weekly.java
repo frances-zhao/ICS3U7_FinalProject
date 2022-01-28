@@ -428,8 +428,7 @@ public class Weekly extends JPanel implements ActionListener{
 				new AddEvent_();
 				frame.dispose();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				System.out.println("cannot add event");
 			}
 		}
 		
@@ -443,7 +442,7 @@ public class Weekly extends JPanel implements ActionListener{
 				new Mainscreen();
 				frame.dispose();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				System.out.println("cannot return to main screen");
 			}
 		}
 	}

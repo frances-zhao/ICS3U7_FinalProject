@@ -208,8 +208,7 @@ public class ClearCfm extends JFrame implements ActionListener{
 				frame.dispose();
 				new Weekly(); // redirect to main class
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				System.out.println("cannot return to weekly.");
 			}
 
 
@@ -220,8 +219,7 @@ public class ClearCfm extends JFrame implements ActionListener{
 			try {
 				new Weekly();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				System.out.println("cannot return to weekly.");
 			}
 		}
 	}

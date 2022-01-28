@@ -309,8 +309,7 @@ public class Main extends JFrame implements ActionListener{
 				try {
 					new Mainscreen();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					System.out.println("cannot login.");
 				} // link to new JFrame
 				frame.dispose(); // dispose of current frame
 
@@ -345,7 +344,7 @@ public class Main extends JFrame implements ActionListener{
 				} 
 
 			} catch (IOException event) {
-				event.printStackTrace();
+				System.out.println("cannot create nor login.");
 			}
 		}
 
