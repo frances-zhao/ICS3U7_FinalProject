@@ -221,14 +221,12 @@ public class Main extends JFrame implements ActionListener{
 	// getter method for current file1
 	public static String getfile1() {
 		fname1 = userslot + "eventname.txt";
-		System.out.println(fname1);
 		return fname1;
 	}
 
 	// getter method for current file2
 	public static String getfile2() {
 		fname2 = userslot + "eventdesc.txt";
-		System.out.println(fname2);
 
 		return fname2;
 	}
