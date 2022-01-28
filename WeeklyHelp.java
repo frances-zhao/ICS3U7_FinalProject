@@ -100,10 +100,6 @@ public class WeeklyHelp implements ActionListener{
 	/*
 	 * implementing ActionListener, based on the event of user (which button clicked), different methods performed 
 	 */
-
-	public static void main(String[]args ) {
-		new WeeklyHelp();
-	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
