@@ -118,7 +118,7 @@ public class Mainscreen extends JFrame implements ActionListener{
 		yearly.setBorder(BorderFactory.createLineBorder(Color.black));
 
 
-		username = new JLabel(userDisplay); // get a different public variable to store user input
+		username = new JLabel("Welcome, " + userDisplay); // get a different public variable to store user input
 		username.setHorizontalAlignment(SwingConstants.CENTER);
 		username.setBounds(385, 46, 633, 59);
 		username.setFont(newfont4);
