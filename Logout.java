@@ -93,8 +93,8 @@ public class Logout extends JFrame implements ActionListener{
 				ColourCSTM.secondcolour = null;
 
 				JOptionPane.showMessageDialog(this, "Logging out...");
-				new Main(); // redirect to main class
 				frame.dispose();
+				new Main(); // redirect to main class
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
