@@ -2,92 +2,120 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
-public class WeeklyHelp extends JFrame implements ActionListener {
-	
-	// declaring the major components
-	JFrame frame = new JFrame("Help || Weekly");
-	JPanel panel = new JPanel();
-	JButton return_main;
-	JLabel title; 
-	JTextArea desc;
-	
-	//declaring fonts 
-	static Font newfont, newfont1, newfont2, newfont3, newfont4, newfont5; //declaring all fonts 
+
+public class WeeklyHelp implements ActionListener{
+
+	private JFrame frame;
+	private JLabel helptitle = new JLabel("Weekly Help");
+	private JLabel helplabel, helplabel1, helplabel2, helplabel3, yearpicture;
+
+	// font declarations
+	Font newfont;
+	Font newfont1;
+
+	private JButton returnbtn;
+	private JLabel lblNewLabel;
+
+
+	public WeeklyHelp() {
+
+		try {
+			newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(13f);
+			newfont1 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(20f);
+		} catch (IOException | FontFormatException e){
+
+		}
+
+		// initializing frame
+		final int HEIGHT = 500;
+		final int WIDTH = 800;
+		frame = new JFrame("Weekly Help"); 
+		frame.setSize(WIDTH,HEIGHT);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLayout(null);
+		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
+
+		helptitle.setFont(newfont1);
+		helptitle.setHorizontalAlignment(SwingConstants.CENTER);
+		helptitle.setBounds(223, 6, 358, 46);
+
+		helplabel = new JLabel("The weekly scheduler is a pretty unique feature!");
+		helplabel.setHorizontalAlignment(SwingConstants.CENTER);
+		helplabel.setFont(newfont);
+		helplabel.setBounds(28, 43, 747, 46);
+
+		helplabel1 = new JLabel("Click on add event to add a new schedule, and make sure to write in a day of the week to schedule it under.");
+		helplabel1.setHorizontalAlignment(SwingConstants.CENTER);
+		helplabel1.setFont(newfont);
+		helplabel1.setBounds(28, 63, 747, 46);
 		
-	// declaring the colours 
-	static Color bumble1 = new Color(255, 208, 37);   // button background colour 
-	static Color bumble2 = new Color(245, 208, 76);   // panel background colour 
-	static Color bumble3 = new Color(252, 248, 219);  // outline 2 (yellowish gray)
-	static Color bumble4 = new Color(202, 194, 150);  // button outline colour 
-	static Color bumble5 = new Color(69, 62, 39);     // outline 2 (dark stale brown)
-	
-	public WeeklyHelp() throws IOException{
-		// declare fonts that'll be used in this class
-			try {
-				newfont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(15f);
-				newfont1 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(30f);
-				newfont2 =  Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(40f);
-				newfont3 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(60f);
-				newfont4 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(35f);
-				newfont5 = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/PPObjectSans-Regular.otf")).deriveFont(25f);
-			} 
-				
-			catch (IOException | FontFormatException e){
-				
-			}
-			
-			// setting the basic outline of the GUI tab 
-			final int HEIGHT = 500;
-			final int WIDTH = 800;
-			frame.setSize(WIDTH,HEIGHT);
-			frame.getContentPane().setBackground(bumble2);
-			frame.setLayout(null);
-			frame.setLocationRelativeTo(null);
-			frame.setResizable(false);
-			
-			// declaring the characteristics of the components
-			title = new JLabel("Help: Weekly");
-			title.setBounds(290, 25, 220, 32);
-			title.setFont(newfont1);
-			title.setForeground(bumble5);
-						
-			desc = new JTextArea();
-			desc.setAlignmentY(WIDTH);
-			desc.setLineWrap(true);
-			desc.setText("To add an event in the weekly scheduler, you need to"
-					+ " click on the ADD button. There you will be directed to "
-					+ "a tab where you can specify the event name, info, time, "
-					+ "etc. When you're finished, click add on the tab and your"
-					+ "event will be displayed on the scheduler. Click the Clear"
-					+ " button to start a fresh weekly scheduler!");
-			desc.setBounds(70, 65, 590, 350);
-			desc.setFont(newfont);
-			
-			return_main = new JButton("Return Home");
-			return_main.setFont(newfont);
-			return_main.setBounds(326, 700, 170, 41);
-			
-			// add the actionlisteners
-			return_main.addActionListener(this);
-			
-			// add the components 
-			frame.add(title);
-			frame.add(desc);
-			
-			// frame visibility toggle 
-			frame.setVisible(true);
-			
-			
-			
+		helplabel2 = new JLabel("Add the event and you'll see it pop up under your scheduler!");
+		helplabel2.setHorizontalAlignment(SwingConstants.CENTER);
+		helplabel2.setFont(newfont);
+		helplabel2.setBounds(38, 83, 737, 46);
+		
+		helplabel3 = new JLabel("If you want to clear your entire weekly scheduler (since you're done for the week), you can click Clear.");
+		helplabel3.setHorizontalAlignment(SwingConstants.CENTER);
+		helplabel3.setFont(newfont);
+		helplabel3.setBounds(46, 322, 729, 46);
+
+		Icon icon = new ImageIcon("images/weekly.gif");
+		Border b = new LineBorder(Color.WHITE, 3);
+
+		yearpicture = new JLabel(icon);
+		yearpicture.setBorder(b);
+		yearpicture.setBounds(249, 127, 305, 183);
+		frame.add(yearpicture);
+
+
+		returnbtn = new JButton("Return Home");
+		returnbtn.setFont(newfont);
+		returnbtn.setBounds(307, 364, 205, 41);
+		returnbtn.addActionListener(this);
+
+
+		// actual GUI
+		frame.add(helptitle);
+		frame.add(helplabel);
+		frame.add(helplabel1);
+		frame.add(helplabel2);
+		frame.add(helplabel3);
+		frame.add(returnbtn);
+		
+		Icon duckdance = new ImageIcon("images/chirp.gif");
+		lblNewLabel = new JLabel(duckdance);
+		lblNewLabel.setBounds(484, 300, 151, 195);
+		frame.add(lblNewLabel);
+		
+		
+
+
+		frame.setVisible(true);
 	}
-	
+
+	/*
+	 * implementing ActionListener, based on the event of user (which button clicked), different methods performed 
+	 */
+
+	public static void main(String[]args ) {
+		new WeeklyHelp();
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == return_main) {
-			new Help();
-			frame.dispose();
+
+		if (e.getSource() == returnbtn) {
+			try {
+				new Mainscreen();
+				frame.dispose();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
-		
+
+
 	}
 }
