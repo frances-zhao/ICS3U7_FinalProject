@@ -280,10 +280,9 @@ public class Mainscreen extends JFrame implements ActionListener{
 				}
 				JOptionPane.showMessageDialog(this, randomline[rand][0]);
 			} catch (FileNotFoundException e) {
-				throw e;
+				System.out.println("file cannot be found.");
 			} catch (HeadlessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("cannot read file.");
 			}
 
 		} catch (FileNotFoundException e) {
