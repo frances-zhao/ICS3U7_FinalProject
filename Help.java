@@ -111,12 +111,7 @@ public class Help implements ActionListener{
 		}
 		
 		if (e.getSource() == weeklytut) {
-			try {
-				new WeeklyHelp();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			new WeeklyHelp();
 			frame.dispose();
 
 		}
