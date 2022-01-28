@@ -17,7 +17,7 @@ public class Main extends JFrame implements ActionListener{
 	private JButton loginButton;
 	private JButton createAccount;
 	private JPasswordField confirmPWTEXT;
-	File filename1, filename2;
+	static File filename1, filename2;
 	
 	Font newfont;
 	Font btnfont = new Font("Tahoma", Font.PLAIN, 13);
@@ -182,12 +182,16 @@ public class Main extends JFrame implements ActionListener{
 		totalAcc[0][usernum] = currentUser;
 		totalAcc[2][usernum] = usernum + "eventname";
 		totalAcc[3][usernum] = usernum + "eventdesc";
+		filename1 = new File(usernum + "eventname.txt");
+		filename2 = new File(usernum + "eventdesc.txt");
+		System.out.println(filename1);
 		usernum++; // increasing the length of the 2D array to allow for bug-proof adding of account info
-		 
-		filename1 = new File(totalAcc[2][usernum] + ".txt");
 		
-		filename1 = new File(totalAcc[2][usernum] + ".txt");
+		filename1.createNewFile();
+		filename2.createNewFile();
+		
 		savedUsers();
+		
 	}
 
 	// class for savedUsers, writes out all account information – username and password, into fileName (userinfo.txt)
@@ -214,6 +218,8 @@ public class Main extends JFrame implements ActionListener{
 		output.newLine();
 		
 		output.close(); // closing Bufferedwriter
+		
+		
 	}
 
 	//checking if username and password match up
